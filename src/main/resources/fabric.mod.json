@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "pastlife",
+	"version": "${version}",
+	"name": "Past Life",
+	"description": "Recreation of Grian's Past Life.",
+	"authors": [
+		"Mat0u5"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/Mat0u5/PastLife"
+	},
+	"license": "MIT",
+	"icon": "assets/pastlife/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"init": [
+			"net.mat0u5.pastlife.Main"
+		],
+		"init_client": [
+			"net.mat0u5.pastlife.MainClient"
+		]
+	},
+	"mixins": [
+		"pastlife.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.14.21",
+		"minecraft": "${targetVersion}",
+		"java": ">=8",
+		"osl-entrypoints": ">=0.4.0"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
