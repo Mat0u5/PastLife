@@ -12,24 +12,20 @@ pluginManagement {
 			name = 'Ornithe Snapshots'
 			url = 'https://maven.ornithemc.net/snapshots'
 		}
-		maven { url = "https://maven.kikugie.dev/releases"}
+		//maven { url = "https://maven.kikugie.dev/releases"}
 		gradlePluginPortal()
 	}
 }
+//plugins {
+//	id "dev.kikugie.stonecutter" version "0.7.1"
+//}
+//
+//stonecutter {
+//	create(rootProject) {
+//		versions "0.1.0.0"
+//		vcsVersion = "0.1.0.0"
+//	}
+//}
 
-plugins {
-	id "dev.kikugie.stonecutter" version "0.7.1"
-}
-
-stonecutter {
-	create(rootProject) {
-		versions "0.1.0.0"
-		vcsVersion = "0.1.0.0"
-	}
-}
-
-if (JavaVersion.current().ordinal() + 1 < 17) {
-	throw new IllegalStateException("Please run gradle with Java 17+!")
-}
-
-rootProject.name = "pastlife"
+include ':client'
+include ':server'

@@ -13,13 +13,10 @@
 	},
 	"license": "MIT",
 	"icon": "assets/pastlife/icon.png",
-	"environment": "*",
+	"environment": "${environment}",
 	"entrypoints": {
 		"init": [
 			"net.mat0u5.pastlife.Main"
-		],
-		"init_client": [
-			"net.mat0u5.pastlife.MainClient"
 		]
 	},
 	"mixins": [
@@ -30,8 +27,5 @@
 		"minecraft": "${targetVersion}",
 		"java": ">=8",
 		"osl-entrypoints": ">=0.4.0"
-	},
-	"suggests": {
-		"another-mod": "*"
 	}
 }
