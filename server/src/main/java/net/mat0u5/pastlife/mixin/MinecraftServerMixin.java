@@ -12,7 +12,7 @@ public class MinecraftServerMixin {
 
 	@Inject(method = "main", remap = false, at = @At("HEAD"))
 	private static void exampleMod$onInit(CallbackInfo ci) {
-		System.out.println("This line is printed by an example mod mixin!");
+		System.out.println("[SERVER] This line is printed by an example mod mixin!");
 	}
 }
 
