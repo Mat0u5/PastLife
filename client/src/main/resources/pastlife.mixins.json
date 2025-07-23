@@ -4,9 +4,13 @@
   "package": "net.mat0u5.pastlife.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "GuiElementMixin",
+    "GameRendererMixin",
     "InputPlayerEntityMixin",
+    "MinecraftMixin",
     "PlayerEntityMixin",
-    "RemotePlayerEntityMixin"
+    "RemotePlayerEntityMixin",
+    "TextureManagerMixin"
   ],
   "client": [
   ],
