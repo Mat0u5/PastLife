@@ -4,8 +4,9 @@
   "package": "net.mat0u5.pastlife.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "GuiElementMixin",
+    "GameOptionsMixin",
     "GameRendererMixin",
+    "GuiElementMixin",
     "InputPlayerEntityMixin",
     "MinecraftMixin",
     "PlayerEntityMixin",
