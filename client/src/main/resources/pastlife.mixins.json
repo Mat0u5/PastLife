@@ -11,7 +11,8 @@
     "MinecraftMixin",
     "PlayerEntityMixin",
     "RemotePlayerEntityMixin",
-    "TextureManagerMixin"
+    "TextureManagerMixin",
+    "WorldRendererMixin"
   ],
   "client": [
   ],
