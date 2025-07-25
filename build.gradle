@@ -14,7 +14,7 @@ def configure(project) {
 	project.base {
 		archivesName = "${project.rootProject.archives_base_name}-${project.environment}"
 	}
-	project.version = "${project.rootProject.version}+mc${project.rootProject.minecraft_version}"
+	project.version = "${project.rootProject.mod_version}"
 	project.maven_group = project.rootProject.maven_group
 
 	project.loom {
@@ -44,7 +44,7 @@ def configure(project) {
 	}
 
 	project.dependencies {
-		minecraft "com.mojang:minecraft:${project.rootProject.minecraft_version}"
+		minecraft "com.mojang:minecraft:${project.minecraft_version}"
 		mappings project.ploceus.featherMappings(project.feather_build)
 		exceptions project.ploceus.raven(project.raven_build) // remove this line if not using exceptions patches
 		signatures project.ploceus.sparrow(project.sparrow_build) // remove this line if not using generics patches
@@ -70,7 +70,7 @@ def configure(project) {
 		filesMatching('fabric.mod.json') {
 			expand "version": project.property('mod_version'),
 					"targetVersion": project.property('target_version'),
-					"minecraftVersion": project.property('minecraft_version'),
+					"minecraftVersion": project.minecraft_version,
 					"environment": project.property('environment')
 		}
 	}
