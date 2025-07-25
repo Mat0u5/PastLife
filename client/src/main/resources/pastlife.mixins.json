@@ -4,6 +4,7 @@
   "package": "net.mat0u5.pastlife.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "CraftingManagerMixin",
     "GameOptionsMixin",
     "GameRendererMixin",
     "GuiElementMixin",
