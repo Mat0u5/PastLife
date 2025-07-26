@@ -10,6 +10,7 @@
     "GuiElementMixin",
     "InputPlayerEntityMixin",
     "MinecraftMixin",
+    "PacketMixin",
     "PlayerEntityMixin",
     "RemotePlayerEntityMixin",
     "TextureManagerMixin",

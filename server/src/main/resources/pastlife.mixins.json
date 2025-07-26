@@ -6,6 +6,7 @@
   "mixins": [
     "CraftingManagerMixin",
     "MinecraftServerMixin",
+    "PacketMixin",
     "PlayerEntityMixin",
     "ServerPlayNetworkHandlerMixin"
   ],

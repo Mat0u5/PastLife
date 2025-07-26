@@ -2,14 +2,21 @@ package net.mat0u5.pastlife.lives;
 
 import net.mat0u5.pastlife.Main;
 import net.minecraft.command.source.CommandSource;
+import net.minecraft.network.packet.ChatMessagePacket;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.entity.living.player.ServerPlayerEntity;
+import net.minecraft.server.network.handler.ServerPlayNetworkHandler;
 
 public class LivesCommand {
-    public static void handleCommand(MinecraftServer server, String command, CommandSource source) {
-        int response = commandLogic(server, command, source);
+    public static void handleCommand(MinecraftServer server, ServerPlayerEntity player, String command, ServerPlayNetworkHandler networkHandler) {
+        if (!server.playerManager.isOp(player.name)) {
+            networkHandler.sendPacket(new ChatMessagePacket("§cYou do not have permission to use this command."));
+            return;
+        }
+        int response = commandLogic(server, command, networkHandler);
         if (response != 1) {
-            source.sendMessage("Invalid usage. Use: /lives <get|set|add|remove> <player> [amount]");
+            networkHandler.sendPacket(new ChatMessagePacket("§cInvalid usage."));
+            networkHandler.sendMessage("Use: /lives <get|set|add|remove> <player> [amount]");
         }
     }
 
@@ -26,18 +33,18 @@ public class LivesCommand {
         ServerPlayerEntity serverPlayer = server.playerManager.get(playerName);
         if (serverPlayer == null) {
             source.sendMessage("Player not found: " + playerName);
-            return -1;
+            return 1;
         }
         playerName = serverPlayer.name;
 
-        if (args.length == 3) {
+        if (args.length >= 3) {
             if (args[1].equalsIgnoreCase("get")) {
                 int lives = Main.livesManager.getLives(serverPlayer);
                 source.sendMessage( playerName + " has " + lives + " " + (lives == 1 ? "life" : "lives") + ".");
                 return 1;
             }
         }
-        else if (args.length >= 4) {
+        if (args.length >= 4) {
             try {
                 int amount = Integer.parseInt(args[3]);
                 if (args[1].equalsIgnoreCase("set")) {
