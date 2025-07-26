@@ -12,9 +12,9 @@ def configure(project) {
 	project.apply plugin: 'ploceus'
 
 	project.base {
-		archivesName = "${project.rootProject.archives_base_name}-${project.environment}"
+		archivesName = "${project.rootProject.archives_base_name}"
 	}
-	project.version = "${project.rootProject.mod_version}"
+	project.version = "${project.rootProject.mod_version}-${project.environment}"
 	project.maven_group = project.rootProject.maven_group
 
 	project.loom {

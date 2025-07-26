@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "pastlife",
-	"version": "${version}",
+	"version": "${version}-${environment}",
 	"name": "Past Life",
 	"description": "Recreation of Grian's Past Life.",
 	"authors": [
