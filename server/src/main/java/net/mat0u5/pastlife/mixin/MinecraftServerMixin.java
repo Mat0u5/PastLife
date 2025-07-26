@@ -28,7 +28,7 @@ public class MinecraftServerMixin {
             return;
         }
         MinecraftServer server = (MinecraftServer) (Object) this;
-        if (ticks % 100 == 0) {
+        if (ticks % 10 == 0) {
             for(int i = 0; i < server.playerManager.players.size(); ++i) {
                 ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity)server.playerManager.players.get(i);
                 int lives = Main.livesManager.getLives(serverPlayerEntity);

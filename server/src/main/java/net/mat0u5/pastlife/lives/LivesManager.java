@@ -43,4 +43,13 @@ public class LivesManager extends ConfigManager {
         currentLives += lives;
         saveLives(player, currentLives);
     }
+
+    public String getColorCode(PlayerEntity player) {
+        int lives = getLives(player);
+        if (lives <= 0) return "§8"; // Dark gray
+        if (lives == 1) return "§c"; // Red
+        if (lives == 2) return "§e"; // Yellow
+        if (lives == 3) return "§a"; // Green
+        return "§2"; // Dark green
+    }
 }

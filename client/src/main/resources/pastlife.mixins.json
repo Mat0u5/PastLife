@@ -12,6 +12,7 @@
     "MinecraftMixin",
     "PacketMixin",
     "PlayerEntityMixin",
+    "PlayerEntityRendererMixin",
     "RemotePlayerEntityMixin",
     "TextureManagerMixin",
     "WorldRendererMixin"
