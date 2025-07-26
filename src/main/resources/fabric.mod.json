@@ -14,18 +14,12 @@
 	"license": "MIT",
 	"icon": "assets/pastlife/icon.png",
 	"environment": "${environment}",
-	"entrypoints": {
-		"init": [
-			"net.mat0u5.pastlife.Main"
-		]
-	},
 	"mixins": [
 		"pastlife.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.14.21",
 		"minecraft": "${targetVersion}",
-		"java": ">=8",
-		"osl-entrypoints": ">=0.4.0"
+		"java": ">=8"
 	}
 }

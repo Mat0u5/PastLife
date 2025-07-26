@@ -1,14 +1,13 @@
 package net.mat0u5.pastlife;
 
 import net.mat0u5.pastlife.lives.LivesManager;
-import net.ornithemc.osl.entrypoints.api.ModInitializer;
 
-public class Main implements ModInitializer {
+public class Main {
 
-	LivesManager livesManager = new LivesManager();
+	public static LivesManager livesManager;
 
-	@Override
-	public void init() {
-		System.out.println("Initializing example mod!");
+	public static void init() {
+		System.out.println("[CLIENT] Initializing Past Life!");
+		livesManager = new LivesManager();
 	}
 }
