@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class LivesManager extends ConfigManager {
 
-    Map<String, Integer> livesMap = new HashMap<>();
+    private Map<String, Integer> livesMap = new HashMap<>();
 
     public LivesManager() {
         super(".", "_pastlife_lives.txt");
@@ -24,7 +24,7 @@ public class LivesManager extends ConfigManager {
         return lives;
     }
 
-    private int getLives(PlayerEntity player) {
+    public int getLives(PlayerEntity player) {
         if (livesMap.containsKey(player.name)) {
             return livesMap.get(player.name);
         }
@@ -32,6 +32,9 @@ public class LivesManager extends ConfigManager {
     }
 
     public void setLives(PlayerEntity player, int lives) {
+        if (lives < 0) {
+            lives = 0;
+        }
         saveLives(player, lives);
     }
 

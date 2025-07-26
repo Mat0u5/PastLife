@@ -6,7 +6,8 @@
   "mixins": [
     "CraftingManagerMixin",
     "MinecraftServerMixin",
-    "PlayerEntityMixin"
+    "PlayerEntityMixin",
+    "ServerPlayNetworkHandlerMixin"
   ],
   "client": [
   ],

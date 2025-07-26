@@ -18,7 +18,7 @@ public abstract class ConfigManager {
         instantiateProperties();
     }
 
-    public void instantiateProperties() {
+    protected void instantiateProperties() {
     }
 
     private void createFileIfNotExists() {
@@ -48,7 +48,7 @@ public abstract class ConfigManager {
         }
     }
 
-    public void loadProperties() {
+    protected void loadProperties() {
         if (folderPath == null || filePath == null) return;
 
         properties = new Properties();
@@ -59,7 +59,7 @@ public abstract class ConfigManager {
         }
     }
 
-    public void setProperty(String key, String value) {
+    protected void setProperty(String key, String value) {
         if (folderPath == null || filePath == null) return;
         properties.setProperty(key, value);
         try (OutputStream output = new FileOutputStream(filePath)) {
@@ -69,7 +69,7 @@ public abstract class ConfigManager {
         }
     }
 
-    public void removeProperty(String key) {
+    protected void removeProperty(String key) {
         if (folderPath == null || filePath == null) return;
         if (!properties.containsKey(key)) return;
         properties.remove(key);
@@ -80,7 +80,7 @@ public abstract class ConfigManager {
         }
     }
 
-    public void resetProperties() {
+    protected void resetProperties() {
         properties.clear();
         try (OutputStream output = new FileOutputStream(filePath)) {
             properties.store(output, null);
@@ -93,7 +93,7 @@ public abstract class ConfigManager {
         Various getters
      */
 
-    public String getProperty(String key) {
+    protected String getProperty(String key) {
         if (folderPath == null || filePath == null) return null;
         if (properties == null) return null;
 
@@ -103,7 +103,7 @@ public abstract class ConfigManager {
         return null;
     }
 
-    public String getOrCreateProperty(String key, String defaultValue) {
+    protected String getOrCreateProperty(String key, String defaultValue) {
         if (folderPath == null || filePath == null) return "";
         if (properties == null) return "";
 
@@ -114,7 +114,7 @@ public abstract class ConfigManager {
         return defaultValue;
     }
 
-    public boolean getOrCreateBoolean(String key, boolean defaultValue) {
+    protected boolean getOrCreateBoolean(String key, boolean defaultValue) {
         String value = getOrCreateProperty(key, String.valueOf(defaultValue));
         if (value == null) return defaultValue;
         if (value.equalsIgnoreCase("true")) return true;
@@ -122,7 +122,7 @@ public abstract class ConfigManager {
         return defaultValue;
     }
 
-    public double getOrCreateDouble(String key, double defaultValue) {
+    protected double getOrCreateDouble(String key, double defaultValue) {
         String value = getOrCreateProperty(key, String.valueOf(defaultValue));
         if (value == null) return defaultValue;
         try {
@@ -131,7 +131,7 @@ public abstract class ConfigManager {
         return defaultValue;
     }
 
-    public int getOrCreateInt(String key, int defaultValue) {
+    protected int getOrCreateInt(String key, int defaultValue) {
         String value = getOrCreateProperty(key, String.valueOf(defaultValue));
         if (value == null) return defaultValue;
         try {
