@@ -4,6 +4,7 @@ import net.mat0u5.pastlife.utils.WorldBorderManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.world.WorldRenderer;
 import net.minecraft.entity.living.player.PlayerEntity;
+import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -17,6 +18,8 @@ public class WorldRendererMixin {
 
     @Shadow
     private Minecraft minecraft;
+    @Shadow
+    private World world;
     private static int frameCounter = 0;
     private static boolean shouldRenderBorder = false;
     private static double distToBorder = 200;
@@ -33,13 +36,15 @@ public class WorldRendererMixin {
         }
 
         frameCounter++;
+
+        double centerX = world.spawnpointX;
+        double centerZ = world.spawnpointZ;
+
         if (frameCounter % 10 == 0) {
             double playerX = player.x;
             double playerZ = player.z;
 
             double halfSize = WorldBorderManager.getSize() / 2.0;
-            double centerX = WorldBorderManager.getCenterX();
-            double centerZ = WorldBorderManager.getCenterZ();
 
             distToBorder = Math.min(
                     Math.abs(playerX - (centerX - halfSize)),
@@ -54,8 +59,6 @@ public class WorldRendererMixin {
 
         if (shouldRenderBorder) {
             double halfSize = WorldBorderManager.getSize() / 2.0;
-            double centerX = WorldBorderManager.getCenterX();
-            double centerZ = WorldBorderManager.getCenterZ();
             renderBorderWalls(centerX, centerZ, halfSize, tickDelta);
         }
     }

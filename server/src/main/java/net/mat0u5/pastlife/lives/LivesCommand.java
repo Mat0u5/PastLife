@@ -9,6 +9,11 @@ import net.minecraft.server.network.handler.ServerPlayNetworkHandler;
 
 public class LivesCommand {
     public static void handleCommand(MinecraftServer server, ServerPlayerEntity player, String command, ServerPlayNetworkHandler networkHandler) {
+        if (command.trim().equalsIgnoreCase("/lives")) {
+            int lives = Main.livesManager.getLives(player);
+            networkHandler.sendMessage("You have " + lives + " " + (lives == 1 ? "life" : "lives") + ".");
+            return;
+        }
         if (!server.playerManager.isOp(player.name)) {
             networkHandler.sendPacket(new ChatMessagePacket("§cYou do not have permission to use this command."));
             return;

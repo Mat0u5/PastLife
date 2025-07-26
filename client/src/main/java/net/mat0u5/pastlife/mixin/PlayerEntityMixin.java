@@ -54,19 +54,16 @@ public class PlayerEntityMixin implements IPlayerEntity {
     private void onTick(CallbackInfo ci) {
         PlayerEntity player = (PlayerEntity) (Object) this;
 
-        if (!WorldBorderManager.setUp) {
-            WorldBorderManager.setCenter(player.world.spawnpointX, player.world.spawnpointZ);
-        }
+        double centerX = player.world.spawnpointX;
+        double centerZ = player.world.spawnpointZ;
 
-        if (WorldBorderManager.isOutsideBorder(player.x, player.z)) {
+        if (WorldBorderManager.isOutsideBorder(centerX, centerZ, player.x, player.z)) {
             double halfSize = WorldBorderManager.getSize() / 2.0;
-            double centerX = WorldBorderManager.getCenterX();
-            double centerZ = WorldBorderManager.getCenterZ();
 
             double posX = player.x;
             double posY = player.y;
             double posZ = player.z;
-            
+
             double newX = posX;
             double newZ = posZ;
 
@@ -77,6 +74,9 @@ public class PlayerEntityMixin implements IPlayerEntity {
                 newZ = centerZ + (halfSize * Math.signum(posZ - centerZ));
             }
 
+            if (Math.abs(posX-newX) > 1 || Math.abs(posZ-newZ) > 1) {
+                return;
+            }
             if (newX != posX || newZ != posZ) {
                 player.setPosition(newX, posY, newZ);
                 player.velocityX = 0;

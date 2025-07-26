@@ -7,7 +7,7 @@
     "CraftingManagerMixin",
     "MinecraftServerMixin",
     "PacketMixin",
-    "PlayerEntityMixin",
+    "ServerPlayerEntityMixin",
     "ServerPlayNetworkHandlerMixin"
   ],
   "client": [
