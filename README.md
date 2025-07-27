@@ -32,6 +32,7 @@ The earliest versions have a separate jar file for the client and the server, so
 ### Note:
 When updating the server, make sure you keep the `_pastlife_lives.txt` file, as that contains the info about players' lives.
 This mod (obviously) does not handle updating the world to newer versions, so you're going to have to do that manually (and handle any issues with it).
+After updating the skins in the minecraft launcher, it takes a while for the skins to update in the game (like 20 minutes) because of the custom implementation of how skins work, so be patient.
 
 ## Features:
 | MC Version  | Status   |                                                                                     Modifications                                                                                     |
