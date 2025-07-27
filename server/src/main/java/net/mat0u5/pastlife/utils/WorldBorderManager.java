@@ -10,8 +10,10 @@ public class WorldBorderManager {
         WorldBorderManager.borderSize = size;
         WorldBorderManager.centerX = centerX;
         WorldBorderManager.centerZ = centerZ;
+        if (!initialized) {
+            System.out.println("[SERVER] World Border initialized with size: " + size + ", centerX: " + centerX + ", centerZ: " + centerZ);
+        }
         initialized = true;
-        System.out.println("[SERVER] World Border initialized with size: " + size + ", centerX: " + centerX + ", centerZ: " + centerZ);
     }
 
     public static boolean isOutsideBorder(double x, double z) {
