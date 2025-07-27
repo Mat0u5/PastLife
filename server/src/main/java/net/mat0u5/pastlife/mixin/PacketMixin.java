@@ -20,15 +20,13 @@ public class PacketMixin {
 
     @Inject(method = "<clinit>", at = @At("TAIL"))
     private static void registerCustomPackets(CallbackInfo ci) {
-
         registerPacket(250, LivesUpdatePacket.class);
         registerPacket(251, WorldBorderUpdatePacket.class);
-
-        System.out.println("Registered CustomPacket with ID 250 for LivesUpdatePacket");
     }
 
     private static void registerPacket(int id, Class packetClass) {
         ID_TO_TYPE.put(id, packetClass);
         TYPE_TO_ID.put(packetClass, id);
+        System.out.println("Registered CustomPacket with ID "+id+" for "+packetClass);
     }
 }
