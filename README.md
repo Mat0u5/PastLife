@@ -8,11 +8,11 @@ If you want to play the other seasons, use my [Life Series](https://modrinth.com
 
 Since modern modding Fabric is not available for Minecraft Beta and other old versions that Past Life is played on, this mod is made for [OrniteMC](https://ornithemc.net).
 
-This mod has different features for each version of Minecraft (matching the features of the sessions). So for example, the Boogeyman will be only available in Beta 1.7.3, and none of the other versions, just like Grian had it.
+**This mod has different features for each version of Minecraft** (matching the features of the sessions). So for example, the Boogeyman will be only available in Beta 1.7.3, and none of the other versions, just like Grian had it.
 
 The earliest versions have a separate jar file for the client and the server, so make sure to download the correct one you want.
 
------
+---------
 
 ## How to play:
 ### Client:
@@ -29,9 +29,10 @@ The earliest versions have a separate jar file for the client and the server, so
 5. Add the mod jar file to the `mods` folder in the server directory.
 6. That's it, just run the server (`fabric-server-launch.jar`) and you're done!
 
-### Note:
-When updating the server, make sure you keep the `_pastlife_lives.txt` file, as that contains the info about players' lives.
-This mod (obviously) does not handle updating the world to newer versions, so you're going to have to do that manually (and handle any issues with it).
+### Notes:
+When updating the server, make sure you keep the `_pastlife_lives.txt` file, as that contains the info about players' lives.<br>
+This mod does not contain Simple Voice Chat.<br>
+This mod (obviously) does not handle updating the world to newer versions, so you're going to have to do that manually (and handle any issues with it).<br>
 After updating the skins in the minecraft launcher, it takes a while for the skins to update in the game (like 20 minutes) because of the custom implementation of how skins work, so be patient.
 
 ## Features:
@@ -45,7 +46,20 @@ After updating the skins in the minecraft launcher, it takes a while for the ski
 | ???         | -        |                                                                                             -                                                                                              |
 
 
-### Commands:
+---------
+
+### Beta 1.2_02:
+This version has no special features.
+### Beta 1.7.3:
+This version contains the **Boogeyman**. Here's how it works:
+- An admin must run the `/boogeyman choose` command, which will randomly select the boogeymen.
+- Boogeyman succeeding / failing is not tracked automatically, so the player that is the Boogeyman must run the `/boogeyman succeed` or `/boogeyman fail` command to say if they have succeeded or failed.
+- They can run that command at any time, but it also sends a public message in chat to prevent any cheating.
+- The console also logs the information about who got picked as the Boogeyman, and if they failed or succeeded, so you can also handle any possible cheating with that.
+
+---------
+
+### All Commands:
 Make sure you're opped to be able to use most of the commands below.<br>
 <details open>
 <summary>/lives</summary>

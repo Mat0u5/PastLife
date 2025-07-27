@@ -5,6 +5,7 @@ import net.mat0u5.pastlife.packets.LivesUpdatePacket;
 import net.mat0u5.pastlife.packets.SoundEventPacket;
 import net.mat0u5.pastlife.packets.WorldBorderUpdatePacket;
 import net.mat0u5.pastlife.utils.PlayerUtils;
+import net.mat0u5.pastlife.utils.TaskScheduler;
 import net.mat0u5.pastlife.utils.WorldBorderManager;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.entity.living.player.ServerPlayerEntity;
@@ -31,6 +32,9 @@ public class MinecraftServerMixin {
     @Inject(method = "tick", at = @At("TAIL"))
     private void onModInit(CallbackInfo ci) {
         MinecraftServer server = (MinecraftServer) (Object) this;
+
+        TaskScheduler.onTick();
+
         if (!WorldBorderManager.initialized) {
             for (ServerWorld world : server.worlds) {
                 if (!world.dimension.isNether) {

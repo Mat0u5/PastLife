@@ -1,6 +1,7 @@
 package net.mat0u5.pastlife.mixin;
 
 import net.mat0u5.pastlife.Main;
+import net.mat0u5.pastlife.boogeyman.BoogeymanCommand;
 import net.mat0u5.pastlife.lives.LivesCommand;
 import net.minecraft.entity.living.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
@@ -26,6 +27,10 @@ public class ServerPlayNetworkHandlerMixin {
         command = command.toLowerCase().trim();
         if (command.startsWith("/lives")) {
             LivesCommand.handleCommand(server, player, command, networkHandler);
+            ci.cancel();
+        }
+        if (command.startsWith("/boogeyman")) {
+            BoogeymanCommand.handleCommand(server, player, command, networkHandler);
             ci.cancel();
         }
     }

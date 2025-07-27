@@ -25,9 +25,15 @@ public class Main {
 		handler.copyBundledSingleFile("/assets/boogeyman_wait.ogg", lifeseriesResourcesPath.resolve("boogeyman_wait.ogg"));
 		handler.copyBundledSingleFile("/assets/boogeyman_yes.ogg", lifeseriesResourcesPath.resolve("boogeyman_yes.ogg"));
 		handler.copyBundledSingleFile("/assets/boogeyman_no.ogg", lifeseriesResourcesPath.resolve("boogeyman_no.ogg"));
+		handler.copyBundledSingleFile("/assets/boogeyman_cure.ogg", lifeseriesResourcesPath.resolve("boogeyman_cure.ogg"));
+		handler.copyBundledSingleFile("/assets/boogeyman_fail.ogg", lifeseriesResourcesPath.resolve("boogeyman_fail.ogg"));
+		handler.copyBundledSingleFile("/assets/didgeridoo.ogg", lifeseriesResourcesPath.resolve("didgeridoo.ogg"));
 
 		minecraft.soundSystem.loadSound("boogeyman_wait.ogg", lifeseriesResourcesPath.resolve("boogeyman_wait.ogg").toFile());
 		minecraft.soundSystem.loadSound("boogeyman_yes.ogg", lifeseriesResourcesPath.resolve("boogeyman_yes.ogg").toFile());
 		minecraft.soundSystem.loadSound("boogeyman_no.ogg", lifeseriesResourcesPath.resolve("boogeyman_no.ogg").toFile());
+		minecraft.soundSystem.loadSound("boogeyman_cure.ogg", lifeseriesResourcesPath.resolve("boogeyman_cure.ogg").toFile());
+		minecraft.soundSystem.loadSound("boogeyman_fail.ogg", lifeseriesResourcesPath.resolve("boogeyman_fail.ogg").toFile());
+		minecraft.soundSystem.loadSound("didgeridoo.ogg", lifeseriesResourcesPath.resolve("didgeridoo.ogg").toFile());
 	}
 }
