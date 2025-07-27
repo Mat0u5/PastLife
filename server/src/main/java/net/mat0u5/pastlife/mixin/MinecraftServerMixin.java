@@ -4,6 +4,7 @@ import net.mat0u5.pastlife.Main;
 import net.mat0u5.pastlife.packets.LivesUpdatePacket;
 import net.mat0u5.pastlife.packets.SoundEventPacket;
 import net.mat0u5.pastlife.packets.WorldBorderUpdatePacket;
+import net.mat0u5.pastlife.utils.PlayerUtils;
 import net.mat0u5.pastlife.utils.WorldBorderManager;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.entity.living.player.ServerPlayerEntity;
@@ -23,7 +24,8 @@ public class MinecraftServerMixin {
 
     @Inject(method = "init", at = @At("TAIL"))
     private void onModInit(CallbackInfoReturnable<Boolean> cir) {
-        Main.init();
+        MinecraftServer server = (MinecraftServer) (Object) this;
+        Main.init(server);
     }
 
     @Inject(method = "tick", at = @At("TAIL"))
@@ -36,13 +38,6 @@ public class MinecraftServerMixin {
                 }
             }
         }
-        for (ServerWorld world : server.worlds) {
-            if (!server.playerManager.players.isEmpty()) {
-                ServerPlayerEntity player = (ServerPlayerEntity) server.playerManager.players.get(0);
-                world.playSound(player.x, player.y, player.z, , 1.0f, 1.0f);
-            }
-        }
-        server.playerManager.sendPacket(new SoundEventPacket("ambient.weather.thunder", 1.0f, 1.0f));
 
         if (Main.livesManager == null) {
             return;
