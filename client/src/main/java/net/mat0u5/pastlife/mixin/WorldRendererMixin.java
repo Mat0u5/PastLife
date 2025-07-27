@@ -35,16 +35,20 @@ public class WorldRendererMixin {
             return;
         }
 
+        if (!WorldBorderManager.initialized || player.world.dimension.isNether) {
+            return;
+        }
+
         frameCounter++;
 
-        double centerX = world.getSpawnPoint().x;
-        double centerZ = world.getSpawnPoint().z;
+        double centerX = WorldBorderManager.centerX;
+        double centerZ = WorldBorderManager.centerZ;
 
         if (frameCounter % 10 == 0) {
             double playerX = player.x;
             double playerZ = player.z;
 
-            double halfSize = WorldBorderManager.getSize() / 2.0;
+            double halfSize = WorldBorderManager.borderSize / 2.0;
 
             distToBorder = Math.min(
                     Math.abs(playerX - (centerX - halfSize)),
@@ -58,7 +62,7 @@ public class WorldRendererMixin {
         }
 
         if (shouldRenderBorder) {
-            double halfSize = WorldBorderManager.getSize() / 2.0;
+            double halfSize = WorldBorderManager.borderSize / 2.0;
             renderBorderWalls(centerX, centerZ, halfSize, tickDelta);
         }
     }

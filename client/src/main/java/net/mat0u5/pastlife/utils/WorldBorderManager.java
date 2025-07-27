@@ -1,13 +1,20 @@
 package net.mat0u5.pastlife.utils;
 
 public class WorldBorderManager {
-    private static int borderSize = 400;
+    public static int borderSize = 0;
+    public static int centerX = 0;
+    public static int centerZ = 0;
+    public static boolean initialized = false;
 
-    public static int getSize() {
-        return borderSize;
+    public static void init(int size, int centerX, int centerZ) {
+        WorldBorderManager.borderSize = size;
+        WorldBorderManager.centerX = centerX;
+        WorldBorderManager.centerZ = centerZ;
+        initialized = true;
+        System.out.println("[CLIENT] World Border initialized with size: " + size + ", centerX: " + centerX + ", centerZ: " + centerZ);
     }
 
-    public static boolean isOutsideBorder(double centerX, double centerZ, double x, double z) {
+    public static boolean isOutsideBorder(double x, double z) {
         double halfSize = borderSize / 2.0;
         return Math.abs(x - centerX) > halfSize || Math.abs(z - centerZ) > halfSize;
     }

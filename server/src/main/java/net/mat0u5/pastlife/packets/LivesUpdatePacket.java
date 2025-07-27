@@ -1,4 +1,4 @@
-package net.mat0u5.pastlife.lives;
+package net.mat0u5.pastlife.packets;
 
 import net.minecraft.network.PacketHandler;
 import net.minecraft.network.packet.Packet;
@@ -38,7 +38,7 @@ public class LivesUpdatePacket extends Packet {
     }
 
     public void handle(PacketHandler handler) {
-        ClientLivesManager.handlePacket(this);
+
     }
 
     public int getSize() {
