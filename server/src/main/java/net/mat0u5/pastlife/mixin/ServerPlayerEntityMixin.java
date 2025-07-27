@@ -17,11 +17,14 @@ public class ServerPlayerEntityMixin {
     private void onTick(CallbackInfo ci) {
         ServerPlayerEntity player = (ServerPlayerEntity) (Object) this;
 
-        double centerX = player.world.spawnpointX;
-        double centerZ = player.world.spawnpointZ;
+        if (!WorldBorderManager.initialized) {
+            return;
+        }
+        double centerX = WorldBorderManager.centerX;
+        double centerZ = WorldBorderManager.centerZ;
 
-        if (WorldBorderManager.isOutsideBorder(centerX, centerZ, player.x, player.z)) {
-            double halfSize = WorldBorderManager.getSize() / 2.0;
+        if (WorldBorderManager.isOutsideBorder(player.x, player.z)) {
+            double halfSize = WorldBorderManager.borderSize / 2.0;
 
             double posX = player.x;
             double posY = player.y;

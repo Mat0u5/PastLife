@@ -1,5 +1,6 @@
 package net.mat0u5.pastlife.lives;
 
+import net.mat0u5.pastlife.packets.LivesUpdatePacket;
 import net.minecraft.entity.living.player.PlayerEntity;
 
 import java.util.HashMap;

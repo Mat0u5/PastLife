@@ -54,11 +54,15 @@ public class PlayerEntityMixin implements IPlayerEntity {
     private void onTick(CallbackInfo ci) {
         PlayerEntity player = (PlayerEntity) (Object) this;
 
-        double centerX = player.world.spawnpointX;
-        double centerZ = player.world.spawnpointZ;
+        if (!WorldBorderManager.initialized) {
+            return;
+        }
 
-        if (WorldBorderManager.isOutsideBorder(centerX, centerZ, player.x, player.z)) {
-            double halfSize = WorldBorderManager.getSize() / 2.0;
+        double centerX = WorldBorderManager.centerX;
+        double centerZ = WorldBorderManager.centerZ;
+
+        if (WorldBorderManager.isOutsideBorder(player.x, player.z)) {
+            double halfSize = WorldBorderManager.borderSize / 2.0;
 
             double posX = player.x;
             double posY = player.y;
