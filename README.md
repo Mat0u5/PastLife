@@ -35,14 +35,14 @@ This mod (obviously) does not handle updating the world to newer versions, so yo
 After updating the skins in the minecraft launcher, it takes a while for the skins to update in the game (like 20 minutes) because of the custom implementation of how skins work, so be patient.
 
 ## Features:
-| MC Version  | Status   |                                                                                     Modifications                                                                                     |
-|:------------|----------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| MC Version  | Status   |                                                                                       Modifications                                                                                        |
+|:------------|----------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 | Beta 1.2_02 | Finished | Fixed player skins not rendering properly.<br/>Improved front-facing third-person perspective.<br/>Added the world border.<br/>Added the ability to zoom.<br/>Added the custom TNT recipe. |
-| Beta 1.7.3  | TODO     |                                                                                           -                                                                                           |
-| Release 1.1 | TODO     |                                                                                           -                                                                                           |
-| ???         | -        |                                                                                           -                                                                                           |
-| ???         | -        |                                                                                           -                                                                                           |
-| ???         | -        |                                                                                           -                                                                                           |
+| Beta 1.7.3  | Working  |                                                                                   Added Keep Inventory.                                                                                    |
+| Release 1.1 | TODO     |                                                                                             -                                                                                              |
+| ???         | -        |                                                                                             -                                                                                              |
+| ???         | -        |                                                                                             -                                                                                              |
+| ???         | -        |                                                                                             -                                                                                              |
 
 
 ### Commands:

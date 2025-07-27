@@ -14,7 +14,8 @@ public class MinecraftMixin {
 
     @Inject(method = "init", at = @At("TAIL"))
     private void onModInit(CallbackInfo ci) {
-        Main.init();
+        Minecraft minecraft = (Minecraft) (Object) this;
+        Main.init(minecraft);
     }
 
     @Unique

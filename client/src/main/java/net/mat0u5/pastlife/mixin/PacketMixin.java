@@ -1,6 +1,7 @@
 package net.mat0u5.pastlife.mixin;
 
 import net.mat0u5.pastlife.packets.LivesUpdatePacket;
+import net.mat0u5.pastlife.packets.SoundEventPacket;
 import net.mat0u5.pastlife.packets.WorldBorderUpdatePacket;
 import net.minecraft.network.packet.Packet;
 import org.spongepowered.asm.mixin.Mixin;
@@ -25,6 +26,7 @@ public class PacketMixin {
     private static void registerCustomPackets(CallbackInfo ci) {
         registerPacket(250, LivesUpdatePacket.class);
         registerPacket(251, WorldBorderUpdatePacket.class);
+        registerPacket(252, SoundEventPacket.class);
     }
 
     private static void registerPacket(int id, Class packetClass) {

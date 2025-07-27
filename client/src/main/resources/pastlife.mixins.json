@@ -14,6 +14,7 @@
     "PlayerEntityMixin",
     "PlayerEntityRendererMixin",
     "RemotePlayerEntityMixin",
+    "SoundsMixin",
     "TextureManagerMixin",
     "WorldRendererMixin"
   ],

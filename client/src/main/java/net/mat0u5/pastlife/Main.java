@@ -1,8 +1,12 @@
 package net.mat0u5.pastlife;
 
-public class Main {
+import net.minecraft.client.Minecraft;
 
-	public static void init() {
+public class Main {
+	public static Minecraft minecraft;
+
+	public static void init(Minecraft minecraftInstance) {
 		System.out.println("[CLIENT] Initializing Past Life!");
+		minecraft = minecraftInstance;
 	}
 }
