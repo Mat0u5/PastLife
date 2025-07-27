@@ -8,7 +8,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 @Mixin(Packet.class)
 public class PacketMixin {
@@ -16,6 +18,8 @@ public class PacketMixin {
     private static Map ID_TO_TYPE;
     @Shadow
     private static Map TYPE_TO_ID;
+    @Shadow
+    private static Set S2C;
 
     @Inject(method = "<clinit>", at = @At("TAIL"))
     private static void registerCustomPackets(CallbackInfo ci) {
@@ -25,6 +29,7 @@ public class PacketMixin {
     private static void registerPacket(int id, Class packetClass) {
         ID_TO_TYPE.put(id, packetClass);
         TYPE_TO_ID.put(packetClass, id);
+        S2C.add(id);
         System.out.println("Registered CustomPacket with ID "+id+" for "+packetClass);
     }
 }

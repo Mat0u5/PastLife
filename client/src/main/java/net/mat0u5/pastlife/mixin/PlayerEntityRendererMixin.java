@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class PlayerEntityRendererMixin {
 
     @Redirect(
-            method = "render(Lnet/minecraft/entity/living/player/PlayerEntity;DDDFF)V",
+            method = "renderNameTag(Lnet/minecraft/entity/living/player/PlayerEntity;DDD)V",
             at = @At(value = "FIELD", target = "Lnet/minecraft/entity/living/player/PlayerEntity;name:Ljava/lang/String;")
     )
     private String redirectPlayerName(PlayerEntity playerEntity) {

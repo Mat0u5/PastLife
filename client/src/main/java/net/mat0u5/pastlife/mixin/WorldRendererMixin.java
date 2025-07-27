@@ -37,8 +37,8 @@ public class WorldRendererMixin {
 
         frameCounter++;
 
-        double centerX = world.spawnpointX;
-        double centerZ = world.spawnpointZ;
+        double centerX = world.getSpawnPoint().x;
+        double centerZ = world.getSpawnPoint().z;
 
         if (frameCounter % 10 == 0) {
             double playerX = player.x;

@@ -44,7 +44,7 @@ def configure(project) {
 	}
 
 	project.dependencies {
-		minecraft "com.mojang:minecraft:${project.minecraft_version}"
+		minecraft "com.mojang:minecraft:${project.rootProject.minecraft_version}"
 		mappings project.ploceus.featherMappings(project.feather_build)
 
 		modImplementation "net.fabricmc:fabric-loader:${project.rootProject.loader_version}"
@@ -65,7 +65,7 @@ def configure(project) {
 		filesMatching('fabric.mod.json') {
 			expand "version": project.property('mod_version'),
 					"targetVersion": project.property('target_version'),
-					"minecraftVersion": project.minecraft_version,
+					"minecraftVersion": project.property('minecraft_version'),
 					"environment": project.property('environment')
 		}
 	}

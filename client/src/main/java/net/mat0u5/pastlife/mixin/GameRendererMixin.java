@@ -31,11 +31,14 @@ public class GameRendererMixin {
         }
         return fov * ZOOM_FACTOR;
     }
-
+/*
+    TODO
     @WrapOperation(
             method = "transformCamera", at = @At(value = "INVOKE", target = "Lorg/lwjgl/input/Keyboard;isKeyDown(I)Z")
     )
     private boolean customF5(int key, Operation<Boolean> original) {
         return KeybindUtils.reversedF5();
     }
+
+ */
 }
