@@ -1,5 +1,6 @@
 package net.mat0u5.pastlife.packets;
 
+import net.mat0u5.pastlife.Main;
 import net.minecraft.network.PacketHandler;
 import net.minecraft.network.packet.Packet;
 
@@ -50,6 +51,9 @@ public class TitlePacket extends Packet {
     }
 
     public void handle(PacketHandler handler) {
+        if (Main.titleRenderer != null) {
+            Main.titleRenderer.showTitle(this.title, this.subtitle, this.fadeIn, this.stay, this.fadeOut);
+        }
     }
 
     public int getSize() {

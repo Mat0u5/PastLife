@@ -1,6 +1,7 @@
 package net.mat0u5.pastlife;
 
 import net.mat0u5.pastlife.utils.ResourceHandler;
+import net.mat0u5.pastlife.utils.TitleRenderer;
 import net.minecraft.client.Minecraft;
 
 import java.io.File;
@@ -8,10 +9,12 @@ import java.nio.file.Path;
 
 public class Main {
 	public static Minecraft minecraft;
+	public static TitleRenderer titleRenderer;
 
 	public static void init(Minecraft minecraftInstance) {
 		System.out.println("[CLIENT] Initializing Past Life!");
 		minecraft = minecraftInstance;
+		titleRenderer = new TitleRenderer();
 
 
 		File runDirectory = minecraft.getRunDirectory();

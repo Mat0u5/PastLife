@@ -1,6 +1,7 @@
 package net.mat0u5.pastlife.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import net.mat0u5.pastlife.Main;
 import net.mat0u5.pastlife.interfaces.IKeybinds;
 import net.mat0u5.pastlife.utils.KeybindUtils;
 import net.minecraft.client.Minecraft;
@@ -12,10 +13,12 @@ import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(GameRenderer.class)
-public class GameRendererMixin {
+public abstract class GameRendererMixin {
     @Shadow
     private Minecraft minecraft;
 

@@ -25,6 +25,9 @@ public class MinecraftMixin {
     private void tickHead(CallbackInfo ci) {
         Minecraft minecraft = (Minecraft) (Object) this;
         previousDebugEnabled = minecraft.options.debugEnabled;
+        if (Main.titleRenderer != null) {
+            Main.titleRenderer.tick();
+        }
     }
 
     @Inject(method = "tick", at = @At(value = "TAIL"))
