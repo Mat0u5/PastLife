@@ -41,7 +41,7 @@ public class LivesManager extends ConfigManager {
     public void addLives(PlayerEntity player, int lives) {
         int currentLives = loadLives(player);
         currentLives += lives;
-        saveLives(player, currentLives);
+        setLives(player, currentLives);
     }
 
     public String getColorCode(PlayerEntity player) {
