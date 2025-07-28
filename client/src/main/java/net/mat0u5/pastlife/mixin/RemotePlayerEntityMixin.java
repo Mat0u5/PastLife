@@ -1,5 +1,6 @@
 package net.mat0u5.pastlife.mixin;
 
+import net.mat0u5.pastlife.Main;
 import net.mat0u5.pastlife.interfaces.IPlayerEntity;
 import net.mat0u5.pastlife.utils.PlayerUtils;
 import net.minecraft.client.entity.living.player.RemotePlayerEntity;
@@ -20,10 +21,10 @@ public class RemotePlayerEntityMixin {
         String uuid = accessor.getUUID();
         if (uuid != null) {
             entity.skin = "https://crafatar.com/skins/"+uuid+".png";
-            System.out.println("Override texture " + entity.skin);
+            Main.log("Override texture " + entity.skin);
             entity.cape = "https://crafatar.com/capes/"+uuid+".png";
             entity.cloak = entity.cape;
-            System.out.println("Override cape " + entity.cape);
+            Main.log("Override cape " + entity.cape);
         }
     }
 }

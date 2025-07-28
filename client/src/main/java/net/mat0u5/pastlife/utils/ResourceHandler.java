@@ -1,5 +1,7 @@
 package net.mat0u5.pastlife.utils;
 
+import net.mat0u5.pastlife.Main;
+
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Files;
@@ -17,7 +19,7 @@ public class ResourceHandler {
             URL resourceUrl = getClass().getResource(resourcePath);
 
             if (resourceUrl == null) {
-                System.out.println("File not found: " + resourcePath);
+                Main.error("File not found: " + resourcePath);
                 return;
             }
 
@@ -29,10 +31,10 @@ public class ResourceHandler {
                 handleSingleFileJar(targetFile, resourcePath);
             }
             else {
-                System.out.println("Unsupported resource protocol: " + resourceUrl.getProtocol());
+                Main.error("Unsupported resource protocol: " + resourceUrl.getProtocol());
             }
         } catch (Exception e) {
-            System.out.println("Error copying bundled file: " + resourcePath + "_" + e);
+            Main.error("Error copying bundled file: " + resourcePath + "_" + e);
         }
     }
 
@@ -45,12 +47,12 @@ public class ResourceHandler {
             if (Files.isRegularFile(sourcePath)) {
                 // Copy the file to the target location
                 Files.copy(sourcePath, targetFile, StandardCopyOption.REPLACE_EXISTING);
-                System.out.println("Copied file: " + sourcePath + " -> " + targetFile);
+                Main.log("Copied file: " + sourcePath + " -> " + targetFile);
             } else {
-                System.out.println("Source is not a regular file: " + sourcePath);
+                Main.error("Source is not a regular file: " + sourcePath);
             }
         } catch (Exception e) {
-            System.out.println("Error copying bundled file." + e);
+            Main.error("Error copying bundled file." + e);
         }
     }
 
@@ -59,16 +61,16 @@ public class ResourceHandler {
             // When running from JAR, we can use InputStream method
             try (InputStream in = getClass().getResourceAsStream(resourcePath)) {
                 if (in == null) {
-                    System.out.println("Could not find resource: " + resourcePath);
+                    Main.error("Could not find resource: " + resourcePath);
                     return;
                 }
 
                 // Copy from the input stream to the target file
                 Files.copy(in, targetFile, StandardCopyOption.REPLACE_EXISTING);
-                System.out.println("Copied file from JAR: " + resourcePath + " -> " + targetFile);
+                Main.log("Copied file from JAR: " + resourcePath + " -> " + targetFile);
             }
         } catch (Exception e) {
-            System.out.println("Error copying file from JAR: " + resourcePath + "_"+ e);
+            Main.error("Error copying file from JAR: " + resourcePath + "_"+ e);
         }
     }
 }

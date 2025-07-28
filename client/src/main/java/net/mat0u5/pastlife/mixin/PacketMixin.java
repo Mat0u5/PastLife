@@ -1,5 +1,6 @@
 package net.mat0u5.pastlife.mixin;
 
+import net.mat0u5.pastlife.Main;
 import net.mat0u5.pastlife.packets.LivesUpdatePacket;
 import net.mat0u5.pastlife.packets.SoundEventPacket;
 import net.mat0u5.pastlife.packets.TitlePacket;
@@ -35,6 +36,6 @@ public class PacketMixin {
         ID_TO_TYPE.put(id, packetClass);
         TYPE_TO_ID.put(packetClass, id);
         S2C.add(id);
-        System.out.println("Registered CustomPacket with ID "+id+" for "+packetClass);
+        Main.log("Registered CustomPacket with ID "+id+" for "+packetClass);
     }
 }

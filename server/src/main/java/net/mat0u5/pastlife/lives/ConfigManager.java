@@ -1,6 +1,8 @@
 package net.mat0u5.pastlife.lives;
 
 
+import net.mat0u5.pastlife.Main;
+
 import java.io.*;
 import java.util.Properties;
 
@@ -26,7 +28,7 @@ public abstract class ConfigManager {
         File configDir = new File(folderPath);
         if (!configDir.exists()) {
             if (!configDir.mkdirs()) {
-                System.out.println("Failed to create folder "+configDir);
+                Main.error("Failed to create folder "+configDir);
                 return;
             }
         }
@@ -35,7 +37,7 @@ public abstract class ConfigManager {
         if (!configFile.exists()) {
             try {
                 if (!configFile.createNewFile()) {
-                    System.out.println("Failed to create file " + configFile);
+                    Main.error("Failed to create file " + configFile);
                     return;
                 }
                 try (OutputStream output = new FileOutputStream(configFile)) {
@@ -43,7 +45,7 @@ public abstract class ConfigManager {
                     properties.store(output, null);
                 }
             } catch (IOException ex) {
-                System.out.println(ex.getMessage());
+                Main.error(ex.getMessage());
             }
         }
     }
@@ -55,7 +57,7 @@ public abstract class ConfigManager {
         try (InputStream input = new FileInputStream(filePath)) {
             properties.load(input);
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            Main.error(ex.getMessage());
         }
     }
 
@@ -65,7 +67,7 @@ public abstract class ConfigManager {
         try (OutputStream output = new FileOutputStream(filePath)) {
             properties.store(output, null);
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            Main.error(ex.getMessage());
         }
     }
 
@@ -76,7 +78,7 @@ public abstract class ConfigManager {
         try (OutputStream output = new FileOutputStream(filePath)) {
             properties.store(output, null);
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            Main.error(ex.getMessage());
         }
     }
 
@@ -85,7 +87,7 @@ public abstract class ConfigManager {
         try (OutputStream output = new FileOutputStream(filePath)) {
             properties.store(output, null);
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            Main.error(ex.getMessage());
         }
     }
 

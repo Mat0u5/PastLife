@@ -3,16 +3,21 @@ package net.mat0u5.pastlife;
 import net.mat0u5.pastlife.utils.ResourceHandler;
 import net.mat0u5.pastlife.utils.TitleRenderer;
 import net.minecraft.client.Minecraft;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.nio.file.Path;
 
 public class Main {
+	public static final String MOD_ID = "pastlife";
+	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+
 	public static Minecraft minecraft;
 	public static TitleRenderer titleRenderer;
 
 	public static void init(Minecraft minecraftInstance) {
-		System.out.println("[CLIENT] Initializing Past Life!");
+		log("[CLIENT] Initializing Past Life!");
 		minecraft = minecraftInstance;
 		titleRenderer = new TitleRenderer();
 
@@ -35,5 +40,23 @@ public class Main {
 		minecraft.soundSystem.loadSound("boogeyman_cure.ogg", lifeseriesResourcesPath.resolve("boogeyman_cure.ogg").toFile());
 		minecraft.soundSystem.loadSound("boogeyman_fail.ogg", lifeseriesResourcesPath.resolve("boogeyman_fail.ogg").toFile());
 		minecraft.soundSystem.loadSound("didgeridoo.ogg", lifeseriesResourcesPath.resolve("didgeridoo.ogg").toFile());
+	}
+
+	public static void log(String message) {
+		if (LOGGER != null) {
+			LOGGER.info(message);
+		}
+		else {
+			System.out.println("[Past Life] " + message);
+		}
+	}
+
+	public static void error(String message) {
+		if (LOGGER != null) {
+			LOGGER.error(message);
+		}
+		else {
+			System.out.println("[Past Life] " + message);
+		}
 	}
 }
