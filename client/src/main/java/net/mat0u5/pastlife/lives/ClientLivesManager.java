@@ -20,7 +20,10 @@ public class ClientLivesManager {
     }
 
     public static Integer getPlayerLives(PlayerEntity player) {
-        String playerName = player.name;
+        return getPlayerLives(player.name);
+    }
+
+    public static Integer getPlayerLives(String playerName) {
         if (livesMap.containsKey(playerName)) {
             return livesMap.get(playerName);
         }
@@ -28,7 +31,11 @@ public class ClientLivesManager {
     }
 
     public static String getColorCode(PlayerEntity player) {
-        Integer lives = getPlayerLives(player);
+        return getColorCode(player.name);
+    }
+
+    public static String getColorCode(String playerName) {
+        Integer lives = getPlayerLives(playerName);
         if (lives == null) {
             return null;
         }

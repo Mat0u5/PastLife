@@ -39,8 +39,8 @@ After updating the skins in the minecraft launcher, it takes a while for the ski
 | MC Version  | Status      |                                                                                                    Modifications                                                                                                     |
 |:------------|-------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 | Beta 1.2_02 | Finished    | Fixed player skins not rendering properly.<br/>Improved front-facing third-person perspective.<br/>Added the world border.<br/>Added the ability to zoom.<br/>Added the custom TNT recipe.<br/>Added Death Messages. |
-| Beta 1.7.3  | Finished    |                                                                                      Added Keep Inventory.<br/>Added the Boogeyman.                                                                                       |
-| Release 1.1 | In Progress |                                                                                                          -                                                                                                           |
+| Beta 1.7.3  | Finished    |                                                                                    Added Keep Inventory.<br/>Added the Boogeyman.                                                                                    |
+| Release 1.1 | In Progress |                                                                                                Tab list shows lives.                                                                                                 |
 | ???         | -           |                                                                                                          -                                                                                                           |
 | ???         | -           |                                                                                                          -                                                                                                           |
 | ???         | -           |                                                                                                          -                                                                                                           |
@@ -69,4 +69,12 @@ Make sure you're opped to be able to use most of the commands below.<br>
 - `/lives remove <player> [amount]` - Removes `[amount]` lives from `<player>`. If `[amount]` is not specified, it defaults to 1.
 - `/lives set <player> <amount>` - Sets `<player>`'s lives to `<amount>`.
 - `/lives get <player>` - Shows you how many lives `<player>` has.
+</details>
+
+<details open>
+<summary>/boogeyman - Only available in session 2 (Minecraft Beta 1.7.3)</summary>
+
+- `/boogeyman choose` - Randomly selects the Boogeymen.
+- `/boogeyman succeed` - Ran by the Boogeyman to say they have succeeded in killing a player. *No permissions required.*
+- `/boogeyman fail` - Ran by the Boogeyman to say they have failed in killing a player. *No permissions required.*
 </details>
