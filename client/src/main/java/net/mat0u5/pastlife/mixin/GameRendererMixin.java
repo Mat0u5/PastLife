@@ -23,6 +23,9 @@ public class GameRendererMixin {
     @ModifyReturnValue(method = "getFov", at = @At("RETURN"))
     private float modifyFov(float fov) {
         GameOptions options = minecraft.options;
+        if (minecraft.screen != null) {
+            return fov;
+        }
         if (options instanceof IKeybinds) {
             IKeybinds customOptions = (IKeybinds) options;
             if (!Keyboard.isKeyDown(customOptions.zoomKey().keyCode)) {
