@@ -4,11 +4,14 @@ import net.mat0u5.pastlife.Main;
 import net.mat0u5.pastlife.utils.WorldBorderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.living.player.PlayerEntity;
+import net.minecraft.network.packet.ChatMessagePacket;
 import net.minecraft.server.entity.living.player.ServerPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ServerPlayerEntity.class)
 public class ServerPlayerEntityMixin {
@@ -50,9 +53,43 @@ public class ServerPlayerEntityMixin {
 
     @Inject(method = "onKilled", at = @At("HEAD"))
     private void onKilled(Entity entity, CallbackInfo ci) {
-        PlayerEntity player = (PlayerEntity) (Object) this;
+        ServerPlayerEntity player = (ServerPlayerEntity) (Object) this;
+
+        //Death message
+        String playerName = player.name;
+        if (Main.livesManager != null) {
+            String colorCode = Main.livesManager.getColorCode(player);
+            if (colorCode != null) {
+                playerName = colorCode + playerName + "§r";
+            }
+        }
+        String deathMessage = playerName + " died";
+        if (lastDamageSource != null) {
+            if (lastDamageSource instanceof PlayerEntity) {
+                PlayerEntity killer = (PlayerEntity) lastDamageSource;
+                String killerName = killer.name;
+                if (Main.livesManager != null) {
+                    String killerColorCode = Main.livesManager.getColorCode(killer);
+                    if (killerColorCode != null) {
+                        killerName = killerColorCode + killerName + "§r";
+                    }
+                }
+                deathMessage = playerName + " was slain by " + killerName;
+            }
+        }
+        player.server.playerManager.sendPacket(new ChatMessagePacket(deathMessage));
+
+        //Remove lives
         if (Main.livesManager != null) {
             Main.livesManager.addLives(player, -1);
         }
+    }
+
+    @Unique
+    private Entity lastDamageSource;
+
+    @Inject(method = "damage", at = @At("HEAD"))
+    private void onKilled(Entity entity, int i, CallbackInfoReturnable<Boolean> cir) {
+        lastDamageSource = entity;
     }
 }
