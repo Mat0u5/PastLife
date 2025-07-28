@@ -2,6 +2,7 @@ package net.mat0u5.pastlife.utils;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import net.mat0u5.pastlife.Main;
 import net.mat0u5.pastlife.interfaces.IPlayerEntity;
 
 import java.io.BufferedReader;
@@ -28,7 +29,7 @@ public class PlayerUtils {
             }
         }
 
-        System.out.println("[PastLife] Official API endpoints failed for player: " + playerName);
+        Main.log("Official API endpoints failed for player: " + playerName);
     }
 
     private static boolean tryLoadUUIDFromEndpoint(IPlayerEntity accessor, String playerName, String apiUrl) {
@@ -51,11 +52,11 @@ public class PlayerUtils {
             if (responseCode == 307 || responseCode == 301 || responseCode == 302) {
                 String redirectUrl = connection.getHeaderField("Location");
                 if (redirectUrl != null && redirectUrl.startsWith("http://")) {
-                    System.out.println("[PastLife] Following HTTP redirect for: " + playerName);
+                    Main.log("Following HTTP redirect for: " + playerName);
                     connection.disconnect();
                     return tryLoadUUIDFromEndpoint(accessor, playerName, redirectUrl);
                 } else {
-                    System.out.println("[PastLife] Skipping HTTPS redirect for: " + playerName);
+                    Main.log("Skipping HTTPS redirect for: " + playerName);
                     return false;
                 }
             }
@@ -75,35 +76,35 @@ public class PlayerUtils {
                 if (json.has("id") && !json.get("id").isJsonNull()) {
                     String uuidStr = json.get("id").getAsString();
                     accessor.setUUID(uuidStr);
-                    System.out.println("[PastLife] Successfully loaded UUID for player: " + playerName);
+                    Main.log("Successfully loaded UUID for player: " + playerName);
                     return true;
                 } else {
-                    System.out.println("[PastLife] No UUID found for player: " + playerName);
+                    Main.log("No UUID found for player: " + playerName);
                     return false;
                 }
 
             } else if (responseCode == 204) {
-                System.out.println("[PastLife] Player does not exist: " + playerName);
+                Main.log("Player does not exist: " + playerName);
                 return false;
             } else if (responseCode == 404) {
-                System.out.println("[PastLife] Player not found: " + playerName);
+                Main.log("Player not found: " + playerName);
                 return false;
             } else if (responseCode == 429) {
-                System.out.println("[PastLife] Rate limited by Mojang API. Try again later.");
+                Main.log("Rate limited by Mojang API. Try again later.");
                 return false;
             } else {
-                System.out.println("[PastLife] API endpoint " + apiUrl + " returned error code: " + responseCode);
+                Main.log("API endpoint " + apiUrl + " returned error code: " + responseCode);
                 return false;
             }
 
         } catch (java.net.UnknownHostException e) {
-            System.out.println("[PastLife] No internet connection or DNS resolution failed");
+            Main.log("No internet connection or DNS resolution failed");
             return false;
         } catch (java.net.SocketTimeoutException e) {
-            System.out.println("[PastLife] Connection timeout for endpoint: " + apiUrl);
+            Main.log("Connection timeout for endpoint: " + apiUrl);
             return false;
         } catch (Exception e) {
-            System.out.println("[PastLife] Error with endpoint " + apiUrl + ": " + e.getMessage());
+            Main.log("Error with endpoint " + apiUrl + ": " + e.getMessage());
             return false;
         } finally {
             if (connection != null) {
@@ -130,7 +131,7 @@ public class PlayerUtils {
             }
         }
 
-        System.out.println("[PastLife] All alternative services failed for: " + playerName);
+        Main.log("All alternative services failed for: " + playerName);
     }
 
     private static boolean tryAlternativeService(IPlayerEntity accessor, String playerName, String serviceUrl) {
@@ -163,13 +164,13 @@ public class PlayerUtils {
                 String uuidStr = extractUUIDFromResponse(json, serviceUrl);
                 if (uuidStr != null && !uuidStr.isEmpty()) {
                     accessor.setUUID(uuidStr);
-                    System.out.println("[PastLife] Successfully loaded UUID via alternative service for: " + playerName);
+                    Main.log("Successfully loaded UUID via alternative service for: " + playerName);
                     return true;
                 }
             }
 
         } catch (Exception e) {
-            System.out.println("[PastLife] Alternative service " + serviceUrl + " failed: " + e.getMessage());
+            Main.log("Alternative service " + serviceUrl + " failed: " + e.getMessage());
         } finally {
             if (connection != null) {
                 connection.disconnect();
@@ -197,7 +198,7 @@ public class PlayerUtils {
                 }
             }
         } catch (Exception e) {
-            System.out.println("[PastLife] Error parsing response from " + serviceUrl + ": " + e.getMessage());
+            Main.log("Error parsing response from " + serviceUrl + ": " + e.getMessage());
         }
         return null;
     }
@@ -206,7 +207,7 @@ public class PlayerUtils {
         String playerName = accessor.getName();
         if (playerName == null) return;
 
-        System.out.println("[PastLife] Could not fetch UUID for " + playerName + " - using offline mode UUID");
+        Main.log("Could not fetch UUID for " + playerName + " - using offline mode UUID");
 
         // Generate offline mode UUID (deterministic based on username)
         String offlineUUID = generateOfflineUUID(playerName);
@@ -235,20 +236,20 @@ public class PlayerUtils {
             return;
         }
 
-        System.out.println("[PastLife] Attempting to load UUID for: " + playerName);
+        Main.log("Attempting to load UUID for: " + playerName);
 
         loadUUID(accessor);
         if (accessor.getUUID() != null && !accessor.getUUID().isEmpty()) {
             return;
         }
 
-        System.out.println("[PastLife] Trying alternative UUID service...");
+        Main.log("Trying alternative UUID service...");
         loadUUIDAlternative(accessor);
         if (accessor.getUUID() != null && !accessor.getUUID().isEmpty()) {
             return;
         }
 
-        System.out.println("[PastLife] Generating offline UUID as fallback...");
+        Main.log("Generating offline UUID as fallback...");
         loadUUIDManual(accessor);
     }
 }

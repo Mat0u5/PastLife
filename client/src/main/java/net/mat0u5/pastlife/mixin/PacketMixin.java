@@ -1,5 +1,6 @@
 package net.mat0u5.pastlife.mixin;
 
+import net.mat0u5.pastlife.Main;
 import net.mat0u5.pastlife.packets.LivesUpdatePacket;
 import net.mat0u5.pastlife.packets.WorldBorderUpdatePacket;
 import net.minecraft.network.packet.Packet;
@@ -27,6 +28,6 @@ public class PacketMixin {
     private static void registerPacket(int id, Class packetClass) {
         ID_TO_TYPE.put(id, packetClass);
         TYPE_TO_ID.put(packetClass, id);
-        System.out.println("Registered CustomPacket with ID "+id+" for "+packetClass);
+        Main.log("Registered CustomPacket with ID " + id + " for " + packetClass);
     }
 }

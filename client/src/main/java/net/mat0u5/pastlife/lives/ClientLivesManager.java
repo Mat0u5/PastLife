@@ -1,5 +1,6 @@
 package net.mat0u5.pastlife.lives;
 
+import net.mat0u5.pastlife.Main;
 import net.mat0u5.pastlife.packets.LivesUpdatePacket;
 import net.minecraft.entity.living.player.PlayerEntity;
 
@@ -12,7 +13,7 @@ public class ClientLivesManager {
         String playerName = packet.playerName;
         int lives = packet.lives;
         if (playerName == null || playerName.isEmpty()) {
-            System.out.println("Invalid player name received in LivesUpdatePacket.");
+            Main.log("Invalid player name received in LivesUpdatePacket.");
             return;
         }
         livesMap.put(playerName, lives);
