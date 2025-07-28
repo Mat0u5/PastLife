@@ -35,7 +35,7 @@ public class BoogeymanCommand {
                 PlayerUtils.playSoundToPlayer(player, "boogeyman_cure", 1, 1);
                 PlayerUtils.sendPacketToPlayer(player, new TitlePacket("§aYou are cured!","", 20, 30, 20));
                 PlayerUtils.sendPacketToAllPlayers(new ChatMessagePacket(player.name + "§7 has been cured of the Boogeyman curse!"));
-                System.out.println("[PAST LIFE] "+player.name + " has been cured of the Boogeyman curse!");
+                Main.log(player.name + " has been cured of the Boogeyman curse!");
             }
             else {
                 source.sendMessage("§cYou are not a Boogeyman, you cannot use this command.");
@@ -49,7 +49,7 @@ public class BoogeymanCommand {
                 PlayerUtils.sendPacketToPlayer(player, new TitlePacket("§cYou have failed.","", 20, 30, 20));
                 PlayerUtils.sendPacketToAllPlayers(new ChatMessagePacket(player.name + "§7 failed to kill a player while being the §cBoogeyman§7."));
                 PlayerUtils.sendPacketToAllPlayers(new ChatMessagePacket("§7They have been dropped to their §cLast Life§7."));
-                System.out.println("[PAST LIFE] "+player.name + " failed to kill a player while being the Boogeyman.");
+                Main.log(player.name + " failed to kill a player while being the Boogeyman.");
                 if (Main.livesManager != null && Main.livesManager.getLives(player) > 1) {
                     Main.livesManager.setLives(player, 1);
                 }

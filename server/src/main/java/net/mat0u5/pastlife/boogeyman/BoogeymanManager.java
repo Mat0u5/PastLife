@@ -49,7 +49,7 @@ public class BoogeymanManager {
         while (0.5 >= Math.random()) {
             chooseBoogeymen++;
         }
-        System.out.println("[PAST LIFE] Choosing "+chooseBoogeymen+ " boogeymen.");
+        Main.log("Choosing "+chooseBoogeymen+ " boogeymen.");
 
         List<ServerPlayerEntity> boogeymenList = new ArrayList<>();
         List<ServerPlayerEntity> normalList = new ArrayList<>();
@@ -57,7 +57,7 @@ public class BoogeymanManager {
             if (chooseBoogeymen > 0 && Main.livesManager.getLives(player) > 1) {
                 boogeymenList.add(player);
                 boogeymen.add(player.name);
-                System.out.println("[PAST LIFE] " + player.name + " has been chosen as a Boogeyman!");
+                Main.log(player.name + " has been chosen as a Boogeyman!");
                 chooseBoogeymen--;
             }
             else {

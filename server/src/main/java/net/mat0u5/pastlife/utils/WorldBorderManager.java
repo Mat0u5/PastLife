@@ -1,5 +1,7 @@
 package net.mat0u5.pastlife.utils;
 
+import net.mat0u5.pastlife.Main;
+
 public class WorldBorderManager {
     public static int borderSize = 0;
     public static int centerX = 0;
@@ -11,7 +13,7 @@ public class WorldBorderManager {
         WorldBorderManager.centerX = centerX;
         WorldBorderManager.centerZ = centerZ;
         if (!initialized) {
-            System.out.println("[SERVER] World Border initialized with size: " + size + ", centerX: " + centerX + ", centerZ: " + centerZ);
+            Main.log("[SERVER] World Border initialized with size: " + size + ", centerX: " + centerX + ", centerZ: " + centerZ);
         }
         initialized = true;
     }
