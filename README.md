@@ -17,7 +17,7 @@ The earliest versions have a separate jar file for the client and the server, so
 ## How to play:
 ### Client:
 1. Install the https://ornithemc.net installer.
-2. Open it, select the **client** environment, and install the desired version of Minecraft (based on the session you're on). Make sure to select check "Historical Versions" otherwise the beta versions won't show up.
+2. Open it, select the **client** environment, and install the desired version of Minecraft (based on the session you're on). **If in version beta 1.2_02 or 1.7.3:**  Make sure to select check "Historical Versions" otherwise the beta versions won't show up.
 3. Open folder where you installed it, and add the mod jar file to the `mods` folder.
 4. Open the Minecraft launcher, select the Ornithe profile, and run the game.
 
@@ -25,7 +25,7 @@ The earliest versions have a separate jar file for the client and the server, so
 1. Install the https://ornithemc.net installer.
 2. Open it, select the **server** environment, and install the desired version of Minecraft (based on the session you're on). Make sure to select check "Historical Versions" otherwise the beta versions won't show up.
 3. Open the folder where you installed the server and run the `fabric-server-launch.jar` file to first start the server.
-4. Open server.properties and **set "online-mode" to false**. This is required, as online-mode does NOT work in the oldest versions
+4. **If in version beta 1.2_02 or 1.7.3:** Open server.properties and **set "online-mode" to false**. This is required, as online-mode does NOT work in the oldest versions
 5. Add the mod jar file to the `mods` folder in the server directory.
 6. That's it, just run the server (`fabric-server-launch.jar`) and you're done!
 
@@ -36,14 +36,14 @@ This mod (obviously) does not handle updating the world to newer versions, so yo
 After updating the skins in the minecraft launcher, it takes a while for the skins to update in the game (like 20 minutes) because of the custom implementation of how skins work, so be patient.
 
 ## Features:
-| MC Version  | Status   |                                                                                       Modifications                                                                                        |
-|:------------|----------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| Beta 1.2_02 | Finished | Fixed player skins not rendering properly.<br/>Improved front-facing third-person perspective.<br/>Added the world border.<br/>Added the ability to zoom.<br/>Added the custom TNT recipe. |
-| Beta 1.7.3  | Working  |                                                                                   Added Keep Inventory.                                                                                    |
-| Release 1.1 | TODO     |                                                                                             -                                                                                              |
-| ???         | -        |                                                                                             -                                                                                              |
-| ???         | -        |                                                                                             -                                                                                              |
-| ???         | -        |                                                                                             -                                                                                              |
+| MC Version  | Status      |                                                                                                    Modifications                                                                                                     |
+|:------------|-------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| Beta 1.2_02 | Finished    | Fixed player skins not rendering properly.<br/>Improved front-facing third-person perspective.<br/>Added the world border.<br/>Added the ability to zoom.<br/>Added the custom TNT recipe.<br/>Added Death Messages. |
+| Beta 1.7.3  | Finished    |                                                                                      Added Keep Inventory. Added the Boogeyman.                                                                                      |
+| Release 1.1 | In Progress |                                                                                                          -                                                                                                           |
+| ???         | -           |                                                                                                          -                                                                                                           |
+| ???         | -           |                                                                                                          -                                                                                                           |
+| ???         | -           |                                                                                                          -                                                                                                           |
 
 
 ---------

@@ -54,7 +54,7 @@ public class PlayerEntityMixin implements IPlayerEntity {
     private void onTick(CallbackInfo ci) {
         PlayerEntity player = (PlayerEntity) (Object) this;
 
-        if (!WorldBorderManager.initialized || player.world.dimension.isNether) {
+        if (!WorldBorderManager.initialized || !player.world.dimension.hasWorldSpawn()) {
             return;
         }
 

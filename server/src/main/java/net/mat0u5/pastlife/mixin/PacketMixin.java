@@ -5,6 +5,7 @@ import net.mat0u5.pastlife.packets.SoundEventPacket;
 import net.mat0u5.pastlife.packets.TitlePacket;
 import net.mat0u5.pastlife.packets.WorldBorderUpdatePacket;
 import net.minecraft.network.packet.Packet;
+import net.minecraft.util.Int2ObjectHashMap;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -17,7 +18,7 @@ import java.util.Set;
 @Mixin(Packet.class)
 public class PacketMixin {
     @Shadow
-    private static Map ID_TO_TYPE;
+    public static Int2ObjectHashMap ID_TO_TYPE;
     @Shadow
     private static Map TYPE_TO_ID;
     @Shadow
@@ -25,10 +26,10 @@ public class PacketMixin {
 
     @Inject(method = "<clinit>", at = @At("TAIL"))
     private static void registerCustomPackets(CallbackInfo ci) {
-        registerPacket(250, LivesUpdatePacket.class);
-        registerPacket(251, WorldBorderUpdatePacket.class);
-        registerPacket(252, SoundEventPacket.class);
-        registerPacket(253, TitlePacket.class);
+        registerPacket(249, LivesUpdatePacket.class);
+        registerPacket(248, WorldBorderUpdatePacket.class);
+        registerPacket(247, SoundEventPacket.class);
+        registerPacket(246, TitlePacket.class);
     }
 
     private static void registerPacket(int id, Class packetClass) {

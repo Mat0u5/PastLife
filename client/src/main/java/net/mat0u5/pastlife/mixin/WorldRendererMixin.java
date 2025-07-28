@@ -35,7 +35,7 @@ public class WorldRendererMixin {
             return;
         }
 
-        if (!WorldBorderManager.initialized || player.world.dimension.isNether) {
+        if (!WorldBorderManager.initialized || !player.world.dimension.hasWorldSpawn()) {
             return;
         }
 

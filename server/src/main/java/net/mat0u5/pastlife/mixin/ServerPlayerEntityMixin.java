@@ -5,6 +5,7 @@ import net.mat0u5.pastlife.utils.InventoryStorage;
 import net.mat0u5.pastlife.utils.PlayerUtils;
 import net.mat0u5.pastlife.utils.WorldBorderManager;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.living.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.packet.ChatMessagePacket;
@@ -24,7 +25,7 @@ public class ServerPlayerEntityMixin {
     private void onTick(CallbackInfo ci) {
         ServerPlayerEntity player = (ServerPlayerEntity) (Object) this;
 
-        if (!WorldBorderManager.initialized || player.world.dimension.isNether) {
+        if (!WorldBorderManager.initialized || !player.world.dimension.hasWorldSpawn()) {
             return;
         }
         double centerX = WorldBorderManager.centerX;
@@ -56,37 +57,8 @@ public class ServerPlayerEntityMixin {
     }
 
     @Inject(method = "onKilled", at = @At("HEAD"))
-    private void onKilled(Entity entity, CallbackInfo ci) {
+    private void onKilled(DamageSource source, CallbackInfo ci) {
         ServerPlayerEntity player = (ServerPlayerEntity) (Object) this;
-
-        //Death message
-        String playerName = player.name;
-        if (Main.livesManager != null) {
-            String colorCode = Main.livesManager.getColorCode(player);
-            if (colorCode != null) {
-                playerName = colorCode + playerName + "§r";
-            }
-        }
-        String deathMessage = playerName + " died";
-        if (lastDamageSource != null) {
-            if (lastDamageSource instanceof PlayerEntity) {
-                PlayerEntity killer = (PlayerEntity) lastDamageSource;
-                String killerName = killer.name;
-                if (Main.livesManager != null) {
-                    String killerColorCode = Main.livesManager.getColorCode(killer);
-                    if (killerColorCode != null) {
-                        killerName = killerColorCode + killerName + "§r";
-                    }
-                }
-                deathMessage = playerName + " was slain by " + killerName;
-            }
-            /*
-            else {
-                deathMessage = playerName + " was slain by " + lastDamageSource.name; //This mc version doesn't even have entity names lol
-            }
-             */
-        }
-        PlayerUtils.sendPacketToAllPlayers(new ChatMessagePacket(deathMessage));
 
         // Remove a life
         if (Main.livesManager != null) {
@@ -110,13 +82,5 @@ public class ServerPlayerEntityMixin {
         if (InventoryStorage.hasStoredInventory(playerName) && (Main.livesManager != null && Main.livesManager.getLives(player) > 0)) {
             InventoryStorage.restoreInventory(playerName, player.inventory);
         }
-    }
-
-    @Unique
-    private Entity lastDamageSource;
-
-    @Inject(method = "damage", at = @At("HEAD"))
-    private void onKilled(Entity entity, int i, CallbackInfoReturnable<Boolean> cir) {
-        lastDamageSource = entity;
     }
 }

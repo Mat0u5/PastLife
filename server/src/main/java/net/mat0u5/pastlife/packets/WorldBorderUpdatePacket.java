@@ -1,6 +1,5 @@
 package net.mat0u5.pastlife.packets;
 
-import net.mat0u5.pastlife.utils.WorldBorderManager;
 import net.minecraft.network.PacketHandler;
 import net.minecraft.network.packet.Packet;
 

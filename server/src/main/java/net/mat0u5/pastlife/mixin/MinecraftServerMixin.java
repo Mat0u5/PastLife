@@ -37,7 +37,7 @@ public class MinecraftServerMixin {
 
         if (!WorldBorderManager.initialized) {
             for (ServerWorld world : server.worlds) {
-                if (!world.dimension.isNether) {
+                if (world.dimension.hasWorldSpawn()) {
                     WorldBorderManager.init(400, world.getSpawnPoint().x, world.getSpawnPoint().z);
                 }
             }
