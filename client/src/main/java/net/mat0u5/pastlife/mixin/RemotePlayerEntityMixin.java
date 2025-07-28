@@ -16,7 +16,7 @@ public class RemotePlayerEntityMixin {
         RemotePlayerEntity entity = (RemotePlayerEntity) (Object) (this);
         IPlayerEntity accessor = (IPlayerEntity) entity;
         accessor.setName(name);
-        PlayerUtils.loadUUID(accessor);
+        PlayerUtils.loadUUIDWithAllMethods(accessor);
         String uuid = accessor.getUUID();
         if (uuid != null) {
             entity.skin = "https://crafatar.com/skins/"+uuid+".png";

@@ -18,7 +18,7 @@ public class InputPlayerEntityMixin {
         InputPlayerEntity entity = (InputPlayerEntity) (Object) (this);
         IPlayerEntity accessor = (IPlayerEntity) entity;
         accessor.setName(session.username);
-        PlayerUtils.loadUUID(accessor);
+        PlayerUtils.loadUUIDWithAllMethods(accessor);
         String uuid = accessor.getUUID();
         if (uuid != null) {
             entity.skin = "https://crafatar.com/skins/"+uuid+".png";
