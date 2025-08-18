@@ -66,7 +66,8 @@ public class PlayerUtils {
         for(int i = 0; i < server.playerManager.players.size(); ++i) {
             ServerPlayerEntity player = (ServerPlayerEntity)server.playerManager.players.get(i);
 
-            
+            //player.setHealth(1);
+
             //player.world.addEntity(new XpOrbEntity(player.world, player.x, player.y, player.z, 10000));
 
             //player.teleportToDimension(2);

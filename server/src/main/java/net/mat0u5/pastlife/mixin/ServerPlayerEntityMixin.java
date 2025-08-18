@@ -56,7 +56,7 @@ public class ServerPlayerEntityMixin {
         }
     }
 
-    @Inject(method = "onKilled", at = @At("HEAD"))
+    @Inject(method = "onKilled", at = @At("TAIL"))
     private void onKilled(DamageSource source, CallbackInfo ci) {
         ServerPlayerEntity player = (ServerPlayerEntity) (Object) this;
 
