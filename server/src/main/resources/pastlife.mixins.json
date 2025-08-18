@@ -6,6 +6,7 @@
   "mixins": [
     "CraftingManagerMixin",
     "EnderDragonEntityMixin",
+    "ItemStackMixin",
     "MinecraftServerMixin",
     "PacketMixin",
     "ServerPlayerEntityMixin",

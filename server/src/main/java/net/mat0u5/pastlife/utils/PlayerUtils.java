@@ -3,6 +3,7 @@ package net.mat0u5.pastlife.utils;
 import net.mat0u5.pastlife.Main;
 import net.mat0u5.pastlife.packets.SoundEventPacket;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.XpOrbEntity;
 import net.minecraft.entity.living.mob.hostile.boss.EnderDragonEntity;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.server.MinecraftServer;
@@ -64,6 +65,10 @@ public class PlayerUtils {
         actionTriggers++;
         for(int i = 0; i < server.playerManager.players.size(); ++i) {
             ServerPlayerEntity player = (ServerPlayerEntity)server.playerManager.players.get(i);
+
+            
+            //player.world.addEntity(new XpOrbEntity(player.world, player.x, player.y, player.z, 10000));
+
             //player.teleportToDimension(2);
             //player.networkHandler.teleport(0, 80, 0, player.yaw, player.pitch);
             //player.networkHandler.teleport(-1016, 24, 423, player.yaw, player.pitch);
