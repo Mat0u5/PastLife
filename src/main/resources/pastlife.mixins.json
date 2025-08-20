@@ -1,0 +1,36 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.mat0u5.pastlife.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "CraftingManagerMixin",
+    "DamageSourceMixin",
+    "EnderDragonEntityMixin",
+    "EntityDamageSourceMixin",
+    "ItemStackMixin",
+    "MinecraftServerMixin",
+    "PacketMixin",
+    "ProjectileDamageSourceMixin",
+    "ServerPlayerEntityMixin",
+    "ServerPlayNetworkHandlerMixin"
+  ],
+  "client": [
+    "client.GameGuiMixin",
+    "client.GameOptionsMixin",
+    "client.GameRendererMixin",
+    "client.GuiElementMixin",
+    "client.InputPlayerEntityMixin",
+    "client.MinecraftMixin",
+    "client.PlayerEntityMixin",
+    "client.PlayerEntityRendererMixin",
+    "client.RemotePlayerEntityMixin",
+    "client.TextureManagerMixin",
+    "client.WorldRendererMixin"
+  ],
+  "server": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+	}
+}

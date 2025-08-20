@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "pastlife",
-	"version": "${version}-${environment}",
+	"version": "${version}",
 	"name": "Past Life",
 	"description": "Recreation of Grian's Past Life.",
 	"authors": [
@@ -13,7 +13,7 @@
 	},
 	"license": "MIT",
 	"icon": "assets/pastlife/icon.png",
-	"environment": "${environment}",
+	"environment": "*",
 	"mixins": [
 		"pastlife.mixins.json"
 	],
