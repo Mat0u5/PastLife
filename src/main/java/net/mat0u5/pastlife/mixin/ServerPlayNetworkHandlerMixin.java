@@ -19,23 +19,21 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ServerPlayNetworkHandlerMixin {
     @Shadow
     private MinecraftServer server;
-    @Shadow
-    private ServerPlayerEntity player;
 
     @Inject(method = "runCommand", at = @At("HEAD"), cancellable = true)
     private void injectCustomCommand(String command, CallbackInfo ci) {
         ServerPlayNetworkHandler networkHandler = (ServerPlayNetworkHandler) (Object) this;
         command = command.toLowerCase().trim();
         if (command.startsWith("/lives")) {
-            LivesCommand.handleCommand(server, player, command, networkHandler);
+            LivesCommand.handleCommand(server, networkHandler.player, command, networkHandler);
             ci.cancel();
         }
         if (command.startsWith("/boogeyman")) {
-            BoogeymanCommand.handleCommand(server, player, command, networkHandler);
+            BoogeymanCommand.handleCommand(server, networkHandler.player, command, networkHandler);
             ci.cancel();
         }
         if (command.startsWith("/society") || command.startsWith("/initiate")) {
-            SecretSocietyCommand.handleCommand(server, player, command, networkHandler);
+            SecretSocietyCommand.handleCommand(server, networkHandler.player, command, networkHandler);
             ci.cancel();
         }
     }

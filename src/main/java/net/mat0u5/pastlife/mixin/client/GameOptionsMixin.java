@@ -1,6 +1,6 @@
 package net.mat0u5.pastlife.mixin.client;
 
-import net.mat0u5.pastlife.interfaces.IKeybinds;
+import net.mat0u5.pastlife.client.interfaces.IKeybinds;
 import net.minecraft.client.options.GameOptions;
 import net.minecraft.client.options.KeyBinding;
 import org.lwjgl.input.Keyboard;

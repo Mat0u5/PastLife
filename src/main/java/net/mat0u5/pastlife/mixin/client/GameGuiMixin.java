@@ -22,6 +22,7 @@ public class GameGuiMixin {
     private void renderTitle(float tickDelta, boolean screenOpen, int mouseX, int mouseY, CallbackInfo ci) {
         if (Main.titleRenderer != null) {
             Main.titleRenderer.renderTitle(minecraft, tickDelta);
+
         }
     }
 

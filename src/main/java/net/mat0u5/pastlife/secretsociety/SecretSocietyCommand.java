@@ -1,10 +1,9 @@
 package net.mat0u5.pastlife.secretsociety;
 
 import net.mat0u5.pastlife.Main;
-import net.mat0u5.pastlife.boogeyman.BoogeymanManager;
-import net.minecraft.command.source.CommandSource;
 import net.minecraft.network.packet.ChatMessagePacket;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.command.source.CommandSource;
 import net.minecraft.server.entity.living.player.ServerPlayerEntity;
 import net.minecraft.server.network.handler.ServerPlayNetworkHandler;
 

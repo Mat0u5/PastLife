@@ -1,6 +1,6 @@
 package net.mat0u5.pastlife.mixin.client;
 
-import net.mat0u5.pastlife.interfaces.IPlayerEntity;
+import net.mat0u5.pastlife.client.interfaces.IPlayerEntity;
 import net.mat0u5.pastlife.utils.WorldBorderManager;
 import net.minecraft.entity.living.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;

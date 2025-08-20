@@ -2,10 +2,8 @@ package net.mat0u5.pastlife.mixin;
 
 import net.mat0u5.pastlife.Main;
 import net.mat0u5.pastlife.packets.LivesUpdatePacket;
-import net.mat0u5.pastlife.packets.SoundEventPacket;
 import net.mat0u5.pastlife.packets.WorldBorderUpdatePacket;
 import net.mat0u5.pastlife.secretsociety.SecretSociety;
-import net.mat0u5.pastlife.utils.PlayerUtils;
 import net.mat0u5.pastlife.utils.TaskScheduler;
 import net.mat0u5.pastlife.utils.WorldBorderManager;
 import net.minecraft.server.MinecraftServer;

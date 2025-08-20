@@ -2,7 +2,6 @@ package net.mat0u5.pastlife.mixin;
 
 import net.mat0u5.pastlife.Main;
 import net.mat0u5.pastlife.packets.LivesUpdatePacket;
-import net.mat0u5.pastlife.packets.SoundEventPacket;
 import net.mat0u5.pastlife.packets.TitlePacket;
 import net.mat0u5.pastlife.packets.WorldBorderUpdatePacket;
 import net.minecraft.network.packet.Packet;
@@ -29,8 +28,7 @@ public class PacketMixin {
     private static void registerCustomPackets(CallbackInfo ci) {
         registerPacket(249, LivesUpdatePacket.class);
         registerPacket(248, WorldBorderUpdatePacket.class);
-        registerPacket(247, SoundEventPacket.class);
-        registerPacket(246, TitlePacket.class);
+        registerPacket(247, TitlePacket.class);
     }
 
     private static void registerPacket(int id, Class packetClass) {

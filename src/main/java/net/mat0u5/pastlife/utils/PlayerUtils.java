@@ -1,11 +1,8 @@
 package net.mat0u5.pastlife.utils;
 
 import net.mat0u5.pastlife.Main;
-import net.mat0u5.pastlife.packets.SoundEventPacket;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.XpOrbEntity;
-import net.minecraft.entity.living.mob.hostile.boss.EnderDragonEntity;
 import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.SoundEventPacket;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.entity.living.player.ServerPlayerEntity;
 
@@ -13,28 +10,17 @@ import java.util.List;
 
 public class PlayerUtils {
     public static void playSoundToAllPlayers(String sound, float volume, float pitch) {
-        playSoundToAllPlayers(sound, volume, pitch, false);
-    }
-    public static void playSoundToAllPlayers(String sound, float volume, float pitch, boolean stream) {
         if (Main.server == null) {
             return;
         }
-        Main.server.playerManager.sendPacket(new SoundEventPacket(sound, volume, pitch, stream));
+        playSoundToPlayers(Main.server.getPlayerManager().players, sound, volume, pitch);
     }
-
     public static void playSoundToPlayer(ServerPlayerEntity player, String sound, float volume, float pitch) {
-        playSoundToPlayer(player, sound, volume, pitch, false);
+        player.networkHandler.sendPacket(new SoundEventPacket(sound, player.x, player.y, player.z, volume, pitch));
     }
-    public static void playSoundToPlayer(ServerPlayerEntity player, String sound, float volume, float pitch, boolean stream) {
-        player.networkHandler.sendPacket(new SoundEventPacket(sound, volume, pitch, stream));
-    }
-
-    public static void playSoundToPlayers(List<ServerPlayerEntity> player, String sound, float volume, float pitch) {
-        playSoundToPlayers(player, sound, volume, pitch, false);
-    }
-    public static void playSoundToPlayers(List<ServerPlayerEntity> player, String sound, float volume, float pitch, boolean stream) {
-        for (ServerPlayerEntity serverPlayerEntity : player) {
-            playSoundToPlayer(serverPlayerEntity, sound, volume, pitch, stream);
+    public static void playSoundToPlayers(List<ServerPlayerEntity> players, String sound, float volume, float pitch) {
+        for (ServerPlayerEntity player : players) {
+            playSoundToPlayer(player, sound, volume, pitch);
         }
     }
 
@@ -42,7 +28,7 @@ public class PlayerUtils {
         if (Main.server == null) {
             return;
         }
-        Main.server.playerManager.sendPacket(packet);
+        Main.server.getPlayerManager().sendPacket(packet);
     }
 
     public static void sendPacketToPlayer(ServerPlayerEntity player, Packet packet) {
@@ -63,8 +49,8 @@ public class PlayerUtils {
         //PORTAL ROOM AT -1016, 24, 423
         if (actionTriggers >= 0) return;
         actionTriggers++;
-        for(int i = 0; i < server.playerManager.players.size(); ++i) {
-            ServerPlayerEntity player = (ServerPlayerEntity)server.playerManager.players.get(i);
+        for(int i = 0; i < server.getPlayerManager().players.size(); ++i) {
+            ServerPlayerEntity player = (ServerPlayerEntity)server.getPlayerManager().players.get(i);
 
             //player.setHealth(1);
 
