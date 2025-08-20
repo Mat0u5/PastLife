@@ -34,7 +34,7 @@ public class MinecraftServerMixin {
     private void onModInit(CallbackInfo ci) {
         MinecraftServer server = (MinecraftServer) (Object) this;
 
-        PlayerUtils.doAction(server); //TODO REMOVE
+        //PlayerUtils.doAction(server); //TODO REMOVE
 
         TaskScheduler.onTick();
         SecretSociety.tick(server);
@@ -42,7 +42,7 @@ public class MinecraftServerMixin {
         if (!WorldBorderManager.initialized) {
             for (ServerWorld world : server.worlds) {
                 if (world.dimension.hasWorldSpawn()) {
-                    WorldBorderManager.init(4000, world.getSpawnPoint().x, world.getSpawnPoint().z);
+                    WorldBorderManager.init(400, world.getSpawnPoint().x, world.getSpawnPoint().z);
                 }
             }
         }
