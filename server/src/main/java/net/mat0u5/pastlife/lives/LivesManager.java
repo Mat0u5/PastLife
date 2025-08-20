@@ -1,6 +1,8 @@
 package net.mat0u5.pastlife.lives;
 
+import net.mat0u5.pastlife.utils.PlayerUtils;
 import net.minecraft.entity.living.player.PlayerEntity;
+import net.minecraft.network.packet.ChatMessagePacket;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,6 +38,9 @@ public class LivesManager extends ConfigManager {
             lives = 0;
         }
         saveLives(player, lives);
+        if (lives == 0) {
+            PlayerUtils.sendPacketToAllPlayers(new ChatMessagePacket("§8"+player.name+"§f ran out of lives."));
+        }
     }
 
     public void addLives(PlayerEntity player, int lives) {

@@ -39,7 +39,7 @@ After updating the skins in the minecraft launcher, it takes a while for the ski
 | MC Version     | Status      |                                                                                                    Modifications                                                                                                     |
 |:---------------|-------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 | Beta 1.2_02    | Finished    | Fixed player skins not rendering properly.<br/>Improved front-facing third-person perspective.<br/>Added the world border.<br/>Added the ability to zoom.<br/>Added the custom TNT recipe.<br/>Added Death Messages. |
-| Beta 1.7.3     | Finished    |                                                                                    Added Keep Inventory.<br/>Added the Boogeyman.                                                                                    |
+| Beta 1.7.3     | Finished    |                                                                                    Added Keep Inventory.                                                                                    |
 | Release 1.1    | In Progress |                                            Tab list shows lives.<br>Ender Dragon drops diamonds.<br>Clamped enchantments to level 1.<br>Colored names in death messages.                                             |
 | Release 1.4.7  | TODO        |                                                                                                          -                                                                                                           |
 | Release 1.9.4  | TODO        |                                                                                                          -                                                                                                           |
@@ -48,14 +48,22 @@ After updating the skins in the minecraft launcher, it takes a while for the ski
 
 ---------
 
-### Beta 1.2_02:
-This version has no special features.
-### Beta 1.7.3:
-This version contains the **Boogeyman**. Here's how it works:
+
+## The Boogeyman
+*Only available in session 2 onwards (so Beta 1.7.3+)*
+Follow this to enable the Boogeyman in your session:
 - An admin must run the `/boogeyman choose` command, which will randomly select the boogeymen.
 - Boogeyman succeeding / failing is not tracked automatically, so the player that is the Boogeyman must run the `/boogeyman succeed` or `/boogeyman fail` command to say if they have succeeded or failed.
 - They can run that command at any time, but it also sends a public message in chat to prevent any cheating.
 - The console also logs the information about who got picked as the Boogeyman, and if they failed or succeeded, so you can also handle any possible cheating with that.
+
+## The Secret Society
+*Only available in session 3 onwards (so Release 1.1+)*
+Follow this to enable the Secret Society in your session:
+- An admin must run the `/society begin` command, which start the Secret Society with a random word.
+- You can also run the `/society begin <word>` command, which start the Secret Society with a specific word that you type.
+- Whether the society succeeds or fails is not tracked automatically, the Members must run the `/society success` `/society fail` command.
+- The console logs the information about who runs the success or fail commands, as well as who is picked for the society.
 
 ---------
 

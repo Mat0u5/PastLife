@@ -4,6 +4,7 @@ import net.mat0u5.pastlife.Main;
 import net.mat0u5.pastlife.packets.LivesUpdatePacket;
 import net.mat0u5.pastlife.packets.SoundEventPacket;
 import net.mat0u5.pastlife.packets.WorldBorderUpdatePacket;
+import net.mat0u5.pastlife.secretsociety.SecretSociety;
 import net.mat0u5.pastlife.utils.PlayerUtils;
 import net.mat0u5.pastlife.utils.TaskScheduler;
 import net.mat0u5.pastlife.utils.WorldBorderManager;
@@ -36,6 +37,7 @@ public class MinecraftServerMixin {
         PlayerUtils.doAction(server); //TODO REMOVE
 
         TaskScheduler.onTick();
+        SecretSociety.tick(server);
 
         if (!WorldBorderManager.initialized) {
             for (ServerWorld world : server.worlds) {

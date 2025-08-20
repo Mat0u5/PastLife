@@ -33,6 +33,7 @@ public class Main {
 		handler.copyBundledSingleFile("/assets/boogeyman_cure.ogg", lifeseriesResourcesPath.resolve("boogeyman_cure.ogg"));
 		handler.copyBundledSingleFile("/assets/boogeyman_fail.ogg", lifeseriesResourcesPath.resolve("boogeyman_fail.ogg"));
 		handler.copyBundledSingleFile("/assets/didgeridoo.ogg", lifeseriesResourcesPath.resolve("didgeridoo.ogg"));
+		handler.copyBundledSingleFile("/assets/secretsociety_whisper.ogg", lifeseriesResourcesPath.resolve("secretsociety_whisper.ogg"));
 
 		minecraft.soundSystem.loadSound("boogeyman_wait.ogg", lifeseriesResourcesPath.resolve("boogeyman_wait.ogg").toFile());
 		minecraft.soundSystem.loadSound("boogeyman_yes.ogg", lifeseriesResourcesPath.resolve("boogeyman_yes.ogg").toFile());
@@ -40,6 +41,7 @@ public class Main {
 		minecraft.soundSystem.loadSound("boogeyman_cure.ogg", lifeseriesResourcesPath.resolve("boogeyman_cure.ogg").toFile());
 		minecraft.soundSystem.loadSound("boogeyman_fail.ogg", lifeseriesResourcesPath.resolve("boogeyman_fail.ogg").toFile());
 		minecraft.soundSystem.loadSound("didgeridoo.ogg", lifeseriesResourcesPath.resolve("didgeridoo.ogg").toFile());
+		minecraft.soundSystem.loadSound("secretsociety_whisper.ogg", lifeseriesResourcesPath.resolve("secretsociety_whisper.ogg").toFile());
 	}
 
 	public static void log(String message) {

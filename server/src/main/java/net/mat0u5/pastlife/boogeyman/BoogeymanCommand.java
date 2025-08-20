@@ -14,8 +14,8 @@ public class BoogeymanCommand {
         int response = commandLogic(server, player, command, networkHandler);
         if (response != 1) {
             networkHandler.sendPacket(new ChatMessagePacket("§cInvalid usage."));
-            networkHandler.sendMessage("For admins: /boogeyman choose");
-            networkHandler.sendMessage("For boogeymen: /boogeyman succeed|fail");
+            networkHandler.sendMessage("For admins: '/boogeyman choose'");
+            networkHandler.sendMessage("For boogeymen: '/boogeyman succeed|fail'");
         }
     }
 

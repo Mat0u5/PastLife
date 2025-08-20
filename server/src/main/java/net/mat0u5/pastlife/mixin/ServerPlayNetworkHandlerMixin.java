@@ -3,6 +3,7 @@ package net.mat0u5.pastlife.mixin;
 import net.mat0u5.pastlife.Main;
 import net.mat0u5.pastlife.boogeyman.BoogeymanCommand;
 import net.mat0u5.pastlife.lives.LivesCommand;
+import net.mat0u5.pastlife.secretsociety.SecretSocietyCommand;
 import net.minecraft.entity.living.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.entity.living.player.ServerPlayerEntity;
@@ -31,6 +32,10 @@ public class ServerPlayNetworkHandlerMixin {
         }
         if (command.startsWith("/boogeyman")) {
             BoogeymanCommand.handleCommand(server, player, command, networkHandler);
+            ci.cancel();
+        }
+        if (command.startsWith("/society") || command.startsWith("/initiate")) {
+            SecretSocietyCommand.handleCommand(server, player, command, networkHandler);
             ci.cancel();
         }
     }

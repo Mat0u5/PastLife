@@ -62,6 +62,7 @@ public class TitleRenderer {
 
     public void renderTitle(Minecraft mc, float tickDelta) {
         if (!isActive) return;
+        if (startTick == 0) return;
 
         float currentProgress = startTick + tickDelta;
         int totalTime = fadeInTime + stayTime + fadeOutTime;
@@ -89,7 +90,7 @@ public class TitleRenderer {
                 rawTitle = rawTitle.substring(2);
             }
 
-            float titleScale = 4.0f;
+            float titleScale = 3.0f;
             GL11.glPushMatrix();
             GL11.glScalef(titleScale, titleScale, 1.0f);
 
