@@ -4,7 +4,6 @@ import net.mat0u5.pastlife.utils.WorldBorderManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.world.WorldRenderer;
 import net.minecraft.entity.living.player.PlayerEntity;
-import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

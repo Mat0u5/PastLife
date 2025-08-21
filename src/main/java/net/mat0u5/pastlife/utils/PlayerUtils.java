@@ -1,6 +1,5 @@
 package net.mat0u5.pastlife.utils;
 
-import net.mat0u5.pastlife.Main;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.SoundEventPacket;
 import net.minecraft.server.MinecraftServer;
@@ -10,10 +9,10 @@ import java.util.List;
 
 public class PlayerUtils {
     public static void playSoundToAllPlayers(String sound, float volume, float pitch) {
-        if (Main.server == null) {
+        if (MinecraftServer.getInstance() == null) {
             return;
         }
-        playSoundToPlayers(Main.server.getPlayerManager().players, sound, volume, pitch);
+        playSoundToPlayers(MinecraftServer.getInstance().getPlayerManager().players, sound, volume, pitch);
     }
     public static void playSoundToPlayer(ServerPlayerEntity player, String sound, float volume, float pitch) {
         player.networkHandler.sendPacket(new SoundEventPacket(sound, player.x, player.y, player.z, volume, pitch));
@@ -25,10 +24,10 @@ public class PlayerUtils {
     }
 
     public static void sendPacketToAllPlayers(Packet packet) {
-        if (Main.server == null) {
+        if (MinecraftServer.getInstance() == null) {
             return;
         }
-        Main.server.getPlayerManager().sendPacket(packet);
+        MinecraftServer.getInstance().getPlayerManager().sendPacket(packet);
     }
 
     public static void sendPacketToPlayer(ServerPlayerEntity player, Packet packet) {

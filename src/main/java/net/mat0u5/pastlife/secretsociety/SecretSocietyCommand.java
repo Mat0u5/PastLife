@@ -1,16 +1,13 @@
 package net.mat0u5.pastlife.secretsociety;
 
 import net.mat0u5.pastlife.Main;
-import net.minecraft.network.packet.ChatMessagePacket;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.AbstractCommand;
 import net.minecraft.server.command.Command;
 import net.minecraft.server.command.source.CommandSource;
 import net.minecraft.server.entity.living.player.ServerPlayerEntity;
-import net.minecraft.server.network.handler.ServerPlayNetworkHandler;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SecretSocietyCommand extends AbstractCommand {

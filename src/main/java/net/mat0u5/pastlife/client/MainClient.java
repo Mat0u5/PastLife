@@ -13,12 +13,10 @@ public class MainClient {
 	public static final String MOD_ID = "pastlife";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-	public static Minecraft minecraft;
 	public static TitleRenderer titleRenderer;
 
-	public static void init(Minecraft minecraftInstance) {
+	public static void init(Minecraft minecraft) {
 		log("[CLIENT] Initializing Past Life!");
-		minecraft = minecraftInstance;
 		titleRenderer = new TitleRenderer();
 
 

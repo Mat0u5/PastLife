@@ -9,7 +9,6 @@ import net.minecraft.server.command.AbstractCommand;
 import net.minecraft.server.command.Command;
 import net.minecraft.server.command.source.CommandSource;
 import net.minecraft.server.entity.living.player.ServerPlayerEntity;
-import net.minecraft.server.network.handler.ServerPlayNetworkHandler;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

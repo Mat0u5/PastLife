@@ -8,7 +8,6 @@ import net.mat0u5.pastlife.lives.LivesManager;
 import net.mat0u5.pastlife.secretsociety.InitiateCommand;
 import net.mat0u5.pastlife.secretsociety.SecretSocietyCommand;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.command.Command;
 import net.minecraft.server.command.handler.CommandRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,13 +16,11 @@ public class Main  {
 	public static final String MOD_ID = "pastlife";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-	public static MinecraftServer server;
 	public static LivesManager livesManager;
 
-	public static void init(MinecraftServer serverInstance) {
+	public static void init(MinecraftServer server) {
 		log("[SERVER] Initializing Past Life!");
 		livesManager = new LivesManager();
-		server = serverInstance;
 		if (server.getCommandHandler() instanceof CommandRegistry) {
 			CommandRegistry registry = (CommandRegistry) server.getCommandHandler();
 			registry.register(new LivesCommand());

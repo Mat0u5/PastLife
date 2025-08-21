@@ -1,7 +1,6 @@
 package net.mat0u5.pastlife.boogeyman;
 
 import net.mat0u5.pastlife.Main;
-import net.mat0u5.pastlife.lives.LivesManager;
 import net.mat0u5.pastlife.packets.TitlePacket;
 import net.mat0u5.pastlife.utils.PlayerUtils;
 import net.mat0u5.pastlife.utils.TaskScheduler;
