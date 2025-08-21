@@ -52,7 +52,7 @@ After updating the skins in the minecraft launcher, it takes a while for the ski
 
 
 ## The Boogeyman
-*Only available in session 2 onwards (so Beta 1.7.3+)*
+*Only available in session 2 onwards (so Beta 1.7.3+)*<br>
 Follow this to enable the Boogeyman in your session:
 - An admin must run the `/boogeyman choose` command, which will randomly select the boogeymen.
 - Boogeyman succeeding / failing is not tracked automatically, so the player that is the Boogeyman must run the `/boogeyman succeed` or `/boogeyman fail` command to say if they have succeeded or failed.
@@ -60,7 +60,7 @@ Follow this to enable the Boogeyman in your session:
 - The console also logs the information about who got picked as the Boogeyman, and if they failed or succeeded, so you can also handle any possible cheating with that.
 
 ## The Secret Society
-*Only available in session 3 onwards (so Release 1.1+)*
+*Only available in session 3 onwards (so Release 1.1+)*<br>
 Follow this to enable the Secret Society in your session:
 - An admin must run the `/society begin` command, which start the Secret Society with a random word.
 - You can also run the `/society begin <word>` command, which start the Secret Society with a specific word that you type.
@@ -82,9 +82,19 @@ Make sure you're opped to be able to use most of the commands below.<br>
 </details>
 
 <details open>
-<summary>/boogeyman - Only available in session 2 (Minecraft Beta 1.7.3)</summary>
+<summary>/boogeyman - Only available in session 2 onwards (Minecraft Beta 1.7.3+)</summary>
 
 - `/boogeyman choose` - Randomly selects the Boogeymen.
 - `/boogeyman succeed` - Ran by the Boogeyman to say they have succeeded in killing a player. *No permissions required.*
 - `/boogeyman fail` - Ran by the Boogeyman to say they have failed in killing a player. *No permissions required.*
+</details>
+
+<details open>
+<summary>/society - Only available in session 3 (Minecraft Release 1.1+)</summary>
+
+- `/society begin` - Starts up the Secret Society with a random word.
+- `/society begin <secret_word>` - Starts up the Secret Society with a specific word you type.
+- `/society succeed` - Ran by the society members to indicate that they have succeeded in the Secret Society. *No permissions required.*
+- `/society fail` - Ran by the society members to indicate that they have failed in the Secret Society. *No permissions required.*
+- `/initiate` - Ran by the society members get initiated into the society.*No permissions required.*
 </details>
