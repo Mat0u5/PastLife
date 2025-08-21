@@ -12,7 +12,7 @@ Since modern modding Fabric is not available for Minecraft Beta and other old ve
 
 **This mod has different features for each version of Minecraft** (matching the features of the sessions). So for example, the Boogeyman will be only available in Beta 1.7.3, and none of the other versions, just like Grian had it.
 
-The earliest versions have a separate jar file for the client and the server, so make sure to download the correct one you want.
+The earliest versions (`Beta 1.2_02`, `Beta 1.7.3` and `Release 1.1`) have a separate jar file for the client and the server, so make sure to download the correct one you want.
 
 ---------
 
@@ -43,9 +43,9 @@ After updating the skins in the minecraft launcher, it takes a while for the ski
 | Beta 1.2_02    | Finished    | Fixed player skins not rendering properly.<br/>Improved front-facing third-person perspective.<br/>Added the world border.<br/>Added the ability to zoom.<br/>Added the custom TNT recipe.<br/>Added Death Messages. |
 | Beta 1.7.3     | Finished    |                                                                                     Added Keep Inventory.<br>Added the Bogeyman.                                                                                     |
 | Release 1.1    | Finished    |                              Tab list shows lives.<br>Ender Dragon drops diamonds.<br>Clamped enchantments to level 1.<br>Colored names in death messages.<br>Added the Secret Society.                              |
-| Release 1.4.7  | In Progress |                                                                                                          -                                                                                                           |
-| Release 1.9.4  | TODO        |                                                                                                          -                                                                                                           |
-| Release 1.14.4 | TODO        |                                                                                                          -                                                                                                           |
+| Release 1.4.7  | Finished    |                                                                                                     No Changes.                                                                                                      |
+| Release 1.9.4  | In Progress |                                                                                                     No Changes.                                                                                                      |
+| Release 1.14.4 | TODO        |                                                                                                     No Changes.                                                                                                      |
 
 
 ---------
