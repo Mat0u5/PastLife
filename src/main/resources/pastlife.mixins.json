@@ -23,12 +23,9 @@
     "client.GameOptionsMixin",
     "client.GameRendererMixin",
     "client.GuiElementMixin",
-    "client.InputClientPlayerEntityMixin",
     "client.IntegratedServerMixin",
     "client.MinecraftMixin",
-    "client.PlayerEntityMixin",
     "client.PlayerEntityRendererMixin",
-    "client.RemotePlayerEntityMixin",
     "client.TextureManagerMixin"
   ],
   "server": [
