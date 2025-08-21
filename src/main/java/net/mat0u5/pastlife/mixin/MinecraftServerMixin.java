@@ -39,20 +39,25 @@ public class MinecraftServerMixin {
             WorldBorder border = overworld.getWorldBorder();
             if (border.getLerpSize() > 1_000_000) {
                 border.setSize(400);
-                BlockPos spawn = overworld.getSpawnPoint();
-                border.setCenter(spawn.getX(), spawn.getZ());
-                Main.log("Initializing World Border: 400, " + spawn.getX() + "_" + spawn.getZ());
             }
+            BlockPos spawn = overworld.getSpawnPoint();
+            border.setCenter(spawn.getX(), spawn.getZ());
+            Main.log("Initializing World Border: "+border.getLerpSize()+"_" + spawn.getX() + "_" + spawn.getZ());
 
-            //TODO test
             server.getCommandHandler().run(server, "scoreboard objectives add Lives dummy");
-            server.getCommandHandler().run(server, "scoreboard objectives setdisplay sidebar Lives");//TODO remove
             server.getCommandHandler().run(server, "scoreboard objectives setdisplay list Lives");
+
             server.getCommandHandler().run(server, "scoreboard teams add DarkGreen");
             server.getCommandHandler().run(server, "scoreboard teams add Green");
             server.getCommandHandler().run(server, "scoreboard teams add Yellow");
             server.getCommandHandler().run(server, "scoreboard teams add Red");
             server.getCommandHandler().run(server, "scoreboard teams add Dead");
+
+            server.getCommandHandler().run(server, "scoreboard teams option DarkGreen color dark_green");
+            server.getCommandHandler().run(server, "scoreboard teams option Green color green");
+            server.getCommandHandler().run(server, "scoreboard teams option Yellow color yellow");
+            server.getCommandHandler().run(server, "scoreboard teams option Red color red");
+            server.getCommandHandler().run(server, "scoreboard teams option Dead color dark_gray");
         }
 
         TaskScheduler.onTick();

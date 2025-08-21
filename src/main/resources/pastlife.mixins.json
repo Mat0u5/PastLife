@@ -5,16 +5,12 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "CraftingManagerMixin",
-    "DamageSourceMixin",
     "DedicatedServerMixin",
     "EnchantmentHelperMixin",
     "EnderDragonEntityMixin",
-    "EntityDamageSourceMixin",
     "ItemStackMixin",
     "MinecraftServerMixin",
-    "ProjectileDamageSourceMixin",
-    "ServerPlayerEntityMixin",
-    "ServerPlayNetworkHandlerMixin"
+    "ServerPlayerEntityMixin"
   ],
   "client": [
     "client.GameOptionsMixin",
