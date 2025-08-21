@@ -17,11 +17,13 @@ public class Main  {
 	public static final String MOD_ID = "pastlife";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
+	public static MinecraftServer server;
 	public static LivesManager livesManager;
 
-	public static void init(MinecraftServer server) {
+	public static void init(MinecraftServer serverInstance) {
 		log("[SERVER] Initializing Past Life!");
 		livesManager = new LivesManager();
+		server = serverInstance;
 		if (server.getCommandHandler() instanceof CommandRegistry) {
 			CommandRegistry registry = (CommandRegistry) server.getCommandHandler();
 			registry.register(new LivesCommand());
@@ -29,7 +31,7 @@ public class Main  {
 			registry.register(new SecretSocietyCommand());
 			registry.register(new InitiateCommand());
 		}
-		TaskScheduler.scheduleTask(1, () -> MinecraftServer.getInstance().getWorld(0).getGameRules().set("keepInventory", "true"));
+		TaskScheduler.scheduleTask(1, () -> server.getWorld(0).getGameRules().set("keepInventory", "true"));
 	}
 
 	public static void log(String message) {

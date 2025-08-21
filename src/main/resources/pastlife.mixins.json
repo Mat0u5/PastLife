@@ -29,8 +29,7 @@
     "client.PlayerEntityMixin",
     "client.PlayerEntityRendererMixin",
     "client.RemotePlayerEntityMixin",
-    "client.TextureManagerMixin",
-    "client.WorldRendererMixin"
+    "client.TextureManagerMixin"
   ],
   "server": [
   ],
