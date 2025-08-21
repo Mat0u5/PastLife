@@ -16,7 +16,7 @@ public class Main  {
 	public static final String RESOURCEPACK_URL = "https://github.com/Mat0u5/LifeSeries-Resources/releases/download/release-pastlife-8916bc1d49a79784de7df6477810e3ff78026f2a/pastlife.zip";
 	public static final String RESOURCEPACK_HASH = "6304b625874dfe7603f6e5caf4978acaffcf0132";
 	public static final String MOD_ID = "pastlife";
-	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+	public static Logger LOGGER = null;
 	public static boolean initializedCommands = false;
 
 	public static MinecraftServer server;

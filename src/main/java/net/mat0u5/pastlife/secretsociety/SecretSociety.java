@@ -75,13 +75,13 @@ public class SecretSociety {
             PlayerUtils.sendTitleToPlayers(memberPlayers, "§cThe Society calls", 0, 30, 0);
         });
         TaskScheduler.scheduleTask(45, () -> {
-            PlayerUtils.sendTitleToPlayers(memberPlayers, "§cThe Society calls.", 0, 30, 0);
+            PlayerUtils.sendTitleToPlayersNoReset(memberPlayers, "§cThe Society calls.", 0, 30, 0);
         });
         TaskScheduler.scheduleTask(60, () -> {
-            PlayerUtils.sendTitleToPlayers(memberPlayers, "§cThe Society calls..", 0, 30, 0);
+            PlayerUtils.sendTitleToPlayersNoReset(memberPlayers, "§cThe Society calls..", 0, 30, 0);
         });
         TaskScheduler.scheduleTask(75, () -> {
-            PlayerUtils.sendTitleToPlayers(memberPlayers, "§cThe Society calls...", 0, 45, 30);
+            PlayerUtils.sendTitleToPlayersNoReset(memberPlayers, "§cThe Society calls...", 0, 45, 30);
         });
         TaskScheduler.scheduleTask(145, () -> {
             PlayerUtils.sendSubtitleToPlayers(memberPlayers, "§cTake yourself somewhere quiet", 20, 60, 20);

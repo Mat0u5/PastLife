@@ -2,12 +2,10 @@ package net.mat0u5.pastlife.utils;
 
 import net.mat0u5.pastlife.Main;
 import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.s2c.play.SoundEventS2CPacket;
+import net.minecraft.network.packet.s2c.play.CustomSoundEventS2CPacket;
 import net.minecraft.network.packet.s2c.play.TitlesS2CPacket;
-import net.minecraft.resource.Identifier;
 import net.minecraft.server.entity.living.player.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.LiteralText;
 
 import java.util.List;
@@ -37,7 +35,8 @@ public class PlayerUtils {
         playSoundToPlayers(Main.server.getPlayerManager().getAll(), sound, volume, pitch);
     }
     public static void playSoundToPlayer(ServerPlayerEntity player, String sound, float volume, float pitch) {
-        player.networkHandler.sendPacket(new SoundEventS2CPacket(new SoundEvent(new Identifier("pastlife_"+sound)), SoundCategory.MASTER, player.x, player.y, player.z, volume, pitch));
+        CustomSoundEventS2CPacket packet = new CustomSoundEventS2CPacket("minecraft:pastlife_"+sound, SoundCategory.MASTER, player.x, player.y, player.z, volume, pitch);
+        player.networkHandler.sendPacket(packet);
     }
     public static void playSoundToPlayers(List<ServerPlayerEntity> players, String sound, float volume, float pitch) {
         for (ServerPlayerEntity player : players) {
@@ -46,26 +45,32 @@ public class PlayerUtils {
     }
 
     public static void sendTitleToAllPlayers(String title, int fadeIn, int duration, int fadeOut) {
-        sendPacketToAllPlayers(new TitlesS2CPacket(TitlesS2CPacket.Type.CLEAR, new LiteralText(title), fadeIn, duration, fadeOut));
+        sendPacketToAllPlayers(new TitlesS2CPacket(TitlesS2CPacket.Type.RESET, null));
         sendPacketToAllPlayers(new TitlesS2CPacket(TitlesS2CPacket.Type.TITLE, new LiteralText(title), fadeIn, duration, fadeOut));
     }
     public static void sendSubtitleToAllPlayers(String title, int fadeIn, int duration, int fadeOut) {
-        sendPacketToAllPlayers(new TitlesS2CPacket(TitlesS2CPacket.Type.CLEAR, new LiteralText(title), fadeIn, duration, fadeOut));
-        sendPacketToAllPlayers(new TitlesS2CPacket(TitlesS2CPacket.Type.TITLE, new LiteralText(""), fadeIn, duration, fadeOut));
+        sendPacketToAllPlayers(new TitlesS2CPacket(TitlesS2CPacket.Type.RESET, null));
         sendPacketToAllPlayers(new TitlesS2CPacket(TitlesS2CPacket.Type.SUBTITLE, new LiteralText(title), fadeIn, duration, fadeOut));
     }
     public static void sendTitleToPlayer(ServerPlayerEntity player, String title, int fadeIn, int duration, int fadeOut) {
-        player.networkHandler.sendPacket(new TitlesS2CPacket(TitlesS2CPacket.Type.CLEAR, new LiteralText(title), fadeIn, duration, fadeOut));
+        player.networkHandler.sendPacket(new TitlesS2CPacket(TitlesS2CPacket.Type.RESET, null));
+        player.networkHandler.sendPacket(new TitlesS2CPacket(TitlesS2CPacket.Type.TITLE, new LiteralText(title), fadeIn, duration, fadeOut));
+    }
+    public static void sendTitleToPlayerNoReset(ServerPlayerEntity player, String title, int fadeIn, int duration, int fadeOut) {
         player.networkHandler.sendPacket(new TitlesS2CPacket(TitlesS2CPacket.Type.TITLE, new LiteralText(title), fadeIn, duration, fadeOut));
     }
     public static void sendSubtitleToPlayer(ServerPlayerEntity player, String title, int fadeIn, int duration, int fadeOut) {
-        player.networkHandler.sendPacket(new TitlesS2CPacket(TitlesS2CPacket.Type.CLEAR, new LiteralText(title), fadeIn, duration, fadeOut));
-        player.networkHandler.sendPacket(new TitlesS2CPacket(TitlesS2CPacket.Type.TITLE, new LiteralText(""), fadeIn, duration, fadeOut));
+        player.networkHandler.sendPacket(new TitlesS2CPacket(TitlesS2CPacket.Type.RESET, null));
         player.networkHandler.sendPacket(new TitlesS2CPacket(TitlesS2CPacket.Type.SUBTITLE, new LiteralText(title), fadeIn, duration, fadeOut));
     }
     public static void sendTitleToPlayers(List<ServerPlayerEntity> players, String title, int fadeIn, int duration, int fadeOut) {
         for (ServerPlayerEntity player : players) {
             sendTitleToPlayer(player, title, fadeIn, duration, fadeOut);
+        }
+    }
+    public static void sendTitleToPlayersNoReset(List<ServerPlayerEntity> players, String title, int fadeIn, int duration, int fadeOut) {
+        for (ServerPlayerEntity player : players) {
+            sendTitleToPlayerNoReset(player, title, fadeIn, duration, fadeOut);
         }
     }
     public static void sendSubtitleToPlayers(List<ServerPlayerEntity> players, String title, int fadeIn, int duration, int fadeOut) {
