@@ -21,8 +21,8 @@ public class PacketMixin {
 
     @Inject(method = "<clinit>", at = @At("TAIL"))
     private static void registerCustomPackets(CallbackInfo ci) {
-        registerPacket(250, LivesUpdatePacket.class);
-        registerPacket(251, WorldBorderUpdatePacket.class);
+        registerPacket(249, LivesUpdatePacket.class);
+        registerPacket(248, WorldBorderUpdatePacket.class);
     }
 
     private static void registerPacket(int id, Class packetClass) {
