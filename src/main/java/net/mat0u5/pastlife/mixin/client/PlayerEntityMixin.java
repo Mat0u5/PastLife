@@ -38,17 +38,6 @@ public class PlayerEntityMixin implements IPlayerEntity {
         return playerName;
     }
 
-    @Inject(method = "registerCloak", at = @At("HEAD"), cancellable = true)
-    public void registerCloak(CallbackInfo ci) {
-        PlayerEntity entity = (PlayerEntity) (Object) this;
-        if (playerUUID != null) {
-            entity.cape = "https://crafatar.com/capes/"+playerUUID+".png";
-            entity.cloak = entity.cape;
-            ci.cancel();
-        }
-    }
-
-
     @Inject(method = "tick", at = @At("HEAD"))
     private void onTick(CallbackInfo ci) {
         PlayerEntity player = (PlayerEntity) (Object) this;

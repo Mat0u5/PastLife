@@ -21,7 +21,7 @@
     "client.GameOptionsMixin",
     "client.GameRendererMixin",
     "client.GuiElementMixin",
-    "client.InputPlayerEntityMixin",
+    "client.InputClientPlayerEntityMixin",
     "client.MinecraftMixin",
     "client.PlayerEntityMixin",
     "client.PlayerEntityRendererMixin",

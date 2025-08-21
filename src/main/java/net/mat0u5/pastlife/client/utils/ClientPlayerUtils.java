@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class PlayerUtils {
+public class ClientPlayerUtils {
 
     public static void loadUUID(IPlayerEntity accessor) {
         String playerName = accessor.getName();

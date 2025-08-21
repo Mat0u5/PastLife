@@ -1,7 +1,7 @@
 package net.mat0u5.pastlife.mixin.client;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import net.mat0u5.pastlife.interfaces.IKeybinds;
+import net.mat0u5.pastlife.client.interfaces.IKeybinds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.options.GameOptions;
 import net.minecraft.client.render.GameRenderer;

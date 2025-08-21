@@ -1,6 +1,6 @@
 package net.mat0u5.pastlife.mixin.client;
 
-import net.mat0u5.pastlife.Main;
+import net.mat0u5.pastlife.client.MainClient;
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,13 +13,13 @@ public class MinecraftMixin {
     @Inject(method = "init", at = @At("TAIL"))
     private void onModInit(CallbackInfo ci) {
         Minecraft minecraft = (Minecraft) (Object) this;
-        Main.init(minecraft);
+        MainClient.init(minecraft);
     }
 
     @Inject(method = "tick", at = @At(value = "HEAD"))
     private void tickHead(CallbackInfo ci) {
-        if (Main.titleRenderer != null) {
-            Main.titleRenderer.tick();
+        if (MainClient.titleRenderer != null) {
+            MainClient.titleRenderer.tick();
         }
     }
 }

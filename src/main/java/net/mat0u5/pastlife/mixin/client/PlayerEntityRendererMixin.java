@@ -1,6 +1,6 @@
 package net.mat0u5.pastlife.mixin.client;
 
-import net.mat0u5.pastlife.lives.ClientLivesManager;
+import net.mat0u5.pastlife.client.lives.ClientLivesManager;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.entity.living.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;

@@ -17,8 +17,6 @@ public class WorldRendererMixin {
 
     @Shadow
     private Minecraft minecraft;
-    @Shadow
-    private World world;
     private static int frameCounter = 0;
     private static boolean shouldRenderBorder = false;
     private static double distToBorder = 200;

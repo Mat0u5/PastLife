@@ -1,7 +1,7 @@
 package net.mat0u5.pastlife.mixin.client;
 
-import net.mat0u5.pastlife.Main;
-import net.mat0u5.pastlife.lives.ClientLivesManager;
+import net.mat0u5.pastlife.client.MainClient;
+import net.mat0u5.pastlife.client.lives.ClientLivesManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GameGui;
 import net.minecraft.client.render.TextRenderer;
@@ -20,8 +20,8 @@ public class GameGuiMixin {
 
     @Inject(method = "render", at = @At(value = "TAIL"))
     private void renderTitle(float tickDelta, boolean screenOpen, int mouseX, int mouseY, CallbackInfo ci) {
-        if (Main.titleRenderer != null) {
-            Main.titleRenderer.renderTitle(minecraft, tickDelta);
+        if (MainClient.titleRenderer != null) {
+            MainClient.titleRenderer.renderTitle(minecraft, tickDelta);
 
         }
     }
@@ -29,14 +29,15 @@ public class GameGuiMixin {
     @Unique
     String currentPlayerName;
 
-    @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/TextRenderer;drawWithShadow(Ljava/lang/String;III)V", ordinal = 6))
-    private void coloredName(TextRenderer instance, String playerName, int x, int y, int color) {
+    @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/TextRenderer;drawWithShadow(Ljava/lang/String;III)I", ordinal = 7))
+    private int coloredName(TextRenderer instance, String playerName, int x, int y, int color) {
         currentPlayerName = playerName;
         String colorCode = ClientLivesManager.getColorCode(playerName);
         if (colorCode != null) {
             playerName = colorCode + playerName;
         }
         instance.drawWithShadow(playerName, x, y, color);
+        return x;
     }
 
     @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GameGui;drawTexture(IIIIII)V", ordinal = 20))

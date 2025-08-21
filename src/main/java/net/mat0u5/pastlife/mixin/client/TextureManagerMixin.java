@@ -1,7 +1,7 @@
 package net.mat0u5.pastlife.mixin.client;
 
 
-import net.mat0u5.pastlife.utils.RenderUtils;
+import net.mat0u5.pastlife.client.utils.RenderUtils;
 import net.minecraft.client.render.texture.TextureManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
