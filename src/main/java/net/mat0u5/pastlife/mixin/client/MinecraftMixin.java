@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Minecraft.class)
 public class MinecraftMixin {
 
-    @Inject(method = "init", at = @At("TAIL"))
+    @Inject(method = "init", at = @At("HEAD"))
     private void onModInit(CallbackInfo ci) {
         Minecraft minecraft = (Minecraft) (Object) this;
         MainClient.init(minecraft);

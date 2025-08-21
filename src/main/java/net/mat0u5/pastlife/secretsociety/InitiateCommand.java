@@ -1,5 +1,6 @@
 package net.mat0u5.pastlife.secretsociety;
 
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.AbstractCommand;
 import net.minecraft.server.command.Command;
 import net.minecraft.server.command.source.CommandSource;
@@ -16,26 +17,28 @@ public class InitiateCommand extends AbstractCommand {
     @Override
     public void run(CommandSource source, String[] args) {
         ServerPlayerEntity player = asPlayer(source);
-        if (args.length < 1) return;
-        if (args[0].equalsIgnoreCase("initiate")) {
-            if (SecretSociety.members.contains(player.name)) {
-                if (SecretSociety.yetToInitiate.contains(player.name)) {
-                    SecretSociety.initiatePlayer(player);
-                }
-                else {
-                    source.sendMessage("§cYou have already been initiated.");
-                    source.sendMessage("§7Find the other members with the secret word: §d\""+SecretSociety.secretWord+"\"");
-                }
+        if (SecretSociety.members.contains(player.name)) {
+            if (SecretSociety.yetToInitiate.contains(player.name)) {
+                SecretSociety.initiatePlayer(player);
             }
             else {
-                source.sendMessage("§cYou are not a Member, you cannot use this command.");
+                source.sendMessage("§cYou have already been initiated.");
+                source.sendMessage("§7Find the other members with the secret word: §d\""+SecretSociety.secretWord+"\"");
             }
+        }
+        else {
+            source.sendMessage("§cYou are not a Member, you cannot use this command.");
         }
     }
 
     @Override
     public int getRequiredPermissionLevel() {
         return 0;
+    }
+
+    @Override
+    public boolean canUse(CommandSource source) {
+        return MinecraftServer.getInstance().isSingleplayer() || super.canUse(source);
     }
 
     @Override

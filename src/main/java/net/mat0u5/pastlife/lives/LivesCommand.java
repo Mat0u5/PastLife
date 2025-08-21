@@ -19,7 +19,7 @@ public class LivesCommand extends AbstractCommand {
 
     @Override
     public String getUsage(CommandSource source) {
-        return "Use: /lives <get|set|add|remove> <player> [amount]";
+        return "/lives usage:\n§7For admins: '/lives <get|set|add|remove> <player> [amount]'\nFor players: '/lives'";
     }
 
     @Override
@@ -28,21 +28,32 @@ public class LivesCommand extends AbstractCommand {
     }
 
     @Override
+    public boolean canUse(CommandSource source) {
+        return MinecraftServer.getInstance().isSingleplayer() || super.canUse(source);
+    }
+
+    @Override
     public void run(CommandSource source, String[] args) {
         ServerPlayerEntity player = asPlayer(source);
         MinecraftServer server = MinecraftServer.getInstance();
-        if (!args[0].equalsIgnoreCase("lives")) return;
-        if (args.length == 1) {
+        if (args.length == 0) {
             int lives = Main.livesManager.getLives(player);
             source.sendMessage("You have " + lives + " " + (lives == 1 ? "life" : "lives") + ".");
             return;
         }
 
-        if (args.length < 3) {
+        if (!server.getPlayerManager().isOp(player.name)) {
+            source.sendMessage("§cYou do not have permission to use this command.");
             return;
         }
 
-        String playerName = args[2];
+
+        if (args.length < 2) {
+            sendUsageInfo(source);
+            return;
+        }
+
+        String playerName = args[1];
         ServerPlayerEntity serverPlayer = server.getPlayerManager().get(playerName);
         if (serverPlayer == null) {
             source.sendMessage("Player not found: " + playerName);
@@ -50,24 +61,25 @@ public class LivesCommand extends AbstractCommand {
         }
         playerName = serverPlayer.name;
 
-        if (args[1].equalsIgnoreCase("get")) {
+        if (args[0].equalsIgnoreCase("get")) {
             int lives = Main.livesManager.getLives(serverPlayer);
             source.sendMessage(playerName + " has " + lives + " " + (lives == 1 ? "life" : "lives") + ".");
             return;
         }
-        if (args.length >= 4) {
+        if (args.length >= 3) {
             try {
-                int amount = Integer.parseInt(args[3]);
-                if (args[1].equalsIgnoreCase("set")) {
+                int amount = Integer.parseInt(args[2]);
+                if (args[0].equalsIgnoreCase("set")) {
                     Main.livesManager.setLives(serverPlayer, amount);
                 }
-                else if (args[1].equalsIgnoreCase("add")) {
+                else if (args[0].equalsIgnoreCase("add")) {
                     Main.livesManager.addLives(serverPlayer, amount);
                 }
-                else if (args[1].equalsIgnoreCase("remove")) {
+                else if (args[0].equalsIgnoreCase("remove")) {
                     Main.livesManager.addLives(serverPlayer, -amount);
                 }
                 else {
+                    sendUsageInfo(source);
                     return;
                 }
             }catch(Exception e) {
@@ -79,6 +91,11 @@ public class LivesCommand extends AbstractCommand {
             source.sendMessage( playerName + " now has " + lives + " " + (lives == 1 ? "life" : "lives") + ".");
             return;
         }
+        sendUsageInfo(source);
+    }
+
+    public void sendUsageInfo(CommandSource source) {
+        source.sendMessage(getUsage(source));
     }
 
     @Override

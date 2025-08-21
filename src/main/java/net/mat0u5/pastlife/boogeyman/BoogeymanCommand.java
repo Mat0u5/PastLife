@@ -22,7 +22,7 @@ public class BoogeymanCommand extends AbstractCommand {
 
     @Override
     public String getUsage(CommandSource source) {
-        return "For admins: '/boogeyman choose'"+"\n"+"For boogeymen: '/boogeyman succeed|fail'";
+        return "/boogeyman usage:\n§7For admins: '/boogeyman choose'"+"\n"+"For boogeymen: '/boogeyman succeed|fail'";
     }
 
     @Override
@@ -31,12 +31,19 @@ public class BoogeymanCommand extends AbstractCommand {
     }
 
     @Override
+    public boolean canUse(CommandSource source) {
+        return MinecraftServer.getInstance().isSingleplayer() || super.canUse(source);
+    }
+
+    @Override
     public void run(CommandSource source, String[] args) {
         ServerPlayerEntity player = asPlayer(source);
-        if (args.length < 2) return;
-        if (!args[0].equalsIgnoreCase("boogeyman")) return;
+        if (args.length < 1) {
+            sendUsageInfo(source);
+            return;
+        }
         MinecraftServer server = MinecraftServer.getInstance();
-        if (args[1].equalsIgnoreCase("choose")) {
+        if (args[0].equalsIgnoreCase("choose")) {
             if (server.getPlayerManager().isOp(player.name)) {
                 BoogeymanManager.rollBoogeymen(server);
             }
@@ -45,7 +52,7 @@ public class BoogeymanCommand extends AbstractCommand {
             }
             return;
         }
-        if (args[1].equalsIgnoreCase("succeed")) {
+        if (args[0].equalsIgnoreCase("succeed")) {
             if (BoogeymanManager.boogeymen.contains(player.name)) {
                 BoogeymanManager.boogeymen.remove(player.name);
                 PlayerUtils.playSoundToPlayer(player, "boogeyman_cure", 1, 1);
@@ -58,7 +65,7 @@ public class BoogeymanCommand extends AbstractCommand {
             }
             return;
         }
-        if (args[1].equalsIgnoreCase("fail")) {
+        if (args[0].equalsIgnoreCase("fail")) {
             if (BoogeymanManager.boogeymen.contains(player.name)) {
                 BoogeymanManager.boogeymen.remove(player.name);
                 PlayerUtils.playSoundToPlayer(player, "boogeyman_fail", 1, 1);
@@ -75,6 +82,11 @@ public class BoogeymanCommand extends AbstractCommand {
             }
             return;
         }
+        sendUsageInfo(source);
+    }
+
+    public void sendUsageInfo(CommandSource source) {
+        source.sendMessage(getUsage(source));
     }
 
     @Override

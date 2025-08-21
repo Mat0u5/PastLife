@@ -27,7 +27,7 @@ The earliest versions have a separate jar file for the client and the server, so
 1. Install the https://ornithemc.net installer.
 2. Open it, select the **server** environment, and install the desired version of Minecraft (based on the session you're on). **If in mc version beta 1.2_02 or beta 1.7.3:** Make sure to select check "Historical Versions" otherwise the beta versions won't show up.
 3. Open the folder where you installed the server and run the `fabric-server-launch.jar` file to first start the server.
-4. **If in mc version beta 1.2_02 or beta 1.7.3:** Open server.properties and **set "online-mode" to false**. This is required, as online-mode does NOT work in the oldest versions
+4. **If in minecraft version `Beta 1.2_02`, `Beta 1.7.3` or `Release 1.1`:** Open server.properties and **set "online-mode" to false**. This is required, as online-mode does NOT work in the oldest versions
 5. Add the mod jar file to the `mods` folder in the server directory.
 6. That's it, just run the server (`fabric-server-launch.jar`) and you're done!
 
@@ -90,7 +90,7 @@ Make sure you're opped to be able to use most of the commands below.<br>
 </details>
 
 <details open>
-<summary>/society - Only available in session 3 (Minecraft Release 1.1+)</summary>
+<summary>/society - Only available in session 3 onwards (Minecraft Release 1.1+)</summary>
 
 - `/society begin` - Starts up the Secret Society with a random word.
 - `/society begin <secret_word>` - Starts up the Secret Society with a specific word you type.

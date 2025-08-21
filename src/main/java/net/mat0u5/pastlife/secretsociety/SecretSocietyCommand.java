@@ -19,7 +19,7 @@ public class SecretSocietyCommand extends AbstractCommand {
 
     @Override
     public String getUsage(CommandSource source) {
-        return "For admins: '/society begin' or '/society begin <secret_word>'" + "\n" + "For members: '/initiate' and '/society success|fail'";
+        return "/society usage:§7\nFor admins: '/society begin' or '/society begin <secret_word>'" + "\n" + "For members: '/initiate' and '/society success|fail'";
     }
 
     @Override
@@ -28,13 +28,20 @@ public class SecretSocietyCommand extends AbstractCommand {
     }
 
     @Override
+    public boolean canUse(CommandSource source) {
+        return MinecraftServer.getInstance().isSingleplayer() || super.canUse(source);
+    }
+
+    @Override
     public void run(CommandSource source, String[] args) {
         ServerPlayerEntity player = asPlayer(source);
-        if (args.length < 2) return;
-        if (!args[0].equalsIgnoreCase("society")) return;
+        if (args.length < 1) {
+            sendUsageInfo(source);
+            return;
+        }
         MinecraftServer server = MinecraftServer.getInstance();
 
-        if (args[1].equalsIgnoreCase("begin")) {
+        if (args[0].equalsIgnoreCase("begin")) {
             if (server.getPlayerManager().isOp(player.name)) {
                 SecretSociety.beginSociety(server, args[2]);
             }
@@ -43,7 +50,7 @@ public class SecretSocietyCommand extends AbstractCommand {
             }
             return;
         }
-        if (args[1].equalsIgnoreCase("success")) {
+        if (args[0].equalsIgnoreCase("success")) {
             if (SecretSociety.members.contains(player.name)) {
                 if (SecretSociety.yetToInitiate.contains(player.name)) {
                     source.sendMessage("§cYou have not been initiated.");
@@ -63,7 +70,7 @@ public class SecretSocietyCommand extends AbstractCommand {
             }
             return;
         }
-        if (args[1].equalsIgnoreCase("fail")) {
+        if (args[0].equalsIgnoreCase("fail")) {
             if (SecretSociety.members.contains(player.name)) {
                 if (SecretSociety.yetToInitiate.contains(player.name)) {
                     source.sendMessage("§cYou have not been initiated.");
@@ -83,6 +90,11 @@ public class SecretSocietyCommand extends AbstractCommand {
             }
             return;
         }
+        sendUsageInfo(source);
+    }
+
+    public void sendUsageInfo(CommandSource source) {
+        source.sendMessage(getUsage(source));
     }
 
     @Override

@@ -6,6 +6,7 @@
   "mixins": [
     "CraftingManagerMixin",
     "DamageSourceMixin",
+    "DedicatedServerMixin",
     "EnchantmentHelperMixin",
     "EnderDragonEntityMixin",
     "EntityDamageSourceMixin",
@@ -22,6 +23,7 @@
     "client.GameRendererMixin",
     "client.GuiElementMixin",
     "client.InputClientPlayerEntityMixin",
+    "client.IntegratedServerMixin",
     "client.MinecraftMixin",
     "client.PlayerEntityMixin",
     "client.PlayerEntityRendererMixin",

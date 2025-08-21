@@ -4,6 +4,7 @@ import net.mat0u5.pastlife.Main;
 import net.mat0u5.pastlife.packets.LivesUpdatePacket;
 import net.mat0u5.pastlife.packets.WorldBorderUpdatePacket;
 import net.mat0u5.pastlife.secretsociety.SecretSociety;
+import net.mat0u5.pastlife.utils.PlayerUtils;
 import net.mat0u5.pastlife.utils.TaskScheduler;
 import net.mat0u5.pastlife.utils.WorldBorderManager;
 import net.minecraft.server.MinecraftServer;
@@ -20,11 +21,12 @@ public class MinecraftServerMixin {
 
     @Shadow
     int ticks = 0;
-
-    @Inject(method = "main", at = @At("TAIL"))
+/*
+    @Inject(method = "main", at = @At("HEAD"))
     private static void onModInit(String[] args, CallbackInfo ci) {
         Main.init(MinecraftServer.getInstance());
     }
+    */
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void onModInit(CallbackInfo ci) {
@@ -50,10 +52,10 @@ public class MinecraftServerMixin {
             for(int i = 0; i < server.getPlayerManager().players.size(); ++i) {
                 ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity)server.getPlayerManager().players.get(i);
                 int lives = Main.livesManager.getLives(serverPlayerEntity);
-                server.getPlayerManager().sendPacket(new LivesUpdatePacket(serverPlayerEntity.name, lives));
+                PlayerUtils.sendPacketToAllPlayers(new LivesUpdatePacket(serverPlayerEntity.name, lives));
             }
             if (WorldBorderManager.initialized) {
-                server.getPlayerManager().sendPacket(new WorldBorderUpdatePacket(WorldBorderManager.centerX, WorldBorderManager.centerZ, WorldBorderManager.borderSize));
+                PlayerUtils.sendPacketToAllPlayers(new WorldBorderUpdatePacket(WorldBorderManager.centerX, WorldBorderManager.centerZ, WorldBorderManager.borderSize));
             }
         }
     }
