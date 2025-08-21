@@ -43,7 +43,12 @@ public class SecretSocietyCommand extends AbstractCommand {
 
         if (args[0].equalsIgnoreCase("begin")) {
             if (server.getPlayerManager().isOp(player.name)) {
-                SecretSociety.beginSociety(server, args[2]);
+                if (args.length >= 2) {
+                    SecretSociety.beginSociety(server, args[1]);
+                }
+                else {
+                    SecretSociety.beginSociety(server);
+                }
             }
             else {
                 source.sendMessage("§cYou do not have permission to use this command.");
@@ -94,6 +99,7 @@ public class SecretSocietyCommand extends AbstractCommand {
     }
 
     public void sendUsageInfo(CommandSource source) {
+        source.sendMessage("§cInvalid usage.");
         source.sendMessage(getUsage(source));
     }
 

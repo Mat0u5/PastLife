@@ -86,6 +86,7 @@ public class BoogeymanCommand extends AbstractCommand {
     }
 
     public void sendUsageInfo(CommandSource source) {
+        source.sendMessage("§cInvalid usage.");
         source.sendMessage(getUsage(source));
     }
 

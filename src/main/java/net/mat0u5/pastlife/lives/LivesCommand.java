@@ -67,23 +67,18 @@ public class LivesCommand extends AbstractCommand {
             return;
         }
         if (args.length >= 3) {
-            try {
-                int amount = Integer.parseInt(args[2]);
-                if (args[0].equalsIgnoreCase("set")) {
-                    Main.livesManager.setLives(serverPlayer, amount);
-                }
-                else if (args[0].equalsIgnoreCase("add")) {
-                    Main.livesManager.addLives(serverPlayer, amount);
-                }
-                else if (args[0].equalsIgnoreCase("remove")) {
-                    Main.livesManager.addLives(serverPlayer, -amount);
-                }
-                else {
-                    sendUsageInfo(source);
-                    return;
-                }
-            }catch(Exception e) {
-                source.sendMessage("Invalid number format for amount: " + args[3]);
+            int amount = parseInt(source, args[2]);
+            if (args[0].equalsIgnoreCase("set")) {
+                Main.livesManager.setLives(serverPlayer, amount);
+            }
+            else if (args[0].equalsIgnoreCase("add")) {
+                Main.livesManager.addLives(serverPlayer, amount);
+            }
+            else if (args[0].equalsIgnoreCase("remove")) {
+                Main.livesManager.addLives(serverPlayer, -amount);
+            }
+            else {
+                sendUsageInfo(source);
                 return;
             }
 
@@ -95,6 +90,7 @@ public class LivesCommand extends AbstractCommand {
     }
 
     public void sendUsageInfo(CommandSource source) {
+        source.sendMessage("§cInvalid usage.");
         source.sendMessage(getUsage(source));
     }
 
