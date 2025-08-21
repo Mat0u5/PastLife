@@ -21,7 +21,7 @@ public class SecretSocietyCommand extends AbstractCommand {
 
     @Override
     public String getUsage(CommandSource source) {
-        return "/society usage:§7\nFor admins: '/society begin' or '/society begin <secret_word>'" + "\n" + "For members: '/initiate' and '/society success|fail'";
+        return "/society usage:§7\nFor admins: '/society begin' or '/society begin <secret_word>'" + "\n" + "§7For members: '/initiate' and '/society success|fail'";
     }
 
     @Override

@@ -57,6 +57,7 @@ public class SecretSociety {
         List<ServerPlayerEntity> memberPlayers = new ArrayList<>();
         for (ServerPlayerEntity player : players) {
             if (player == null) continue;
+            if (Main.livesManager != null && Main.livesManager.getLives(player) <= 0) continue;
 
             if (members.size() < MEMBERS) {
                 memberPlayers.add(player);
@@ -83,7 +84,7 @@ public class SecretSociety {
             PlayerUtils.sendTitleToPlayers(memberPlayers, "§cThe Society calls...", 0, 45, 30);
         });
         TaskScheduler.scheduleTask(145, () -> {
-            PlayerUtils.sendTitleToPlayers(memberPlayers, "§cTake yourself somewhere quiet", 20, 60, 20);
+            PlayerUtils.sendSubtitleToPlayers(memberPlayers, "§cTake yourself somewhere quiet", 20, 60, 20);
         });
     }
 
@@ -149,18 +150,18 @@ public class SecretSociety {
         }
 
         if (success) {
-            PlayerUtils.sendTitleToPlayers(memberPlayers, "§aThe Society is pleased", 20, 30, 20);
+            PlayerUtils.sendSubtitleToPlayers(memberPlayers, "§aThe Society is pleased", 20, 30, 20);
             TaskScheduler.scheduleTask(75, () -> {
-                PlayerUtils.sendTitleToPlayers(memberPlayers, "§aYou will not be punished", 20, 30, 20);
+                PlayerUtils.sendSubtitleToPlayers(memberPlayers, "§aYou will not be punished", 20, 30, 20);
             });
             TaskScheduler.scheduleTask(150, () -> {
-                PlayerUtils.sendTitleToPlayers(memberPlayers, "§cYou are still sworn to secrecy", 20, 30, 20);
+                PlayerUtils.sendSubtitleToPlayers(memberPlayers, "§cYou are still sworn to secrecy", 20, 30, 20);
             });
         }
         else {
-            PlayerUtils.sendTitleToPlayers(memberPlayers, "§cThe Society is displeased", 20, 30, 20);
+            PlayerUtils.sendSubtitleToPlayers(memberPlayers, "§cThe Society is displeased", 20, 30, 20);
             TaskScheduler.scheduleTask(75, () -> {
-                PlayerUtils.sendTitleToPlayers(memberPlayers, "§cYou will be punished", 20, 30, 20);
+                PlayerUtils.sendSubtitleToPlayers(memberPlayers, "§cYou will be punished", 20, 30, 20);
             });
             TaskScheduler.scheduleTask(110, () -> {
                 for (ServerPlayerEntity member : memberPlayers) {
@@ -174,7 +175,7 @@ public class SecretSociety {
                 }
             });
             TaskScheduler.scheduleTask(150, () -> {
-                PlayerUtils.sendTitleToPlayers(memberPlayers, "§cYou are still sworn to secrecy", 20, 30, 20);
+                PlayerUtils.sendSubtitleToPlayers(memberPlayers, "§cYou are still sworn to secrecy", 20, 30, 20);
             });
         }
     }

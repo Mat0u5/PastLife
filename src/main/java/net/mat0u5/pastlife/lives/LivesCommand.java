@@ -22,7 +22,7 @@ public class LivesCommand extends AbstractCommand {
 
     @Override
     public String getUsage(CommandSource source) {
-        return "/lives usage:\n§7For admins: '/lives <get|set|add|remove> <player> [amount]'\nFor players: '/lives'";
+        return "/lives usage:\n§7For admins: '/lives <get|set|add|remove> <player> [amount]'\n§7For players: '/lives'";
     }
 
     @Override

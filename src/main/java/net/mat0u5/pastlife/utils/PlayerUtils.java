@@ -37,7 +37,7 @@ public class PlayerUtils {
         playSoundToPlayers(Main.server.getPlayerManager().getAll(), sound, volume, pitch);
     }
     public static void playSoundToPlayer(ServerPlayerEntity player, String sound, float volume, float pitch) {
-        player.networkHandler.sendPacket(new SoundEventS2CPacket(new SoundEvent(new Identifier("pastlife", sound)), SoundCategory.MASTER, player.x, player.y, player.z, volume, pitch));
+        player.networkHandler.sendPacket(new SoundEventS2CPacket(new SoundEvent(new Identifier("pastlife_"+sound)), SoundCategory.MASTER, player.x, player.y, player.z, volume, pitch));
     }
     public static void playSoundToPlayers(List<ServerPlayerEntity> players, String sound, float volume, float pitch) {
         for (ServerPlayerEntity player : players) {
@@ -46,15 +46,21 @@ public class PlayerUtils {
     }
 
     public static void sendTitleToAllPlayers(String title, int fadeIn, int duration, int fadeOut) {
+        sendPacketToAllPlayers(new TitlesS2CPacket(TitlesS2CPacket.Type.CLEAR, new LiteralText(title), fadeIn, duration, fadeOut));
         sendPacketToAllPlayers(new TitlesS2CPacket(TitlesS2CPacket.Type.TITLE, new LiteralText(title), fadeIn, duration, fadeOut));
     }
-    public static void sendSubitleToAllPlayers(String title, int fadeIn, int duration, int fadeOut) {
+    public static void sendSubtitleToAllPlayers(String title, int fadeIn, int duration, int fadeOut) {
+        sendPacketToAllPlayers(new TitlesS2CPacket(TitlesS2CPacket.Type.CLEAR, new LiteralText(title), fadeIn, duration, fadeOut));
+        sendPacketToAllPlayers(new TitlesS2CPacket(TitlesS2CPacket.Type.TITLE, new LiteralText(""), fadeIn, duration, fadeOut));
         sendPacketToAllPlayers(new TitlesS2CPacket(TitlesS2CPacket.Type.SUBTITLE, new LiteralText(title), fadeIn, duration, fadeOut));
     }
     public static void sendTitleToPlayer(ServerPlayerEntity player, String title, int fadeIn, int duration, int fadeOut) {
+        player.networkHandler.sendPacket(new TitlesS2CPacket(TitlesS2CPacket.Type.CLEAR, new LiteralText(title), fadeIn, duration, fadeOut));
         player.networkHandler.sendPacket(new TitlesS2CPacket(TitlesS2CPacket.Type.TITLE, new LiteralText(title), fadeIn, duration, fadeOut));
     }
-    public static void sendSubitleToPlayer(ServerPlayerEntity player, String title, int fadeIn, int duration, int fadeOut) {
+    public static void sendSubtitleToPlayer(ServerPlayerEntity player, String title, int fadeIn, int duration, int fadeOut) {
+        player.networkHandler.sendPacket(new TitlesS2CPacket(TitlesS2CPacket.Type.CLEAR, new LiteralText(title), fadeIn, duration, fadeOut));
+        player.networkHandler.sendPacket(new TitlesS2CPacket(TitlesS2CPacket.Type.TITLE, new LiteralText(""), fadeIn, duration, fadeOut));
         player.networkHandler.sendPacket(new TitlesS2CPacket(TitlesS2CPacket.Type.SUBTITLE, new LiteralText(title), fadeIn, duration, fadeOut));
     }
     public static void sendTitleToPlayers(List<ServerPlayerEntity> players, String title, int fadeIn, int duration, int fadeOut) {
@@ -62,9 +68,9 @@ public class PlayerUtils {
             sendTitleToPlayer(player, title, fadeIn, duration, fadeOut);
         }
     }
-    public static void sendSubitleToPlayers(List<ServerPlayerEntity> players, String title, int fadeIn, int duration, int fadeOut) {
+    public static void sendSubtitleToPlayers(List<ServerPlayerEntity> players, String title, int fadeIn, int duration, int fadeOut) {
         for (ServerPlayerEntity player : players) {
-            sendSubitleToPlayer(player, title, fadeIn, duration, fadeOut);
+            sendSubtitleToPlayer(player, title, fadeIn, duration, fadeOut);
         }
     }
 

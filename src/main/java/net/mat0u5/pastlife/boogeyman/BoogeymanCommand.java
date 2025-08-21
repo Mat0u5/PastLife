@@ -22,7 +22,7 @@ public class BoogeymanCommand extends AbstractCommand {
 
     @Override
     public String getUsage(CommandSource source) {
-        return "/boogeyman usage:\n§7For admins: '/boogeyman choose'"+"\n"+"For boogeymen: '/boogeyman succeed|fail'";
+        return "/boogeyman usage:\n§7For admins: '/boogeyman choose'"+"\n"+"§7For boogeymen: '/boogeyman succeed|fail'";
     }
 
     @Override
