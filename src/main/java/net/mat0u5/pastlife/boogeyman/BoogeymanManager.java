@@ -38,7 +38,7 @@ public class BoogeymanManager {
     }
 
     public static void boogeymenChooseRandom(MinecraftServer server) {
-        List<ServerPlayerEntity> players = new ArrayList<>(server.playerManager.players);
+        List<ServerPlayerEntity> players = new ArrayList<>(server.getPlayerManager().players);
         if (players.isEmpty()) {
             return;
         }

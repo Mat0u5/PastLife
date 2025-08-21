@@ -3,56 +3,50 @@ package net.mat0u5.pastlife.secretsociety;
 import net.mat0u5.pastlife.Main;
 import net.minecraft.network.packet.ChatMessagePacket;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.command.AbstractCommand;
+import net.minecraft.server.command.Command;
 import net.minecraft.server.command.source.CommandSource;
 import net.minecraft.server.entity.living.player.ServerPlayerEntity;
 import net.minecraft.server.network.handler.ServerPlayNetworkHandler;
+import org.jetbrains.annotations.NotNull;
 
-public class SecretSocietyCommand {
-    public static void handleCommand(MinecraftServer server, ServerPlayerEntity player, String command, ServerPlayNetworkHandler networkHandler) {
-        int response = commandLogic(server, player, command, networkHandler);
-        if (response != 1) {
-            networkHandler.sendPacket(new ChatMessagePacket("§cInvalid usage."));
-            networkHandler.sendMessage("For admins: '/society begin' or '/society begin <secret_word>'");
-            networkHandler.sendMessage("For members: '/initiate' and '/society success|fail'");
-        }
+import java.util.ArrayList;
+import java.util.List;
+
+public class SecretSocietyCommand extends AbstractCommand {
+
+    @Override
+    public String getName() {
+        return "society";
     }
 
-    public static int commandLogic(MinecraftServer server, ServerPlayerEntity player, String command, CommandSource source) {
-        if (command.equalsIgnoreCase("/initiate")) {
-            if (SecretSociety.members.contains(player.name)) {
-                if (SecretSociety.yetToInitiate.contains(player.name)) {
-                    SecretSociety.initiatePlayer(player);
-                }
-                else {
-                    source.sendMessage("§cYou have already been initiated.");
-                    source.sendMessage("§7Find the other members with the secret word: §d\""+SecretSociety.secretWord+"\"");
-                }
-            }
-            else {
-                source.sendMessage("§cYou are not a Member, you cannot use this command.");
-            }
-            return 1;
-        }
-        if (command.equalsIgnoreCase("/society begin")) {
-            if (server.playerManager.isOp(player.name)) {
-                SecretSociety.beginSociety(server);
-            }
-            else {
-                source.sendMessage("§cYou do not have permission to use this command.");
-            }
-            return 1;
-        }
-        if (command.startsWith("/society begin ")) {
-            String word = command.replaceFirst("/society begin ","");
-            if (server.playerManager.isOp(player.name)) {
-                SecretSociety.beginSociety(server, word);
+    @Override
+    public String getUsage(CommandSource source) {
+        return "For admins: '/society begin' or '/society begin <secret_word>'" + "\n" + "For members: '/initiate' and '/society success|fail'";
+    }
+
+    @Override
+    public int getRequiredPermissionLevel() {
+        return 0;
+    }
+
+    @Override
+    public void run(CommandSource source, String[] args) {
+        ServerPlayerEntity player = asPlayer(source);
+        if (args.length < 2) return;
+        if (!args[0].equalsIgnoreCase("society")) return;
+        MinecraftServer server = MinecraftServer.getInstance();
+
+        if (args[1].equalsIgnoreCase("begin")) {
+            if (server.getPlayerManager().isOp(player.name)) {
+                SecretSociety.beginSociety(server, args[2]);
             }
             else {
                 source.sendMessage("§cYou do not have permission to use this command.");
             }
-            return 1;
+            return;
         }
-        if (command.equalsIgnoreCase("/society success")) {
+        if (args[1].equalsIgnoreCase("success")) {
             if (SecretSociety.members.contains(player.name)) {
                 if (SecretSociety.yetToInitiate.contains(player.name)) {
                     source.sendMessage("§cYou have not been initiated.");
@@ -70,9 +64,9 @@ public class SecretSocietyCommand {
             else {
                 source.sendMessage("§cYou are not a Member, you cannot use this command.");
             }
-            return 1;
+            return;
         }
-        if (command.equalsIgnoreCase("/society fail")) {
+        if (args[1].equalsIgnoreCase("fail")) {
             if (SecretSociety.members.contains(player.name)) {
                 if (SecretSociety.yetToInitiate.contains(player.name)) {
                     source.sendMessage("§cYou have not been initiated.");
@@ -90,8 +84,23 @@ public class SecretSocietyCommand {
             else {
                 source.sendMessage("§cYou are not a Member, you cannot use this command.");
             }
-            return 1;
+            return;
         }
-        return -1;
+    }
+
+    @Override
+    public List getSuggestions(CommandSource source, String[] args) {
+        if (args.length == 1) {
+            return suggestMatching(args, new String[]{"begin", "success", "fail"});
+        }
+        return null;
+    }
+
+    @Override
+    public int compareTo(@NotNull Object o) {
+        if (o instanceof Command) {
+            return this.getName().compareTo(((Command) o).getName());
+        }
+        return 0;
     }
 }

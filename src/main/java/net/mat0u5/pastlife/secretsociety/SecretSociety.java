@@ -34,7 +34,7 @@ public class SecretSociety {
         ticks++;
         if (ticks < 250) return;
         if (ticks % INITIATE_MESSAGE_DELAYS == 0) {
-            List<ServerPlayerEntity> players = new ArrayList<>(server.playerManager.players);
+            List<ServerPlayerEntity> players = new ArrayList<>(server.getPlayerManager().players);
             for (ServerPlayerEntity player : players) {
                 if (yetToInitiate.contains(player.name)) {
                     PlayerUtils.sendPacketToPlayer(player, new ChatMessagePacket("§7When you are alone, type \"/initiate\""));
@@ -57,7 +57,7 @@ public class SecretSociety {
 
         members.clear();
         yetToInitiate.clear();
-        List<ServerPlayerEntity> players = new ArrayList<>(server.playerManager.players);
+        List<ServerPlayerEntity> players = new ArrayList<>(server.getPlayerManager().players);
         Collections.shuffle(players);
 
         List<ServerPlayerEntity> memberPlayers = new ArrayList<>();
@@ -145,7 +145,7 @@ public class SecretSociety {
         ticks = 0;
         PlayerUtils.playSoundToAllPlayers("secretsociety_whisper", 1, 1);
 
-        List<ServerPlayerEntity> players = new ArrayList<>(server.playerManager.players);
+        List<ServerPlayerEntity> players = new ArrayList<>(server.getPlayerManager().players);
         List<ServerPlayerEntity> memberPlayers = new ArrayList<>();
         for (ServerPlayerEntity player : players) {
             if (player == null) continue;

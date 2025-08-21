@@ -22,6 +22,7 @@ public class ServerPlayNetworkHandlerMixin {
 
     @Inject(method = "runCommand", at = @At("HEAD"), cancellable = true)
     private void injectCustomCommand(String command, CallbackInfo ci) {
+        /*
         ServerPlayNetworkHandler networkHandler = (ServerPlayNetworkHandler) (Object) this;
         command = command.toLowerCase().trim();
         if (command.startsWith("/lives")) {
@@ -35,7 +36,7 @@ public class ServerPlayNetworkHandlerMixin {
         if (command.startsWith("/society") || command.startsWith("/initiate")) {
             SecretSocietyCommand.handleCommand(server, networkHandler.player, command, networkHandler);
             ci.cancel();
-        }
+        }*/
     }
 
     @Redirect(
