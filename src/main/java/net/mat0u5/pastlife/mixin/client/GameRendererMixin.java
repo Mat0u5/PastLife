@@ -25,7 +25,7 @@ public abstract class GameRendererMixin {
         }
         if (options instanceof IKeybinds) {
             IKeybinds customOptions = (IKeybinds) options;
-            if (!Keyboard.isKeyDown(customOptions.zoomKey().keyCode)) {
+            if (!Keyboard.isKeyDown(customOptions.zoomKey().getKeyCode())) {
                 return fov;
             }
         }

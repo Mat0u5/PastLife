@@ -10,9 +10,9 @@ This mod is a one-to-one recreation of [Grian](https://www.youtube.com/c/Grian)'
 
 Since modern modding Fabric is not available for Minecraft Beta and other old versions that Past Life is played on, this mod is made for [OrniteMC](https://ornithemc.net).
 
-**This mod has different features for each version of Minecraft** (matching the features of the sessions). So for example, the Boogeyman will be only available in Beta 1.7.3, and none of the other versions, just like Grian had it.
-
 The earliest versions (`Beta 1.2_02`, `Beta 1.7.3` and `Release 1.1`) have a separate jar file for the client and the server, so make sure to download the correct one you want.
+
+This mod is **client-side required** in versions `Beta 1.2_02`, `Beta 1.7.3`, `Release 1.1` and `Release 1.4.7`. The later versions are only optional.
 
 ---------
 

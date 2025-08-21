@@ -12,7 +12,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class DedicatedServerMixin {
 
     @Inject(method = "init", at = @At("HEAD"))
-    private static void onModInit(CallbackInfoReturnable<Boolean> cir) {
-        Main.init(MinecraftServer.getInstance());
+    private void onModInit(CallbackInfoReturnable<Boolean> cir) {
+        MinecraftServer server = (MinecraftServer) (Object) this;
+        Main.init(server);
     }
 }

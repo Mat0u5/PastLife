@@ -15,7 +15,7 @@ import java.util.Arrays;
 @Mixin(GameOptions.class)
 public class GameOptionsMixin implements IKeybinds {
     @Unique
-    private KeyBinding zoomKey = new KeyBinding("Zoom", Keyboard.KEY_C);
+    private KeyBinding zoomKey = new KeyBinding("Zoom", Keyboard.KEY_C, "Past Life");
 
     @Override
     public KeyBinding zoomKey() {
@@ -32,7 +32,7 @@ public class GameOptionsMixin implements IKeybinds {
     private void addNewKeys(GameOptions options) {
         KeyBinding[] currentKeybindings = options.keyBindings;
         for (KeyBinding key : currentKeybindings) {
-            if (key.name.equals(zoomKey.name)) {
+            if (key.getName().equals(zoomKey.getName())) {
                 return;
             }
         }

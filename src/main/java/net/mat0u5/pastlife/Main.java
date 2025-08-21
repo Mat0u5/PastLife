@@ -14,8 +14,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Main  {
+	public static final String RESOURCEPACK_URL = "";
+	public static final String RESOURCEPACK_HASH = "";
 	public static final String MOD_ID = "pastlife";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+	public static boolean initializedCommands = false;
 
 	public static MinecraftServer server;
 	public static LivesManager livesManager;
@@ -31,7 +34,6 @@ public class Main  {
 			registry.register(new SecretSocietyCommand());
 			registry.register(new InitiateCommand());
 		}
-		TaskScheduler.scheduleTask(1, () -> server.getWorld(0).getGameRules().set("keepInventory", "true"));
 	}
 
 	public static void log(String message) {

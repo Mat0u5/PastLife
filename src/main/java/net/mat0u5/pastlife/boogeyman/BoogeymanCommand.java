@@ -51,7 +51,7 @@ public class BoogeymanCommand extends AbstractCommand {
             if (BoogeymanManager.boogeymen.contains(player.getUuid())) {
                 BoogeymanManager.boogeymen.remove(player.getUuid());
                 PlayerUtils.playSoundToPlayer(player, "boogeyman_cure", 1, 1);
-                PlayerUtils.sendTitleToPlayer(player, "§aYou are cured!", 20, 30, 20););
+                PlayerUtils.sendTitleToPlayer(player, "§aYou are cured!", 20, 30, 20);
                 PlayerUtils.broadcast(player.getName() + "§7 has been cured of the Boogeyman curse!");
                 Main.log(player.getName() + " has been cured of the Boogeyman curse!");
             }

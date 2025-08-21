@@ -12,21 +12,14 @@
     "EntityDamageSourceMixin",
     "ItemStackMixin",
     "MinecraftServerMixin",
-    "PacketMixin",
     "ProjectileDamageSourceMixin",
     "ServerPlayerEntityMixin",
     "ServerPlayNetworkHandlerMixin"
   ],
   "client": [
-    "client.ControlsOptionScreenMixin",
-    "client.GameGuiMixin",
     "client.GameOptionsMixin",
     "client.GameRendererMixin",
-    "client.GuiElementMixin",
-    "client.IntegratedServerMixin",
-    "client.MinecraftMixin",
-    "client.PlayerEntityRendererMixin",
-    "client.TextureManagerMixin"
+    "client.IntegratedServerMixin"
   ],
   "server": [
   ],

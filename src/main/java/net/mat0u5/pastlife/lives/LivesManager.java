@@ -2,33 +2,33 @@ package net.mat0u5.pastlife.lives;
 
 import net.mat0u5.pastlife.utils.PlayerUtils;
 import net.minecraft.entity.living.player.PlayerEntity;
-import net.minecraft.network.packet.ChatMessagePacket;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class LivesManager extends ConfigManager {
 
-    private Map<String, Integer> livesMap = new HashMap<>();
+    private Map<UUID, Integer> livesMap = new HashMap<>();
 
     public LivesManager() {
         super(".", "_pastlife_lives.txt");
     }
 
     private void saveLives(PlayerEntity player, int lives) {
-        setProperty(player.name, String.valueOf(lives));
-        livesMap.put(player.name, lives);
+        setProperty(player.getName(), String.valueOf(lives));
+        livesMap.put(player.getUuid(), lives);
     }
 
     private int loadLives(PlayerEntity player) {
-        int lives = getOrCreateInt(player.name, 6);
-        livesMap.put(player.name, lives);
+        int lives = getOrCreateInt(player.getName(), 6);
+        livesMap.put(player.getUuid(), lives);
         return lives;
     }
 
     public int getLives(PlayerEntity player) {
-        if (livesMap.containsKey(player.name)) {
-            return livesMap.get(player.name);
+        if (livesMap.containsKey(player.getUuid())) {
+            return livesMap.get(player.getUuid());
         }
         return loadLives(player);
     }
@@ -39,7 +39,7 @@ public class LivesManager extends ConfigManager {
         }
         saveLives(player, lives);
         if (lives == 0) {
-            PlayerUtils.sendPacketToAllPlayers(new ChatMessagePacket("§8"+player.name+"§f ran out of lives."));
+            PlayerUtils.broadcast("§8"+player.getName()+"§f ran out of lives.");
         }
     }
 

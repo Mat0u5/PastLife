@@ -4,9 +4,10 @@ import net.mat0u5.pastlife.Main;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.SoundEventS2CPacket;
 import net.minecraft.network.packet.s2c.play.TitlesS2CPacket;
-import net.minecraft.server.MinecraftServer;
+import net.minecraft.resource.Identifier;
 import net.minecraft.server.entity.living.player.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.LiteralText;
 
 import java.util.List;
@@ -36,7 +37,7 @@ public class PlayerUtils {
         playSoundToPlayers(Main.server.getPlayerManager().getAll(), sound, volume, pitch);
     }
     public static void playSoundToPlayer(ServerPlayerEntity player, String sound, float volume, float pitch) {
-        player.networkHandler.sendPacket(new SoundEventS2CPacket(sound, SoundCategory.MASTER, player.x, player.y, player.z, volume, pitch));
+        player.networkHandler.sendPacket(new SoundEventS2CPacket(new SoundEvent(new Identifier("pastlife", sound)), SoundCategory.MASTER, player.x, player.y, player.z, volume, pitch));
     }
     public static void playSoundToPlayers(List<ServerPlayerEntity> players, String sound, float volume, float pitch) {
         for (ServerPlayerEntity player : players) {
@@ -84,30 +85,6 @@ public class PlayerUtils {
     public static void sendPacketToPlayers(List<ServerPlayerEntity> players, Packet packet) {
         for (ServerPlayerEntity player : players) {
             sendPacketToPlayer(player, packet);
-        }
-    }
-
-    public static int actionTriggers = 0;
-    public static void doAction(MinecraftServer server) {
-        //PORTAL ROOM AT -1016, 24, 423
-        if (actionTriggers >= 0) return;
-        actionTriggers++;
-        for(ServerPlayerEntity player :  server.getPlayerManager().getAll()) {
-
-            //player.setHealth(1);
-
-            //player.world.addEntity(new XpOrbEntity(player.world, player.x, player.y, player.z, 10000));
-
-            //player.teleportToDimension(2);
-            //player.networkHandler.teleport(0, 80, 0, player.yaw, player.pitch);
-            //player.networkHandler.teleport(-1016, 24, 423, player.yaw, player.pitch);
-
-
-            //for (Object entity : player.world.entities) {
-            //    if (entity instanceof EnderDragonEntity) {
-            //        ((EnderDragonEntity) entity).setHealth(1);
-            //    }
-            //}
         }
     }
 }
