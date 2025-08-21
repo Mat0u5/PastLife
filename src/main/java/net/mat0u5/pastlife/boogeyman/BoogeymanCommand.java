@@ -26,13 +26,8 @@ public class BoogeymanCommand extends AbstractCommand {
     }
 
     @Override
-    public int getRequiredPermissionLevel() {
-        return 0;
-    }
-
-    @Override
     public boolean canUse(CommandSource source) {
-        return MinecraftServer.getInstance().isSingleplayer() || super.canUse(source);
+        return true;
     }
 
     @Override
