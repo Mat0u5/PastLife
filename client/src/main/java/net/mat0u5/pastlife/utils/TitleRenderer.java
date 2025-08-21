@@ -62,7 +62,7 @@ public class TitleRenderer {
 
     public void renderTitle(Minecraft mc, float tickDelta) {
         if (!isActive) return;
-        if (startTick == 0) return;
+        if (startTick == 0 && fadeInTime != 0) return;
 
         float currentProgress = startTick + tickDelta;
         int totalTime = fadeInTime + stayTime + fadeOutTime;
