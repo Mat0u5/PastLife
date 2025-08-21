@@ -3,10 +3,12 @@ package net.mat0u5.pastlife.secretsociety;
 import net.mat0u5.pastlife.Main;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.AbstractCommand;
-import net.minecraft.server.command.Command;
+import net.minecraft.server.command.exception.PlayerNotFoundException;
 import net.minecraft.server.command.source.CommandSource;
 import net.minecraft.server.entity.living.player.ServerPlayerEntity;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.text.LiteralText;
+import net.minecraft.util.math.BlockPos;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -23,21 +25,20 @@ public class SecretSocietyCommand extends AbstractCommand {
     }
 
     @Override
-    public boolean canUse(CommandSource source) {
+    public boolean canUse(MinecraftServer server, CommandSource source) {
         return true;
     }
 
     @Override
-    public void run(CommandSource source, String[] args) {
+    public void run(MinecraftServer server, CommandSource source, String[] args) throws PlayerNotFoundException {
         ServerPlayerEntity player = asPlayer(source);
         if (args.length < 1) {
             sendUsageInfo(source);
             return;
         }
-        MinecraftServer server = MinecraftServer.getInstance();
 
         if (args[0].equalsIgnoreCase("begin")) {
-            if (server.getPlayerManager().isOp(player.name)) {
+            if (server.getPlayerManager().isOp(player.getGameProfile())) {
                 if (args.length >= 2) {
                     SecretSociety.beginSociety(server, args[1]);
                 }
@@ -46,47 +47,47 @@ public class SecretSocietyCommand extends AbstractCommand {
                 }
             }
             else {
-                source.sendMessage("§cYou do not have permission to use this command.");
+                source.sendMessage(new LiteralText("§cYou do not have permission to use this command."));
             }
             return;
         }
         if (args[0].equalsIgnoreCase("success")) {
-            if (SecretSociety.members.contains(player.name)) {
-                if (SecretSociety.yetToInitiate.contains(player.name)) {
-                    source.sendMessage("§cYou have not been initiated.");
+            if (SecretSociety.members.contains(player.getUuid())) {
+                if (SecretSociety.yetToInitiate.contains(player.getUuid())) {
+                    source.sendMessage(new LiteralText("§cYou have not been initiated."));
                 }
                 else {
                     if (SecretSociety.ended) {
-                        source.sendMessage("§cThe society has already ended.");
+                        source.sendMessage(new LiteralText("§cThe society has already ended."));
                     }
                     else {
-                        Main.log(player.name+" ran the '/society success' command");
+                        Main.log(player.getName()+" ran the '/society success' command");
                         SecretSociety.end(server, true);
                     }
                 }
             }
             else {
-                source.sendMessage("§cYou are not a Member, you cannot use this command.");
+                source.sendMessage(new LiteralText("§cYou are not a Member, you cannot use this command."));
             }
             return;
         }
         if (args[0].equalsIgnoreCase("fail")) {
-            if (SecretSociety.members.contains(player.name)) {
-                if (SecretSociety.yetToInitiate.contains(player.name)) {
-                    source.sendMessage("§cYou have not been initiated.");
+            if (SecretSociety.members.contains(player.getUuid())) {
+                if (SecretSociety.yetToInitiate.contains(player.getUuid())) {
+                    source.sendMessage(new LiteralText("§cYou have not been initiated."));
                 }
                 else {
                     if (SecretSociety.ended) {
-                        source.sendMessage("§cThe society has already ended.");
+                        source.sendMessage(new LiteralText("§cThe society has already ended."));
                     }
                     else {
-                        Main.log(player.name+" ran the '/society fail' command");
+                        Main.log(player.getName()+" ran the '/society fail' command");
                         SecretSociety.end(server, false);
                     }
                 }
             }
             else {
-                source.sendMessage("§cYou are not a Member, you cannot use this command.");
+                source.sendMessage(new LiteralText("§cYou are not a Member, you cannot use this command."));
             }
             return;
         }
@@ -94,23 +95,15 @@ public class SecretSocietyCommand extends AbstractCommand {
     }
 
     public void sendUsageInfo(CommandSource source) {
-        source.sendMessage("§cInvalid usage.");
-        source.sendMessage(getUsage(source));
+        source.sendMessage(new LiteralText("§cInvalid usage."));
+        source.sendMessage(new LiteralText(getUsage(source)));
     }
 
     @Override
-    public List getSuggestions(CommandSource source, String[] args) {
+    public List<String> getSuggestions(MinecraftServer server, CommandSource source, String[] args, @Nullable BlockPos pos) {
         if (args.length == 1) {
             return suggestMatching(args, new String[]{"begin", "success", "fail"});
         }
         return null;
-    }
-
-    @Override
-    public int compareTo(@NotNull Object o) {
-        if (o instanceof Command) {
-            return this.getName().compareTo(((Command) o).getName());
-        }
-        return 0;
     }
 }

@@ -2,8 +2,6 @@ package net.mat0u5.pastlife.mixin;
 
 import net.mat0u5.pastlife.Main;
 import net.mat0u5.pastlife.packets.LivesUpdatePacket;
-import net.mat0u5.pastlife.packets.TitlePacket;
-import net.mat0u5.pastlife.packets.WorldBorderUpdatePacket;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.util.Int2ObjectHashMap;
 import org.spongepowered.asm.mixin.Mixin;
@@ -27,8 +25,6 @@ public class PacketMixin {
     @Inject(method = "<clinit>", at = @At("TAIL"))
     private static void registerCustomPackets(CallbackInfo ci) {
         registerPacket(249, LivesUpdatePacket.class);
-        registerPacket(248, WorldBorderUpdatePacket.class);
-        registerPacket(247, TitlePacket.class);
     }
 
     private static void registerPacket(int id, Class packetClass) {

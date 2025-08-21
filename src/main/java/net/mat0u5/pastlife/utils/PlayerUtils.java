@@ -1,21 +1,42 @@
 package net.mat0u5.pastlife.utils;
 
+import net.mat0u5.pastlife.Main;
 import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.SoundEventPacket;
+import net.minecraft.network.packet.s2c.play.SoundEventS2CPacket;
+import net.minecraft.network.packet.s2c.play.TitlesS2CPacket;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.entity.living.player.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.text.LiteralText;
 
 import java.util.List;
 
 public class PlayerUtils {
-    public static void playSoundToAllPlayers(String sound, float volume, float pitch) {
-        if (MinecraftServer.getInstance() == null) {
+    public static void broadcast(String message) {
+        if (Main.server == null) {
             return;
         }
-        playSoundToPlayers(MinecraftServer.getInstance().getPlayerManager().players, sound, volume, pitch);
+        Main.server.getPlayerManager().sendMessage(new LiteralText(message), false);
+    }
+
+    public static void broadcastToPlayer(ServerPlayerEntity player, String message) {
+        player.sendMessage(new LiteralText(message));
+    }
+
+    public static void broadcastToPlayers(List<ServerPlayerEntity> players, String message) {
+        for (ServerPlayerEntity player : players) {
+            broadcastToPlayer(player, message);
+        }
+    }
+
+    public static void playSoundToAllPlayers(String sound, float volume, float pitch) {
+        if (Main.server == null) {
+            return;
+        }
+        playSoundToPlayers(Main.server.getPlayerManager().getAll(), sound, volume, pitch);
     }
     public static void playSoundToPlayer(ServerPlayerEntity player, String sound, float volume, float pitch) {
-        player.networkHandler.sendPacket(new SoundEventPacket(sound, player.x, player.y, player.z, volume, pitch));
+        player.networkHandler.sendPacket(new SoundEventS2CPacket(sound, SoundCategory.MASTER, player.x, player.y, player.z, volume, pitch));
     }
     public static void playSoundToPlayers(List<ServerPlayerEntity> players, String sound, float volume, float pitch) {
         for (ServerPlayerEntity player : players) {
@@ -23,11 +44,34 @@ public class PlayerUtils {
         }
     }
 
+    public static void sendTitleToAllPlayers(String title, int fadeIn, int duration, int fadeOut) {
+        sendPacketToAllPlayers(new TitlesS2CPacket(TitlesS2CPacket.Type.TITLE, new LiteralText(title), fadeIn, duration, fadeOut));
+    }
+    public static void sendSubitleToAllPlayers(String title, int fadeIn, int duration, int fadeOut) {
+        sendPacketToAllPlayers(new TitlesS2CPacket(TitlesS2CPacket.Type.SUBTITLE, new LiteralText(title), fadeIn, duration, fadeOut));
+    }
+    public static void sendTitleToPlayer(ServerPlayerEntity player, String title, int fadeIn, int duration, int fadeOut) {
+        player.networkHandler.sendPacket(new TitlesS2CPacket(TitlesS2CPacket.Type.TITLE, new LiteralText(title), fadeIn, duration, fadeOut));
+    }
+    public static void sendSubitleToPlayer(ServerPlayerEntity player, String title, int fadeIn, int duration, int fadeOut) {
+        player.networkHandler.sendPacket(new TitlesS2CPacket(TitlesS2CPacket.Type.SUBTITLE, new LiteralText(title), fadeIn, duration, fadeOut));
+    }
+    public static void sendTitleToPlayers(List<ServerPlayerEntity> players, String title, int fadeIn, int duration, int fadeOut) {
+        for (ServerPlayerEntity player : players) {
+            sendTitleToPlayer(player, title, fadeIn, duration, fadeOut);
+        }
+    }
+    public static void sendSubitleToPlayers(List<ServerPlayerEntity> players, String title, int fadeIn, int duration, int fadeOut) {
+        for (ServerPlayerEntity player : players) {
+            sendSubitleToPlayer(player, title, fadeIn, duration, fadeOut);
+        }
+    }
+
     public static void sendPacketToAllPlayers(Packet packet) {
-        if (MinecraftServer.getInstance() == null) {
+        if (Main.server == null) {
             return;
         }
-        MinecraftServer.getInstance().getPlayerManager().sendPacket(packet);
+        Main.server.getPlayerManager().sendPacket(packet);
     }
 
     public static void sendPacketToPlayer(ServerPlayerEntity player, Packet packet) {
@@ -48,8 +92,7 @@ public class PlayerUtils {
         //PORTAL ROOM AT -1016, 24, 423
         if (actionTriggers >= 0) return;
         actionTriggers++;
-        for(int i = 0; i < server.getPlayerManager().players.size(); ++i) {
-            ServerPlayerEntity player = (ServerPlayerEntity)server.getPlayerManager().players.get(i);
+        for(ServerPlayerEntity player :  server.getPlayerManager().getAll()) {
 
             //player.setHealth(1);
 

@@ -3,7 +3,6 @@ package net.mat0u5.pastlife.client.utils;
 import net.mat0u5.pastlife.client.MainClient;
 import net.mat0u5.pastlife.client.lives.ClientLivesManager;
 import net.mat0u5.pastlife.packets.LivesUpdatePacket;
-import net.mat0u5.pastlife.packets.TitlePacket;
 
 public class ClientPacketHandler {
 

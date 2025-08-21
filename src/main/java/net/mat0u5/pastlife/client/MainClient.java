@@ -1,7 +1,6 @@
 package net.mat0u5.pastlife.client;
 
 import net.mat0u5.pastlife.client.utils.ResourceHandler;
-import net.mat0u5.pastlife.client.utils.TitleRenderer;
 import net.minecraft.client.Minecraft;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,11 +12,8 @@ public class MainClient {
 	public static final String MOD_ID = "pastlife";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-	public static TitleRenderer titleRenderer;
-
 	public static void init(Minecraft minecraft) {
 		log("[CLIENT] Initializing Past Life!");
-		titleRenderer = new TitleRenderer();
 
 
 		File runDirectory = minecraft.getRunDirectory();
