@@ -26,10 +26,10 @@ public class PacketMixin {
 
     @Inject(method = "<clinit>", at = @At("TAIL"))
     private static void registerCustomPackets(CallbackInfo ci) {
-        registerPacket(250, LivesUpdatePacket.class);
-        registerPacket(251, WorldBorderUpdatePacket.class);
-        registerPacket(252, SoundEventPacket.class);
-        registerPacket(253, TitlePacket.class);
+        registerPacket(249, LivesUpdatePacket.class);
+        registerPacket(248, WorldBorderUpdatePacket.class);
+        registerPacket(247, SoundEventPacket.class);
+        registerPacket(246, TitlePacket.class);
     }
 
     private static void registerPacket(int id, Class packetClass) {
