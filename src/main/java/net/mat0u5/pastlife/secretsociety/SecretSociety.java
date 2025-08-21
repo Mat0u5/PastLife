@@ -62,6 +62,7 @@ public class SecretSociety {
         List<ServerPlayerEntity> memberPlayers = new ArrayList<>();
         for (ServerPlayerEntity player : players) {
             if (player == null) continue;
+            if (Main.livesManager != null && Main.livesManager.getLives(player) <= 0) continue;
 
             if (members.size() < MEMBERS) {
                 memberPlayers.add(player);
