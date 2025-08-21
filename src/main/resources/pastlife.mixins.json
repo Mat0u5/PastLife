@@ -15,7 +15,8 @@
   "client": [
     "client.GameOptionsMixin",
     "client.GameRendererMixin",
-    "client.IntegratedServerMixin"
+    "client.IntegratedServerMixin",
+    "client.PlayerTabOverlayMixin"
   ],
   "server": [
   ],
