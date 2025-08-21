@@ -7,6 +7,7 @@ import net.mat0u5.pastlife.lives.LivesCommand;
 import net.mat0u5.pastlife.lives.LivesManager;
 import net.mat0u5.pastlife.secretsociety.InitiateCommand;
 import net.mat0u5.pastlife.secretsociety.SecretSocietyCommand;
+import net.mat0u5.pastlife.utils.TaskScheduler;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.handler.CommandRegistry;
 import org.slf4j.Logger;
@@ -28,6 +29,7 @@ public class Main  {
 			registry.register(new SecretSocietyCommand());
 			registry.register(new InitiateCommand());
 		}
+		TaskScheduler.scheduleTask(1, () -> MinecraftServer.getInstance().getWorld(0).getGameRules().set("keepInventory", "true"));
 	}
 
 	public static void log(String message) {

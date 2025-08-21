@@ -18,6 +18,7 @@
     "ServerPlayNetworkHandlerMixin"
   ],
   "client": [
+    "client.ControlsOptionScreenMixin",
     "client.GameGuiMixin",
     "client.GameOptionsMixin",
     "client.GameRendererMixin",
