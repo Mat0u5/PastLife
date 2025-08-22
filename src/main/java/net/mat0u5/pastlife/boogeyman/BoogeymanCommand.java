@@ -20,8 +20,8 @@ public class BoogeymanCommand {
                     .requires(PlayerUtils::isAdmin)
                     .executes(context -> choose(context.getSource()))
                 )
-                .then(literal("succeed")
-                    .executes(context -> succeed(context.getSource()))
+                .then(literal("success")
+                    .executes(context -> success(context.getSource()))
                 )
                 .then(literal("fail")
                     .executes(context -> fail(context.getSource()))
@@ -32,7 +32,7 @@ public class BoogeymanCommand {
         BoogeymanManager.rollBoogeymen(source.getMinecraftServer());
         return 1;
     }
-    public static int succeed(ServerCommandSource source) throws CommandSyntaxException {
+    public static int success(ServerCommandSource source) throws CommandSyntaxException {
         ServerPlayerEntity player = source.getPlayer();
 
         if (!BoogeymanManager.boogeymen.contains(player.getUuid())) {

@@ -77,7 +77,7 @@ public class BoogeymanManager {
             PlayerUtils.broadcastToPlayers(boogeymenList, "§7by direct action to be cured of the curse.");
         });
         TaskScheduler.scheduleTask(260, () -> {
-            PlayerUtils.broadcastToPlayers(boogeymenList, "§7If you succeed, run \"/boogeyman succeed\", you will be cured.");
+            PlayerUtils.broadcastToPlayers(boogeymenList, "§7If you succeed, run \"/boogeyman success\", you will be cured.");
         });
         TaskScheduler.scheduleTask(320, () -> {
             PlayerUtils.broadcastToPlayers(boogeymenList, "§7If you fail, run \"/boogeyman fail\", and you will");
