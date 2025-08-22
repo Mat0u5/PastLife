@@ -22,7 +22,7 @@ public class BoogeymanCommand extends AbstractCommand {
 
     @Override
     public String getUsage(CommandSource source) {
-        return "/boogeyman usage:\n§7For admins: '/boogeyman choose'"+"\n"+"§7For boogeymen: '/boogeyman succeed|fail'";
+        return "/boogeyman usage:\n§7For admins: '/boogeyman choose'"+"\n"+"§7For boogeymen: '/boogeyman success|fail'";
     }
 
     @Override
@@ -47,7 +47,7 @@ public class BoogeymanCommand extends AbstractCommand {
             }
             return;
         }
-        if (args[0].equalsIgnoreCase("succeed")) {
+        if (args[0].equalsIgnoreCase("success")) {
             if (BoogeymanManager.boogeymen.contains(player.getUuid())) {
                 BoogeymanManager.boogeymen.remove(player.getUuid());
                 PlayerUtils.playSoundToPlayer(player, "boogeyman_cure", 1, 1);
@@ -88,7 +88,7 @@ public class BoogeymanCommand extends AbstractCommand {
     @Override
     public List<String> getSuggestions(MinecraftServer server, CommandSource source, String[] args, @Nullable BlockPos pos) {
         if (args.length == 1) {
-            return suggestMatching(args, new String[]{"choose", "succeed", "fail"});
+            return suggestMatching(args, new String[]{"choose", "success", "fail"});
         }
         return null;
     }
