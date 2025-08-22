@@ -15,7 +15,7 @@ public class BoogeymanCommand {
         if (response != 1) {
             networkHandler.sendPacket(new ChatMessagePacket("§cInvalid usage."));
             networkHandler.sendMessage("For admins: '/boogeyman choose'");
-            networkHandler.sendMessage("For boogeymen: '/boogeyman succeed|fail'");
+            networkHandler.sendMessage("For boogeymen: '/boogeyman success|fail'");
         }
     }
 
@@ -29,7 +29,7 @@ public class BoogeymanCommand {
             }
             return 1;
         }
-        if (command.equalsIgnoreCase("/boogeyman succeed")) {
+        if (command.equalsIgnoreCase("/boogeyman success")) {
             if (BoogeymanManager.boogeymen.contains(player.name)) {
                 BoogeymanManager.boogeymen.remove(player.name);
                 PlayerUtils.playSoundToPlayer(player, "boogeyman_cure", 1, 1);

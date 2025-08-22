@@ -83,6 +83,6 @@ Make sure you're opped to be able to use most of the commands below.<br>
 <summary>/boogeyman - Only available in session 2 (Minecraft Beta 1.7.3)</summary>
 
 - `/boogeyman choose` - Randomly selects the Boogeymen.
-- `/boogeyman succeed` - Ran by the Boogeyman to say they have succeeded in killing a player. *No permissions required.*
+- `/boogeyman success` - Ran by the Boogeyman to say they have succeeded in killing a player. *No permissions required.*
 - `/boogeyman fail` - Ran by the Boogeyman to say they have failed in killing a player. *No permissions required.*
 </details>
