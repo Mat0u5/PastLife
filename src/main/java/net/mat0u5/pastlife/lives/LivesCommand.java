@@ -1,109 +1,99 @@
 package net.mat0u5.pastlife.lives;
 
+import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.mat0u5.pastlife.Main;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.command.AbstractCommand;
-import net.minecraft.server.command.exception.InvalidNumberException;
-import net.minecraft.server.command.exception.PlayerNotFoundException;
-import net.minecraft.server.command.source.CommandSource;
-import net.minecraft.server.entity.living.player.ServerPlayerEntity;
+import net.mat0u5.pastlife.utils.PlayerUtils;
+import net.minecraft.command.arguments.EntityArgumentType;
+import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.LiteralText;
-import net.minecraft.util.math.BlockPos;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
+import static net.minecraft.server.command.CommandManager.argument;
+import static net.minecraft.server.command.CommandManager.literal;
 
-public class LivesCommand extends AbstractCommand {
+public class LivesCommand {
 
-    @Override
-    public String getName() {
-        return "lives";
+    public static void register(CommandDispatcher<ServerCommandSource> dispatcher, boolean b) {
+        dispatcher.register(
+            literal("lives")
+            .executes(context -> showLives(context.getSource()))
+            .then(literal("get")
+                    .requires(PlayerUtils::isAdmin)
+                    .then(argument("player", EntityArgumentType.player())
+                            .executes(context -> getLives(
+                                    context.getSource(), EntityArgumentType.getPlayer(context, "player")
+                            ))
+                    )
+            )
+            .then(literal("set")
+                    .requires(PlayerUtils::isAdmin)
+                    .then(argument("player", EntityArgumentType.player())
+                            .then(argument("amount", IntegerArgumentType.integer())
+                                    .executes(context -> setLives(
+                                            context.getSource(), EntityArgumentType.getPlayer(context, "player"), IntegerArgumentType.getInteger(context, "amount")
+                                    ))
+                            )
+                    )
+            )
+            .then(literal("add")
+                    .requires(PlayerUtils::isAdmin)
+                    .then(argument("player", EntityArgumentType.player())
+                            .then(argument("amount", IntegerArgumentType.integer())
+                                    .executes(context -> addLives(
+                                            context.getSource(), EntityArgumentType.getPlayer(context, "player"), IntegerArgumentType.getInteger(context, "amount")
+                                    ))
+                            )
+                    )
+            )
+            .then(literal("remove")
+                    .requires(PlayerUtils::isAdmin)
+                    .then(argument("player", EntityArgumentType.player())
+                            .then(argument("amount", IntegerArgumentType.integer())
+                                    .executes(context -> removeLives(
+                                            context.getSource(), EntityArgumentType.getPlayer(context, "player"), IntegerArgumentType.getInteger(context, "amount")
+                                    ))
+                            )
+                    )
+            )
+        );
     }
 
-    @Override
-    public String getUsage(CommandSource source) {
-        return "/lives usage:\n§7For admins: '/lives <get|set|add|remove> <player> [amount]'\n§7For players: '/lives'";
+    public static int showLives(ServerCommandSource source) throws CommandSyntaxException {
+        ServerPlayerEntity player = source.getPlayer();
+
+        int lives = Main.livesManager.getLives(player);
+        source.sendFeedback(new LiteralText("You have " + lives + " " + (lives == 1 ? "life" : "lives") + "."), false);
+        return 1;
     }
 
-    @Override
-    public boolean canUse(MinecraftServer server, CommandSource source) {
-        return true;
+    public static int getLives(ServerCommandSource source, ServerPlayerEntity target) {
+        int lives = Main.livesManager.getLives(target);
+        source.sendFeedback(new LiteralText(target.getEntityName() + " has " + lives + " " + (lives == 1 ? "life" : "lives") + "."), false);
+        return 1;
     }
 
-    @Override
-    public void run(MinecraftServer server, CommandSource source, String[] args) throws PlayerNotFoundException, InvalidNumberException {
-        ServerPlayerEntity player = asPlayer(source);
-        if (args.length == 0) {
-            int lives = Main.livesManager.getLives(player);
-            source.sendMessage(new LiteralText("You have " + lives + " " + (lives == 1 ? "life" : "lives") + "."));
-            return;
-        }
-
-        if (!server.getPlayerManager().isOp(player.getGameProfile())) {
-            source.sendMessage(new LiteralText("§cYou do not have permission to use this command."));
-            return;
-        }
-
-
-        if (args.length < 2) {
-            sendUsageInfo(source);
-            return;
-        }
-
-        String playerName = args[1];
-        ServerPlayerEntity serverPlayer = server.getPlayerManager().get(playerName);
-        if (serverPlayer == null) {
-            source.sendMessage(new LiteralText("Player not found: " + playerName));
-            return;
-        }
-        playerName = serverPlayer.getName();
-
-        if (args[0].equalsIgnoreCase("get")) {
-            int lives = Main.livesManager.getLives(serverPlayer);
-            source.sendMessage(new LiteralText(playerName + " has " + lives + " " + (lives == 1 ? "life" : "lives") + "."));
-            return;
-        }
-        if (args.length >= 3) {
-            int amount = parseInt(args[2], 0);
-            if (args[0].equalsIgnoreCase("set")) {
-                Main.livesManager.setLives(serverPlayer, amount);
-            }
-            else if (args[0].equalsIgnoreCase("add")) {
-                Main.livesManager.addLives(serverPlayer, amount);
-            }
-            else if (args[0].equalsIgnoreCase("remove")) {
-                Main.livesManager.addLives(serverPlayer, -amount);
-            }
-            else {
-                sendUsageInfo(source);
-                return;
-            }
-
-            int lives = Main.livesManager.getLives(serverPlayer);
-            source.sendMessage(new LiteralText(playerName + " now has " + lives + " " + (lives == 1 ? "life" : "lives") + "."));
-            return;
-        }
-        sendUsageInfo(source);
+    public static int setLives(ServerCommandSource source, ServerPlayerEntity target, int amount) {
+        Main.livesManager.setLives(target, amount);
+        sendAmountOfLives(source, target);
+        return 1;
     }
 
-    public void sendUsageInfo(CommandSource source) {
-        source.sendMessage(new LiteralText("§cInvalid usage."));
-        source.sendMessage(new LiteralText(getUsage(source)));
+    public static int addLives(ServerCommandSource source, ServerPlayerEntity target, int amount) {
+        Main.livesManager.addLives(target, amount);
+        sendAmountOfLives(source, target);
+        return 1;
     }
 
-    @Override
-    public List<String> getSuggestions(MinecraftServer server, CommandSource source, String[] args, @Nullable BlockPos pos) {
-        if (args.length == 1) {
-            return suggestMatching(args, new String[]{"get", "set", "add", "remove"});
-        }
-        else if (args.length == 2 && !args[1].equalsIgnoreCase("get")) {
-            return suggestMatching(args, server.getPlayerNames());
-        }
-        return null;
+    public static int removeLives(ServerCommandSource source, ServerPlayerEntity target, int amount) {
+        Main.livesManager.addLives(target, -amount);
+        sendAmountOfLives(source, target);
+        return 1;
     }
 
-    @Override
-    public boolean hasTargetSelectorAt(String[] args, int index) {
-        return index == 1;
+    public static void sendAmountOfLives(ServerCommandSource source, ServerPlayerEntity target) {
+        int lives = Main.livesManager.getLives(target);
+        source.sendFeedback(new LiteralText(target.getEntityName() + " now has " + lives + " " + (lives == 1 ? "life" : "lives") + "."), true);
     }
 }

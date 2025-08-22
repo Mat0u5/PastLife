@@ -5,7 +5,7 @@ import net.mat0u5.pastlife.utils.PlayerUtils;
 import net.mat0u5.pastlife.utils.TaskScheduler;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.entity.living.player.ServerPlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 
 import java.util.*;
 

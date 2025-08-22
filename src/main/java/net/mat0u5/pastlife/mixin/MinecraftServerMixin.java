@@ -31,6 +31,8 @@ public class MinecraftServerMixin {
     @Inject(method = "tick", at = @At("TAIL"))
     private void onModInit(CallbackInfo ci) {
         MinecraftServer server = (MinecraftServer) (Object) this;
+        if (Main.server == null) Main.server = server;
+
         if (!Main.initializedCommands) {
             Main.initializedCommands = true;
             ServerWorld overworld = server.getWorld(0);

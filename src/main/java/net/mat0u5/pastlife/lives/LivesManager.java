@@ -2,9 +2,10 @@ package net.mat0u5.pastlife.lives;
 
 import net.mat0u5.pastlife.utils.PlayerUtils;
 import net.minecraft.scoreboard.Scoreboard;
+import net.minecraft.scoreboard.ServerScoreboard;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.entity.living.player.ServerPlayerEntity;
-import net.minecraft.world.WorldSettings;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.world.GameMode;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,12 +20,12 @@ public class LivesManager extends ConfigManager {
     }
 
     private void saveLives(ServerPlayerEntity player, int lives) {
-        setProperty(player.getName(), String.valueOf(lives));
+        setProperty(player.getEntityName(), String.valueOf(lives));
         livesMap.put(player.getUuid(), lives);
     }
 
     private int loadLives(ServerPlayerEntity player) {
-        int lives = getOrCreateInt(player.getName(), 6);
+        int lives = getOrCreateInt(player.getEntityName(), 6);
         livesMap.put(player.getUuid(), lives);
         return lives;
     }
@@ -43,7 +44,7 @@ public class LivesManager extends ConfigManager {
         saveLives(player, lives);
         if (lives == 0) {
             PlayerUtils.broadcast("§8"+player.getName()+"§f ran out of lives.");
-            player.setGameMode(WorldSettings.GameMode.SPECTATOR);
+            player.setGameMode(GameMode.SPECTATOR);
         }
         scoreboardUpdate(player);
     }
@@ -59,11 +60,11 @@ public class LivesManager extends ConfigManager {
         MinecraftServer server = player.getServer();
         if (server == null) return;
 
-        Scoreboard scoreboard = server.getWorld(0).getScoreboard();
-        scoreboard.getScore(player.getName(), scoreboard.getObjective("Lives")).set(lives);
+        ServerScoreboard scoreboard = server.getScoreboard();
+        scoreboard.getPlayerScore(player.getEntityName(), scoreboard.getObjective("Lives")).setScore(lives);
 
-        if (lives == 0 && !server.getPlayerManager().isOp(player.getGameProfile())) {
-            player.setGameMode(WorldSettings.GameMode.SPECTATOR);
+        if (lives == 0 && !PlayerUtils.isAdmin(player)) {
+            player.setGameMode(GameMode.SPECTATOR);
         }
 
         teamUpdate(player, lives, scoreboard);
@@ -75,6 +76,6 @@ public class LivesManager extends ConfigManager {
         if (lives == 2) teamName = "Yellow";
         if (lives == 3) teamName = "Green";
         if (lives >= 4) teamName = "DarkGreen";
-        scoreboard.addMemberToTeam(player.getName(), teamName);
+        scoreboard.addPlayerToTeam(player.getEntityName(), scoreboard.getTeam(teamName));
     }
 }

@@ -1,7 +1,6 @@
 plugins {
 	id 'maven-publish'
 	id 'fabric-loom' version '1.11-SNAPSHOT'
-	id 'ploceus' version '1.11-SNAPSHOT'
 }
 
 base {
@@ -20,9 +19,10 @@ repositories {
 
 dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings ploceus.featherMappings(project.feather_build)
+	mappings("net.fabricmc:yarn:${property("yarn_mappings")}:v2")
 
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	modImplementation("net.fabricmc.fabric-api:fabric-api:${property("fabric_version")}")
 }
 
 

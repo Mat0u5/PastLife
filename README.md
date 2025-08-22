@@ -16,7 +16,7 @@ This mod is **client-side required** in versions `Beta 1.2_02`, `Beta 1.7.3`, `R
 
 ---------
 
-## How to play:
+## How to play in versions before 1.14 (after that you can just use Fabric like normal.):
 ### Client:
 1. Install the https://ornithemc.net installer.
 2. Open it, select the **client** environment, and install the desired version of Minecraft (based on the session you're on). **If in mc version beta 1.2_02 or beta 1.7.3:**  Make sure to select check "Historical Versions" otherwise the beta versions won't show up.
@@ -44,8 +44,8 @@ After updating the skins in the minecraft launcher, it takes a while for the ski
 | Beta 1.7.3     | Finished    |                                                                                     Added Keep Inventory.<br>Added the Bogeyman.                                                                                     |
 | Release 1.1    | Finished    |                              Tab list shows lives.<br>Ender Dragon drops diamonds.<br>Clamped enchantments to level 1.<br>Colored names in death messages.<br>Added the Secret Society.                              |
 | Release 1.4.7  | Finished    |                                                                                                     No Changes.                                                                                                      |
-| Release 1.9.4  | In Progress |                                                                                                     No Changes.                                                                                                      |
-| Release 1.14.4 | TODO        |                                                                                                     No Changes.                                                                                                      |
+| Release 1.9.4  | Finished    |                                                                                                     No Changes.                                                                                                      |
+| Release 1.14.4 | In Progress |                                                                                                     No Changes.                                                                                                      |
 
 
 ---------
@@ -85,7 +85,7 @@ Make sure you're opped to be able to use most of the commands below.<br>
 <summary>/boogeyman - Only available in session 2 onwards (Minecraft Beta 1.7.3+)</summary>
 
 - `/boogeyman choose` - Randomly selects the Boogeymen.
-- `/boogeyman succeed` - Ran by the Boogeyman to say they have succeeded in killing a player. *No permissions required.*
+- `/boogeyman success` - Ran by the Boogeyman to say they have succeeded in killing a player. *No permissions required.*
 - `/boogeyman fail` - Ran by the Boogeyman to say they have failed in killing a player. *No permissions required.*
 </details>
 
@@ -94,7 +94,7 @@ Make sure you're opped to be able to use most of the commands below.<br>
 
 - `/society begin` - Starts up the Secret Society with a random word.
 - `/society begin <secret_word>` - Starts up the Secret Society with a specific word you type.
-- `/society succeed` - Ran by the society members to indicate that they have succeeded in the Secret Society. *No permissions required.*
+- `/society success` - Ran by the society members to indicate that they have succeeded in the Secret Society. *No permissions required.*
 - `/society fail` - Ran by the society members to indicate that they have failed in the Secret Society. *No permissions required.*
 - `/initiate` - Ran by the society members get initiated into the society.*No permissions required.*
 </details>

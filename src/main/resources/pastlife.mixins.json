@@ -4,6 +4,7 @@
   "package": "net.mat0u5.pastlife.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "CommandManagerMixin",
     "CraftingManagerMixin",
     "DedicatedServerMixin",
     "EnchantmentHelperMixin",
