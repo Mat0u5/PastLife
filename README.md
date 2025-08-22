@@ -85,7 +85,7 @@ Make sure you're opped to be able to use most of the commands below.<br>
 <summary>/boogeyman - Only available in session 2 onwards (Minecraft Beta 1.7.3+)</summary>
 
 - `/boogeyman choose` - Randomly selects the Boogeymen.
-- `/boogeyman succeed` - Ran by the Boogeyman to say they have succeeded in killing a player. *No permissions required.*
+- `/boogeyman success` - Ran by the Boogeyman to say they have succeeded in killing a player. *No permissions required.*
 - `/boogeyman fail` - Ran by the Boogeyman to say they have failed in killing a player. *No permissions required.*
 </details>
 
@@ -94,7 +94,7 @@ Make sure you're opped to be able to use most of the commands below.<br>
 
 - `/society begin` - Starts up the Secret Society with a random word.
 - `/society begin <secret_word>` - Starts up the Secret Society with a specific word you type.
-- `/society succeed` - Ran by the society members to indicate that they have succeeded in the Secret Society. *No permissions required.*
+- `/society success` - Ran by the society members to indicate that they have succeeded in the Secret Society. *No permissions required.*
 - `/society fail` - Ran by the society members to indicate that they have failed in the Secret Society. *No permissions required.*
 - `/initiate` - Ran by the society members get initiated into the society.*No permissions required.*
 </details>
