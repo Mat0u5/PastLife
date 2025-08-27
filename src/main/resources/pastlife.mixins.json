@@ -8,6 +8,8 @@
     "EnderDragonEntityMixin",
     "ItemStackMixin",
     "MinecraftServerMixin",
+    "RecipeManagerAccessor",
+    "RecipeManagerMixin",
     "ServerPlayerEntityMixin"
   ],
   "client": [
