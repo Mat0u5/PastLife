@@ -64,7 +64,7 @@ public class SecretSociety {
             if (members.size() < MEMBERS) {
                 memberPlayers.add(player);
                 members.add(player.getUuid());
-                Main.log(player.getName()+" has been chosen as a member of the Secret Society.");
+                Main.log(player.getEntityName()+" has been chosen as a member of the Secret Society.");
             }
         }
         yetToInitiate = new ArrayList<>(members);

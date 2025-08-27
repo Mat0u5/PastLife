@@ -43,7 +43,7 @@ public class LivesManager extends ConfigManager {
         }
         saveLives(player, lives);
         if (lives == 0) {
-            PlayerUtils.broadcast("§8"+player.getName()+"§f ran out of lives.");
+            PlayerUtils.broadcast("§8"+player.getEntityName()+"§f ran out of lives.");
             player.setGameMode(GameMode.SPECTATOR);
         }
         scoreboardUpdate(player);

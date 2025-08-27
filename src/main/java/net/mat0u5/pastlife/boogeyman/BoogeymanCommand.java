@@ -43,8 +43,8 @@ public class BoogeymanCommand {
         BoogeymanManager.boogeymen.remove(player.getUuid());
         PlayerUtils.playSoundToPlayer(player, new SoundEvent(new Identifier("pastlife_boogeyman_cure")), 1, 1);
         PlayerUtils.sendTitleToPlayer(player, "§aYou are cured!", 20, 30, 20);
-        PlayerUtils.broadcast(player.getName() + "§7 has been cured of the Boogeyman curse!");
-        Main.log(player.getName() + " has been cured of the Boogeyman curse!");
+        PlayerUtils.broadcast(player.getEntityName() + "§7 has been cured of the Boogeyman curse!");
+        Main.log(player.getEntityName() + " has been cured of the Boogeyman curse!");
         return 1;
     }
     public static int fail(ServerCommandSource source) throws CommandSyntaxException {
@@ -58,9 +58,9 @@ public class BoogeymanCommand {
         BoogeymanManager.boogeymen.remove(player.getUuid());
         PlayerUtils.playSoundToPlayer(player, new SoundEvent(new Identifier("pastlife_boogeyman_fail")), 1, 1);
         PlayerUtils.sendTitleToPlayer(player, "§cYou have failed.", 20, 30, 20);
-        PlayerUtils.broadcast(player.getName() + "§7 failed to kill a player while being the §cBoogeyman§7.");
+        PlayerUtils.broadcast(player.getEntityName() + "§7 failed to kill a player while being the §cBoogeyman§7.");
         PlayerUtils.broadcast("§7They have been dropped to their §cLast Life§7.");
-        Main.log(player.getName() + " failed to kill a player while being the Boogeyman.");
+        Main.log(player.getEntityName() + " failed to kill a player while being the Boogeyman.");
         if (Main.livesManager != null && Main.livesManager.getLives(player) > 1) {
             Main.livesManager.setLives(player, 1);
         }

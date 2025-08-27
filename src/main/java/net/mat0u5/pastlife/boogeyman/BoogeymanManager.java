@@ -58,7 +58,7 @@ public class BoogeymanManager {
             if (chooseBoogeymen > 0 && Main.livesManager.getLives(player) > 1) {
                 boogeymenList.add(player);
                 boogeymen.add(player.getUuid());
-                Main.log(player.getName() + " has been chosen as a Boogeyman!");
+                Main.log(player.getEntityName() + " has been chosen as a Boogeyman!");
                 chooseBoogeymen--;
             }
             else {

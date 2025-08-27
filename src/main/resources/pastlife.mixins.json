@@ -4,19 +4,15 @@
   "package": "net.mat0u5.pastlife.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "CommandManagerMixin",
-    "CraftingManagerMixin",
-    "DedicatedServerMixin",
     "EnchantmentHelperMixin",
     "EnderDragonEntityMixin",
     "ItemStackMixin",
     "MinecraftServerMixin",
+    "RecipeManagerAccessor",
+    "RecipeManagerMixin",
     "ServerPlayerEntityMixin"
   ],
   "client": [
-    "client.GameOptionsMixin",
-    "client.GameRendererMixin",
-    "client.IntegratedServerMixin",
     "client.PlayerTabOverlayMixin"
   ],
   "server": [

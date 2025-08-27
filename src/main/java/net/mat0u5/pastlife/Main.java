@@ -3,6 +3,7 @@ package net.mat0u5.pastlife;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.mat0u5.pastlife.boogeyman.BoogeymanCommand;
 import net.mat0u5.pastlife.lives.LivesCommand;
@@ -10,7 +11,9 @@ import net.mat0u5.pastlife.lives.LivesManager;
 import net.mat0u5.pastlife.secretsociety.InitiateCommand;
 import net.mat0u5.pastlife.secretsociety.SecretSocietyCommand;
 import net.mat0u5.pastlife.utils.IClientHelper;
+import net.mat0u5.pastlife.utils.TaskScheduler;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.network.ServerPlayerEntity;
 
 import java.util.UUID;
 import java.util.logging.Logger;
@@ -34,7 +37,19 @@ public class Main implements ModInitializer {
 		CommandRegistrationCallback.EVENT.register(BoogeymanCommand::register);
 		CommandRegistrationCallback.EVENT.register(SecretSocietyCommand::register);
 		CommandRegistrationCallback.EVENT.register(InitiateCommand::register);
+
+		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> onPlayerJoin(handler.player));
 	}
+
+	private static void onPlayerJoin(ServerPlayerEntity player) {
+		MinecraftServer thisServer = player.getServer();
+		if (thisServer == null) return;
+		TaskScheduler.scheduleTask(5, () -> {
+			thisServer.getCommandManager().execute(thisServer.getCommandSource().withSilent(),"recipe give @a pastlife:tnt_variation");
+
+		});
+	}
+
 
 	public static void log(String message) {
 		if (LOGGER != null) {

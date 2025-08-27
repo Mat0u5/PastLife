@@ -65,7 +65,7 @@ public class SecretSocietyCommand {
             return -1;
         }
 
-        Main.log(player.getName()+" ran the '/society success' command");
+        Main.log(player.getEntityName()+" ran the '/society success' command");
         SecretSociety.end(source.getMinecraftServer(), true);
         return 1;
     }
@@ -88,7 +88,7 @@ public class SecretSocietyCommand {
             return -1;
         }
 
-        Main.log(player.getName()+" ran the '/society fail' command");
+        Main.log(player.getEntityName()+" ran the '/society fail' command");
         SecretSociety.end(source.getMinecraftServer(), false);
         return 1;
     }

@@ -2,6 +2,7 @@ package net.mat0u5.pastlife.utils;
 
 import net.mat0u5.pastlife.Main;
 import net.minecraft.network.Packet;
+import net.minecraft.network.packet.s2c.play.PlaySoundIdS2CPacket;
 import net.minecraft.network.packet.s2c.play.TitleS2CPacket;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -65,11 +66,12 @@ public class PlayerUtils {
     public static void playSoundToPlayers(Collection<ServerPlayerEntity> players, SoundEvent sound, SoundCategory soundCategory, float volume, float pitch) {
         for (ServerPlayerEntity player : players) {
             player.playSound(sound, soundCategory, volume, pitch);
+            player.networkHandler.sendPacket(new PlaySoundIdS2CPacket(sound.getId(), soundCategory, player.getPos(), volume, pitch));
         }
     }
 
     public static void playSoundToPlayer(ServerPlayerEntity player, SoundEvent sound, float volume, float pitch) {
-        player.playSound(sound, SoundCategory.MASTER, volume, pitch);
+        player.networkHandler.sendPacket(new PlaySoundIdS2CPacket(sound.getId(), SoundCategory.MASTER, player.getPos(), volume, pitch));
     }
 
     public static List<ServerPlayerEntity> getAllPlayers() {
