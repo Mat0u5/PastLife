@@ -6,6 +6,9 @@ import net.mat0u5.pastlife.utils.TaskScheduler;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.text.LiteralText;
+import net.minecraft.util.Identifier;
 
 import java.util.*;
 
@@ -28,10 +31,9 @@ public class SecretSociety {
         ticks++;
         if (ticks < 250) return;
         if (ticks % INITIATE_MESSAGE_DELAYS == 0) {
-            List<ServerPlayerEntity> players = new ArrayList<>(server.getPlayerManager().getAll());
-            for (ServerPlayerEntity player : players) {
+            for (ServerPlayerEntity player : PlayerUtils.getAllPlayers()) {
                 if (yetToInitiate.contains(player.getUuid())) {
-                    PlayerUtils.broadcastToPlayer(player, "§7When you are alone, type \"/initiate\"");
+                    player.sendMessage(new LiteralText("§7When you are alone, type \"/initiate\""));
                 }
             }
         }
@@ -51,7 +53,7 @@ public class SecretSociety {
 
         members.clear();
         yetToInitiate.clear();
-        List<ServerPlayerEntity> players = new ArrayList<>(server.getPlayerManager().getAll());
+        List<ServerPlayerEntity> players = PlayerUtils.getAllPlayers();
         Collections.shuffle(players);
 
         List<ServerPlayerEntity> memberPlayers = new ArrayList<>();
@@ -71,17 +73,17 @@ public class SecretSociety {
 
 
         TaskScheduler.scheduleTask(30, () -> {
-            PlayerUtils.playSoundToAllPlayers("secretsociety_whisper", 1, 1);
+            PlayerUtils.playSoundToAllPlayers(new SoundEvent(new Identifier("pastlife_secretsociety_whisper")), 1, 1);
             PlayerUtils.sendTitleToPlayers(memberPlayers, "§cThe Society calls", 0, 30, 0);
         });
         TaskScheduler.scheduleTask(45, () -> {
-            PlayerUtils.sendTitleToPlayersNoReset(memberPlayers, "§cThe Society calls.", 0, 30, 0);
+            PlayerUtils.sendTitleToPlayers(memberPlayers, "§cThe Society calls.", 0, 30, 0);
         });
         TaskScheduler.scheduleTask(60, () -> {
-            PlayerUtils.sendTitleToPlayersNoReset(memberPlayers, "§cThe Society calls..", 0, 30, 0);
+            PlayerUtils.sendTitleToPlayers(memberPlayers, "§cThe Society calls..", 0, 30, 0);
         });
         TaskScheduler.scheduleTask(75, () -> {
-            PlayerUtils.sendTitleToPlayersNoReset(memberPlayers, "§cThe Society calls...", 0, 45, 30);
+            PlayerUtils.sendTitleToPlayers(memberPlayers, "§cThe Society calls...", 0, 45, 30);
         });
         TaskScheduler.scheduleTask(145, () -> {
             PlayerUtils.sendSubtitleToPlayers(memberPlayers, "§cTake yourself somewhere quiet", 20, 60, 20);
@@ -93,43 +95,43 @@ public class SecretSociety {
         if (!yetToInitiate.contains(player.getUuid())) return;
         yetToInitiate.remove(player.getUuid());
 
-        PlayerUtils.playSoundToPlayer(player, "secretsociety_whisper", 1, 1);
+        PlayerUtils.playSoundToPlayer(player, new SoundEvent(new Identifier("pastlife_secretsociety_whisper")), 1, 1);
 
         int currentTime = 20;
         TaskScheduler.scheduleTask(currentTime, () -> {
-            PlayerUtils.broadcastToPlayer(player, "§7You have been chosen to be part of the §csecret society§7.");
+            player.sendMessage(new LiteralText("§7You have been chosen to be part of the §csecret society§7."));
         });
         currentTime += 50;
         TaskScheduler.scheduleTask(currentTime, () -> {
-            PlayerUtils.broadcastToPlayer(player, "§7There are §c2§7 other members. Find them.");
+            player.sendMessage(new LiteralText("§7There are §c2§7 other members. Find them."));
         });
         currentTime += 80;
         TaskScheduler.scheduleTask(currentTime, () -> {
-            PlayerUtils.broadcastToPlayer(player, "§7Together, secretly kill §c2§7 other players by §cnon-pvp§7 means.");
+            player.sendMessage(new LiteralText("§7Together, secretly kill §c2§7 other players by §cnon-pvp§7 means."));
         });
         currentTime += 100;
         TaskScheduler.scheduleTask(currentTime, () -> {
-            PlayerUtils.broadcastToPlayer(player, "§7Find the other members with the secret word:");
+            player.sendMessage(new LiteralText("§7Find the other members with the secret word:"));
         });
         currentTime += 80;
         TaskScheduler.scheduleTask(currentTime, () -> {
-            PlayerUtils.broadcastToPlayer(player, "§d\""+secretWord+"\"");
+            player.sendMessage(new LiteralText("§d\""+secretWord+"\""));
         });
         currentTime += 80;
         TaskScheduler.scheduleTask(currentTime, () -> {
-            PlayerUtils.broadcastToPlayer(player, "§7Type \"/society success\" when you complete your goal.");
+            player.sendMessage(new LiteralText("§7Type \"/society success\" when you complete your goal."));
         });
         currentTime += 80;
         TaskScheduler.scheduleTask(currentTime, () -> {
-            PlayerUtils.broadcastToPlayer(player, "§7Don't tell anyone else about the society.");
+            player.sendMessage(new LiteralText("§7Don't tell anyone else about the society."));
         });
         currentTime += 70;
         TaskScheduler.scheduleTask(currentTime, () -> {
-            PlayerUtils.broadcastToPlayer(player, "§7If you fail...");
+            player.sendMessage(new LiteralText("§7If you fail..."));
         });
         currentTime += 70;
         TaskScheduler.scheduleTask(currentTime, () -> {
-            PlayerUtils.broadcastToPlayer(player, "§7Type \"/society fail\", and you all lose §c2 lives§7.");
+            player.sendMessage(new LiteralText("§7Type \"/society fail\", and you all lose §c2 lives§7."));
         });
     }
 
@@ -138,9 +140,9 @@ public class SecretSociety {
         active = false;
         ended = true;
         ticks = 0;
-        PlayerUtils.playSoundToAllPlayers("secretsociety_whisper", 1, 1);
+        PlayerUtils.playSoundToAllPlayers(new SoundEvent(new Identifier("pastlife_secretsociety_whisper")), 1, 1);
 
-        List<ServerPlayerEntity> players = new ArrayList<>(server.getPlayerManager().getAll());
+        List<ServerPlayerEntity> players = PlayerUtils.getAllPlayers();
         List<ServerPlayerEntity> memberPlayers = new ArrayList<>();
         for (ServerPlayerEntity player : players) {
             if (player == null) continue;

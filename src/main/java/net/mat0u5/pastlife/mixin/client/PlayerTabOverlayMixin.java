@@ -1,27 +1,27 @@
 package net.mat0u5.pastlife.mixin.client;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.overlay.PlayerTabOverlay;
-import net.minecraft.client.render.TextRenderer;
-import net.minecraft.text.Formatting;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gui.hud.PlayerListHud;
+import net.minecraft.util.Formatting;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Mixin(PlayerTabOverlay.class)
+@Mixin(PlayerListHud.class)
 public class PlayerTabOverlayMixin {
     @Shadow
-    private Minecraft minecraft;
+    private MinecraftClient client;
 
-    @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/TextRenderer;getWidth(Ljava/lang/String;)I", ordinal = 1))
+    @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/font/TextRenderer;getStringWidth(Ljava/lang/String;)I", ordinal = 1))
     private int clampScore(TextRenderer instance, String text) {
-        return instance.getWidth(text+"+");
+        return instance.getStringWidth(text+"+");
     }
 
-    @Redirect(method = "renderDisplayScore", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/TextRenderer;drawWithShadow(Ljava/lang/String;FFI)I", ordinal = 1))
+    @Redirect(method = "renderScoreboardObjective", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/font/TextRenderer;drawWithShadow(Ljava/lang/String;FFI)I", ordinal = 1))
     private int clampScore(TextRenderer instance, String text, float x, float y, int color) {
-        int originalWidth = minecraft.textRenderer.getWidth(text);
+        int originalWidth = client.textRenderer.getStringWidth(text);
         try {
             String copy = text.replace(Formatting.YELLOW.toString(), "");
             int score = Integer.parseInt(copy);
@@ -29,7 +29,7 @@ public class PlayerTabOverlayMixin {
                 text = Formatting.YELLOW + "4+";
             }
         }catch(Exception ignored) {}
-        int newWidth = minecraft.textRenderer.getWidth(text);
+        int newWidth = client.textRenderer.getStringWidth(text);
         return instance.drawWithShadow(text, x - (newWidth - originalWidth), y, color);
     }
 }

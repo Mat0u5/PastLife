@@ -4,7 +4,10 @@ import net.mat0u5.pastlife.Main;
 import net.mat0u5.pastlife.utils.PlayerUtils;
 import net.mat0u5.pastlife.utils.TaskScheduler;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.entity.living.player.ServerPlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,26 +20,26 @@ public class BoogeymanManager {
     public static void rollBoogeymen(MinecraftServer server) {
         PlayerUtils.broadcast("§4The Boogeymen are about to be chosen");
         TaskScheduler.scheduleTask(100, () -> {
-            PlayerUtils.playSoundToAllPlayers("didgeridoo", 1, 1);
+            PlayerUtils.playSoundToAllPlayers(SoundEvents.BLOCK_NOTE_BLOCK_DIDGERIDOO, 1, 1);
             PlayerUtils.sendTitleToAllPlayers("§a3", 10, 15, 10);
         });
         TaskScheduler.scheduleTask(130, () -> {
-            PlayerUtils.playSoundToAllPlayers("didgeridoo", 1, 1);
+            PlayerUtils.playSoundToAllPlayers(SoundEvents.BLOCK_NOTE_BLOCK_DIDGERIDOO, 1, 1);
             PlayerUtils.sendTitleToAllPlayers("§e2", 10, 15, 10);
         });
         TaskScheduler.scheduleTask(160, () -> {
-            PlayerUtils.playSoundToAllPlayers("didgeridoo", 1, 1);
+            PlayerUtils.playSoundToAllPlayers(SoundEvents.BLOCK_NOTE_BLOCK_DIDGERIDOO, 1, 1);
             PlayerUtils.sendTitleToAllPlayers("§c1", 10, 15, 10);
         });
         TaskScheduler.scheduleTask(190, () -> {
-            PlayerUtils.playSoundToAllPlayers("boogeyman_wait", 1, 1);
+            PlayerUtils.playSoundToAllPlayers(new SoundEvent(new Identifier("pastlife_boogeyman_wait")), 1, 1);
             PlayerUtils.sendTitleToAllPlayers("§6You are...", 10, 50, 20);
         });
         TaskScheduler.scheduleTask(280, () -> boogeymenChooseRandom(server));
     }
 
     public static void boogeymenChooseRandom(MinecraftServer server) {
-        List<ServerPlayerEntity> players = new ArrayList<>(server.getPlayerManager().getAll());
+        List<ServerPlayerEntity> players = PlayerUtils.getAllPlayers();
         if (players.isEmpty()) {
             return;
         }
@@ -63,10 +66,10 @@ public class BoogeymanManager {
             }
         }
 
-        PlayerUtils.playSoundToPlayers(normalList, "boogeyman_no", 1, 1);
+        PlayerUtils.playSoundToPlayers(normalList, new SoundEvent(new Identifier("pastlife_boogeyman_no")), 1, 1);
         PlayerUtils.sendTitleToPlayers(normalList, "§aNOT the Boogeyman.", 10, 50, 20);
 
-        PlayerUtils.playSoundToPlayers(boogeymenList, "boogeyman_yes", 1, 1);
+        PlayerUtils.playSoundToPlayers(boogeymenList, new SoundEvent(new Identifier("pastlife_boogeyman_yes")), 1, 1);
         PlayerUtils.sendTitleToPlayers(boogeymenList, "§cThe Boogeyman.", 10, 50, 20);
 
         TaskScheduler.scheduleTask(100, () -> {

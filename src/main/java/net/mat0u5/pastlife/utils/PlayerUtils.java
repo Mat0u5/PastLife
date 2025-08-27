@@ -47,10 +47,17 @@ public class PlayerUtils {
             sendSubtitleToPlayer(player, subtitle, fadeIn, stay, fadeOut);
         }
     }
-
-    public static void playSoundToPlayers(Collection<ServerPlayerEntity> players, SoundEvent sound) {
-        playSoundToPlayers(players,sound,SoundCategory.MASTER,1,1);
+    public static void sendSubtitleToAllPlayers(String subtitle, int fadeIn, int stay, int fadeOut) {
+        sendSubtitleToPlayers(getAllPlayers(), subtitle, fadeIn, stay, fadeOut);
     }
+    public static void sendTitleToAllPlayers(String title, int fadeIn, int stay, int fadeOut) {
+        sendTitleToPlayers(getAllPlayers(), title, fadeIn, stay, fadeOut);
+    }
+
+    public static void playSoundToAllPlayers(SoundEvent sound, float volume, float pitch) {
+        playSoundToPlayers(getAllPlayers(), sound, volume, pitch);
+    }
+
     public static void playSoundToPlayers(Collection<ServerPlayerEntity> players, SoundEvent sound, float volume, float pitch) {
         playSoundToPlayers(players,sound, SoundCategory.MASTER, volume, pitch);
     }
@@ -59,10 +66,6 @@ public class PlayerUtils {
         for (ServerPlayerEntity player : players) {
             player.playSound(sound, soundCategory, volume, pitch);
         }
-    }
-
-    public static void playSoundToPlayer(ServerPlayerEntity player, SoundEvent sound) {
-        playSoundToPlayer(player, sound, 1, 1);
     }
 
     public static void playSoundToPlayer(ServerPlayerEntity player, SoundEvent sound, float volume, float pitch) {
@@ -84,17 +87,14 @@ public class PlayerUtils {
         return server.getPlayerManager().getPlayer(uuid);
     }
 
-    public static void broadcastMessageExcept(String message, ServerPlayerEntity exceptPlayer) {
-        for (ServerPlayerEntity player : PlayerUtils.getAllPlayers()) {
-            if (player == exceptPlayer) continue;
+    public static void broadcastToPlayers(List<ServerPlayerEntity> players, String message) {
+        for (ServerPlayerEntity player : players) {
             player.sendMessage(new LiteralText(message));
         }
     }
 
     public static void broadcast(String message) {
-        for (ServerPlayerEntity player : PlayerUtils.getAllPlayers()) {
-            player.sendMessage(new LiteralText(message));
-        }
+        broadcastToPlayers(getAllPlayers(), message);
     }
 
     public static void broadcastToAdmins(String message) {

@@ -3,12 +3,12 @@ package net.mat0u5.pastlife.mixin;
 import net.mat0u5.pastlife.Main;
 import net.mat0u5.pastlife.secretsociety.SecretSociety;
 import net.mat0u5.pastlife.utils.TaskScheduler;
-import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.command.source.CommandSource;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.GameRules;
 import net.minecraft.world.border.WorldBorder;
+import net.minecraft.world.dimension.DimensionType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -35,31 +35,30 @@ public class MinecraftServerMixin {
 
         if (!Main.initializedCommands) {
             Main.initializedCommands = true;
-            ServerWorld overworld = server.getWorld(0);
-            overworld.getGameRules().set("keepInventory", "true");
+            server.getGameRules().get(GameRules.KEEP_INVENTORY).set(true, server);
 
-            WorldBorder border = overworld.getWorldBorder();
-            if (border.getLerpSize() > 1_000_000) {
+            WorldBorder border = server.getWorld(DimensionType.OVERWORLD).getWorldBorder();
+            if (border.getSize() > 1_000_000) {
                 border.setSize(400);
             }
-            BlockPos spawn = overworld.getSpawnPoint();
+            BlockPos spawn = server.getWorld(DimensionType.OVERWORLD).getSpawnPos();
             border.setCenter(spawn.getX(), spawn.getZ());
-            Main.log("Initializing World Border: "+border.getLerpSize()+"_" + spawn.getX() + "_" + spawn.getZ());
+            Main.log("Initializing World Border: "+border.getSize()+"_" + spawn.getX() + "_" + spawn.getZ());
 
-            server.getCommandHandler().run(server, "scoreboard objectives add Lives dummy");
-            server.getCommandHandler().run(server, "scoreboard objectives setdisplay list Lives");
+            server.getCommandManager().execute(server.getCommandSource().withSilent(),"scoreboard objectives add Lives dummy");
+            server.getCommandManager().execute(server.getCommandSource().withSilent(),"scoreboard objectives setdisplay list Lives");
 
-            server.getCommandHandler().run(server, "scoreboard teams add DarkGreen");
-            server.getCommandHandler().run(server, "scoreboard teams add Green");
-            server.getCommandHandler().run(server, "scoreboard teams add Yellow");
-            server.getCommandHandler().run(server, "scoreboard teams add Red");
-            server.getCommandHandler().run(server, "scoreboard teams add Dead");
+            server.getCommandManager().execute(server.getCommandSource().withSilent(),"team add DarkGreen");
+            server.getCommandManager().execute(server.getCommandSource().withSilent(),"team add Green");
+            server.getCommandManager().execute(server.getCommandSource().withSilent(),"team add Yellow");
+            server.getCommandManager().execute(server.getCommandSource().withSilent(),"team add Red");
+            server.getCommandManager().execute(server.getCommandSource().withSilent(),"team add Dead");
 
-            server.getCommandHandler().run(server, "scoreboard teams option DarkGreen color dark_green");
-            server.getCommandHandler().run(server, "scoreboard teams option Green color green");
-            server.getCommandHandler().run(server, "scoreboard teams option Yellow color yellow");
-            server.getCommandHandler().run(server, "scoreboard teams option Red color red");
-            server.getCommandHandler().run(server, "scoreboard teams option Dead color dark_gray");
+            server.getCommandManager().execute(server.getCommandSource().withSilent(),"team modify DarkGreen color dark_green");
+            server.getCommandManager().execute(server.getCommandSource().withSilent(),"team modify Green color green");
+            server.getCommandManager().execute(server.getCommandSource().withSilent(),"team modify Yellow color yellow");
+            server.getCommandManager().execute(server.getCommandSource().withSilent(),"team modify Red color red");
+            server.getCommandManager().execute(server.getCommandSource().withSilent(),"team modify Dead color dark_gray");
         }
 
         TaskScheduler.onTick();
