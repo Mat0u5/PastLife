@@ -44,7 +44,7 @@ public class LivesManager extends ConfigManager {
         saveLives(player, lives);
         if (lives == 0) {
             PlayerUtils.broadcast("§8"+player.getEntityName()+"§f ran out of lives.");
-            player.setGameMode(GameMode.SPECTATOR);
+            player.changeGameMode(GameMode.SPECTATOR);
         }
         scoreboardUpdate(player);
     }
@@ -64,7 +64,7 @@ public class LivesManager extends ConfigManager {
         scoreboard.getPlayerScore(player.getEntityName(), scoreboard.getObjective("Lives")).setScore(lives);
 
         if (lives == 0 && !PlayerUtils.isAdmin(player)) {
-            player.setGameMode(GameMode.SPECTATOR);
+            player.changeGameMode(GameMode.SPECTATOR);
         }
 
         teamUpdate(player, lives, scoreboard);

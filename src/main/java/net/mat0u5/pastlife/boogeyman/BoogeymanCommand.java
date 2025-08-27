@@ -7,7 +7,7 @@ import net.mat0u5.pastlife.utils.PlayerUtils;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 import static net.minecraft.server.command.CommandManager.literal;
@@ -29,14 +29,14 @@ public class BoogeymanCommand {
         );
     }
     public static int choose(ServerCommandSource source) {
-        BoogeymanManager.rollBoogeymen(source.getMinecraftServer());
+        BoogeymanManager.rollBoogeymen(source.getServer());
         return 1;
     }
     public static int success(ServerCommandSource source) throws CommandSyntaxException {
         ServerPlayerEntity player = source.getPlayer();
 
         if (!BoogeymanManager.boogeymen.contains(player.getUuid())) {
-            source.sendError(new LiteralText("§cYou are not a Boogeyman, you cannot use this command."));
+            source.sendError(Text.of("§cYou are not a Boogeyman, you cannot use this command."));
             return -1;
         }
 
@@ -51,7 +51,7 @@ public class BoogeymanCommand {
         ServerPlayerEntity player = source.getPlayer();
 
         if (!BoogeymanManager.boogeymen.contains(player.getUuid())) {
-            source.sendError(new LiteralText("§cYou are not a Boogeyman, you cannot use this command."));
+            source.sendError(Text.of("§cYou are not a Boogeyman, you cannot use this command."));
             return -1;
         }
 

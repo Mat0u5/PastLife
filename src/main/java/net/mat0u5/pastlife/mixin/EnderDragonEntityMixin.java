@@ -5,7 +5,8 @@ import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.world.World;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.Vec3d;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -13,10 +14,9 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(EnderDragonEntity.class)
 public class EnderDragonEntityMixin {
 
-    @Redirect(method = "method_6824", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;spawnEntity(Lnet/minecraft/entity/Entity;)Z"))
-    private boolean dropDiamonds(World world, Entity entity) {
-        Entity diamond = new ItemEntity(world, entity.x, entity.y, entity.z, new ItemStack(Items.DIAMOND, 1));
+    @Redirect(method = "updatePostDeath", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/ExperienceOrbEntity;spawn(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/util/math/Vec3d;I)V"))
+    private void dropDiamonds(ServerWorld world, Vec3d pos, int amount) {
+        Entity diamond = new ItemEntity(world, pos.x, pos.y, pos.z, new ItemStack(Items.DIAMOND, 1));
         world.spawnEntity(diamond);
-        return false;
     }
 }

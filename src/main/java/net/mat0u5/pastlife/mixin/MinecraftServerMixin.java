@@ -37,11 +37,11 @@ public class MinecraftServerMixin {
             Main.initializedCommands = true;
             server.getGameRules().get(GameRules.KEEP_INVENTORY).set(true, server);
 
-            WorldBorder border = server.getWorld(DimensionType.OVERWORLD).getWorldBorder();
+            WorldBorder border = server.getOverworld().getWorldBorder();
             if (border.getSize() > 1_000_000) {
                 border.setSize(400);
             }
-            BlockPos spawn = server.getWorld(DimensionType.OVERWORLD).getSpawnPos();
+            BlockPos spawn = server.getOverworld().getSpawnPos();
             border.setCenter(spawn.getX(), spawn.getZ());
             Main.log("Initializing World Border: "+border.getSize()+"_" + spawn.getX() + "_" + spawn.getZ());
 

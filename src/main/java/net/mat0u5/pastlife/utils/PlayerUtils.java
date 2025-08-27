@@ -3,12 +3,14 @@ package net.mat0u5.pastlife.utils;
 import net.mat0u5.pastlife.Main;
 import net.minecraft.network.Packet;
 import net.minecraft.network.packet.s2c.play.PlaySoundIdS2CPacket;
+import net.minecraft.network.packet.s2c.play.SubtitleS2CPacket;
+import net.minecraft.network.packet.s2c.play.TitleFadeS2CPacket;
 import net.minecraft.network.packet.s2c.play.TitleS2CPacket;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 
 import java.util.*;
 
@@ -24,17 +26,22 @@ public class PlayerUtils {
     public static void sendSubtitleToPlayer(ServerPlayerEntity player, String subtitle, int fadeIn, int stay, int fadeOut) {
         if (server == null) return;
         if (player == null) return;
-
-        player.networkHandler.sendPacket(new TitleS2CPacket(TitleS2CPacket.Action.RESET, null));
-        player.networkHandler.sendPacket(new TitleS2CPacket(TitleS2CPacket.Action.SUBTITLE, new LiteralText(subtitle), fadeIn, stay, fadeOut));
+        TitleFadeS2CPacket fadePacket = new TitleFadeS2CPacket(fadeIn, stay, fadeOut);
+        player.networkHandler.sendPacket(fadePacket);
+        TitleS2CPacket titlePacket = new TitleS2CPacket(Text.of(""));
+        player.networkHandler.sendPacket(titlePacket);
+        SubtitleS2CPacket subtitlePacket = new SubtitleS2CPacket(Text.of(subtitle));
+        player.networkHandler.sendPacket(subtitlePacket);
     }
 
     public static void sendTitleToPlayer(ServerPlayerEntity player, String title, int fadeIn, int duration, int fadeOut) {
         if (server == null) return;
         if (player == null) return;
 
-        player.networkHandler.sendPacket(new TitleS2CPacket(TitleS2CPacket.Action.RESET, null));
-        player.networkHandler.sendPacket(new TitleS2CPacket(TitleS2CPacket.Action.TITLE, new LiteralText(title), fadeIn, duration, fadeOut));
+        TitleFadeS2CPacket fadePacket = new TitleFadeS2CPacket(fadeIn, duration, fadeOut);
+        player.networkHandler.sendPacket(fadePacket);
+        TitleS2CPacket titlePacket = new TitleS2CPacket(Text.of(title));
+        player.networkHandler.sendPacket(titlePacket);
     }
 
     public static void sendTitleToPlayers(Collection<ServerPlayerEntity> players, String title, int fadeIn, int stay, int fadeOut) {
@@ -91,7 +98,7 @@ public class PlayerUtils {
 
     public static void broadcastToPlayers(List<ServerPlayerEntity> players, String message) {
         for (ServerPlayerEntity player : players) {
-            player.sendMessage(new LiteralText(message));
+            player.sendMessage(Text.of(message), false);
         }
     }
 
@@ -102,7 +109,7 @@ public class PlayerUtils {
     public static void broadcastToAdmins(String message) {
         for (ServerPlayerEntity player : PlayerUtils.getAllPlayers()) {
             if (!isAdmin(player)) continue;
-            player.sendMessage(new LiteralText(message));
+            player.sendMessage(Text.of(message), false);
         }
         Main.LOGGER.info(message);
     }

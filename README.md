@@ -16,7 +16,7 @@ This mod is **client-side required** in versions `Beta 1.2_02`, `Beta 1.7.3`, `R
 
 ---------
 
-## How to play in versions before 1.14 (after that you can just use Fabric like normal.):
+## How to play in versions before 1.14 (after that you can just use Fabric like normal):
 ### Client:
 1. Install the https://ornithemc.net installer.
 2. Open it, select the **client** environment, and install the desired version of Minecraft (based on the session you're on). **If in mc version beta 1.2_02 or beta 1.7.3:**  Make sure to select check "Historical Versions" otherwise the beta versions won't show up.
@@ -37,16 +37,18 @@ This mod does not contain Simple Voice Chat.<br>
 This mod (obviously) does not handle updating the world to newer versions, so you're going to have to do that manually (and handle any issues with it).<br>
 After updating the skins in the minecraft launcher, it takes a while for the skins to update in the game (like 20 minutes) because of the custom implementation of how skins work, so be patient.
 
+---------
+
 ## Features:
-| MC Version     | Status       |                                                                                                    Modifications                                                                                                     |
-|:---------------|--------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| Beta 1.2_02    | Finished     | Fixed player skins not rendering properly.<br/>Improved front-facing third-person perspective.<br/>Added the world border.<br/>Added the ability to zoom.<br/>Added the custom TNT recipe.<br/>Added Death Messages. |
-| Beta 1.7.3     | Finished     |                                                                                     Added Keep Inventory.<br>Added the Bogeyman.                                                                                     |
-| Release 1.1    | Finished     |                              Tab list shows lives.<br>Ender Dragon drops diamonds.<br>Clamped enchantments to level 1.<br>Colored names in death messages.<br>Added the Secret Society.                              |
-| Release 1.4.7  | Finished     |                                                                                                     No Changes.                                                                                                      |
-| Release 1.9.4  | Finished     |                                                                                                     No Changes.                                                                                                      |
-| Release 1.14.4 | Finished     |                                                                               Switched from Ornithe to Fabric. <br/>Removed built-in zoom.                                                                                |
-| Release 1.18.2 | In Progress. |                                                                                                     No Changes.                                                                                                      |
+| MC Version     | Status      |                                                                                                    Modifications                                                                                                     |
+|:---------------|-------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| Beta 1.2_02    | Finished    | Fixed player skins not rendering properly.<br/>Improved front-facing third-person perspective.<br/>Added the world border.<br/>Added the ability to zoom.<br/>Added the custom TNT recipe.<br/>Added Death Messages. |
+| Beta 1.7.3     | Finished    |                                                                                     Added Keep Inventory.<br>Added the Bogeyman.                                                                                     |
+| Release 1.1    | Finished    |                              Tab list shows lives.<br>Ender Dragon drops diamonds.<br>Clamped enchantments to level 1.<br>Colored names in death messages.<br>Added the Secret Society.                              |
+| Release 1.4.7  | Finished    |                                                                                                     No Changes.                                                                                                      |
+| Release 1.9.4  | Finished    |                                                                                                     No Changes.                                                                                                      |
+| Release 1.14.4 | Finished    |                                                                               Switched from Ornithe to Fabric. <br/>Removed built-in zoom.                                                                                |
+| Release 1.18.2 | In Progress |                                                                                                     No Changes.                                                                                                      |
 
 
 ---------

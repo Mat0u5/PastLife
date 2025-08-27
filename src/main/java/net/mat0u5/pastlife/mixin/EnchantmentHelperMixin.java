@@ -18,16 +18,9 @@ public class EnchantmentHelperMixin {
         return Math.min(original, 1);
     }
 
-    @ModifyReturnValue(method = "getEnchantments(Lnet/minecraft/item/ItemStack;)Ljava/util/Map;", at = @At(value = "RETURN"))
-    private static Map<Enchantment, Integer> clampEnchantmentLevel2(Map<Enchantment, Integer> original) {
-        original.replaceAll((key, value) -> Math.min(1, value));
-        return original;
-    }
-
     @ModifyVariable(method = "set", at = @At("HEAD"), argsOnly = true)
     private static Map<Enchantment, Integer> clampEnchantmentLevel(Map<Enchantment, Integer> enchantments) {
         enchantments.replaceAll((key, value) -> Math.min(1, value));
         return enchantments;
     }
-    //TODO maybe needs more
 }

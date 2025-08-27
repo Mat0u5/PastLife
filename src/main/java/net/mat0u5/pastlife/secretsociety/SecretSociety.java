@@ -7,7 +7,7 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 import java.util.*;
@@ -33,7 +33,7 @@ public class SecretSociety {
         if (ticks % INITIATE_MESSAGE_DELAYS == 0) {
             for (ServerPlayerEntity player : PlayerUtils.getAllPlayers()) {
                 if (yetToInitiate.contains(player.getUuid())) {
-                    player.sendMessage(new LiteralText("§7When you are alone, type \"/initiate\""));
+                    player.sendMessage(Text.of("§7When you are alone, type \"/initiate\""), false);
                 }
             }
         }
@@ -99,39 +99,39 @@ public class SecretSociety {
 
         int currentTime = 20;
         TaskScheduler.scheduleTask(currentTime, () -> {
-            player.sendMessage(new LiteralText("§7You have been chosen to be part of the §csecret society§7."));
+            player.sendMessage(Text.of("§7You have been chosen to be part of the §csecret society§7."), false);
         });
         currentTime += 50;
         TaskScheduler.scheduleTask(currentTime, () -> {
-            player.sendMessage(new LiteralText("§7There are §c2§7 other members. Find them."));
+            player.sendMessage(Text.of("§7There are §c2§7 other members. Find them."), false);
         });
         currentTime += 80;
         TaskScheduler.scheduleTask(currentTime, () -> {
-            player.sendMessage(new LiteralText("§7Together, secretly kill §c2§7 other players by §cnon-pvp§7 means."));
+            player.sendMessage(Text.of("§7Together, secretly kill §c2§7 other players by §cnon-pvp§7 means."), false);
         });
         currentTime += 100;
         TaskScheduler.scheduleTask(currentTime, () -> {
-            player.sendMessage(new LiteralText("§7Find the other members with the secret word:"));
+            player.sendMessage(Text.of("§7Find the other members with the secret word:"), false);
         });
         currentTime += 80;
         TaskScheduler.scheduleTask(currentTime, () -> {
-            player.sendMessage(new LiteralText("§d\""+secretWord+"\""));
+            player.sendMessage(Text.of("§d\""+secretWord+"\""), false);
         });
         currentTime += 80;
         TaskScheduler.scheduleTask(currentTime, () -> {
-            player.sendMessage(new LiteralText("§7Type \"/society success\" when you complete your goal."));
+            player.sendMessage(Text.of("§7Type \"/society success\" when you complete your goal."), false);
         });
         currentTime += 80;
         TaskScheduler.scheduleTask(currentTime, () -> {
-            player.sendMessage(new LiteralText("§7Don't tell anyone else about the society."));
+            player.sendMessage(Text.of("§7Don't tell anyone else about the society."), false);
         });
         currentTime += 70;
         TaskScheduler.scheduleTask(currentTime, () -> {
-            player.sendMessage(new LiteralText("§7If you fail..."));
+            player.sendMessage(Text.of("§7If you fail..."), false);
         });
         currentTime += 70;
         TaskScheduler.scheduleTask(currentTime, () -> {
-            player.sendMessage(new LiteralText("§7Type \"/society fail\", and you all lose §c2 lives§7."));
+            player.sendMessage(Text.of("§7Type \"/society fail\", and you all lose §c2 lives§7."), false);
         });
     }
 

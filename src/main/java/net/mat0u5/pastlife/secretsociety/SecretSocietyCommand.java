@@ -5,14 +5,9 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.mat0u5.pastlife.Main;
 import net.mat0u5.pastlife.utils.PlayerUtils;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.LiteralText;
-import net.minecraft.util.math.BlockPos;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
+import net.minecraft.text.Text;
 
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
@@ -38,12 +33,12 @@ public class SecretSocietyCommand {
     }
 
     public static int begin(ServerCommandSource source) {
-        SecretSociety.beginSociety(source.getMinecraftServer());
+        SecretSociety.beginSociety(source.getServer());
         return 1;
     }
 
     public static int beginWord(ServerCommandSource source, String word) {
-        SecretSociety.beginSociety(source.getMinecraftServer(), word);
+        SecretSociety.beginSociety(source.getServer(), word);
         return 1;
     }
 
@@ -51,22 +46,22 @@ public class SecretSocietyCommand {
         ServerPlayerEntity player = source.getPlayer();
 
         if (!SecretSociety.members.contains(player.getUuid())) {
-            source.sendError(new LiteralText("§cYou are not a Member, you cannot use this command."));
+            source.sendError(Text.of("§cYou are not a Member, you cannot use this command."));
             return -1;
         }
 
         if (SecretSociety.yetToInitiate.contains(player.getUuid())) {
-            source.sendError(new LiteralText("§cYou have not been initiated."));
+            source.sendError(Text.of("§cYou have not been initiated."));
             return -1;
         }
 
         if (SecretSociety.ended) {
-            source.sendError(new LiteralText("§cThe society has already ended."));
+            source.sendError(Text.of("§cThe society has already ended."));
             return -1;
         }
 
         Main.log(player.getEntityName()+" ran the '/society success' command");
-        SecretSociety.end(source.getMinecraftServer(), true);
+        SecretSociety.end(source.getServer(), true);
         return 1;
     }
 
@@ -74,22 +69,22 @@ public class SecretSocietyCommand {
         ServerPlayerEntity player = source.getPlayer();
 
         if (!SecretSociety.members.contains(player.getUuid())) {
-            source.sendError(new LiteralText("§cYou are not a Member, you cannot use this command."));
+            source.sendError(Text.of("§cYou are not a Member, you cannot use this command."));
             return -1;
         }
 
         if (SecretSociety.yetToInitiate.contains(player.getUuid())) {
-            source.sendError(new LiteralText("§cYou have not been initiated."));
+            source.sendError(Text.of("§cYou have not been initiated."));
             return -1;
         }
 
         if (SecretSociety.ended) {
-            source.sendError(new LiteralText("§cThe society has already ended."));
+            source.sendError(Text.of("§cThe society has already ended."));
             return -1;
         }
 
         Main.log(player.getEntityName()+" ran the '/society fail' command");
-        SecretSociety.end(source.getMinecraftServer(), false);
+        SecretSociety.end(source.getServer(), false);
         return 1;
     }
 }

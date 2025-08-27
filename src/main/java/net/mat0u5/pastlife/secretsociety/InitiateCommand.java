@@ -4,7 +4,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 
 import static net.minecraft.server.command.CommandManager.literal;
 
@@ -19,13 +19,13 @@ public class InitiateCommand  {
     public static int execute(ServerCommandSource source) throws CommandSyntaxException {
         ServerPlayerEntity player = source.getPlayer();
         if (!SecretSociety.members.contains(player.getUuid())) {
-            source.sendError(new LiteralText("§cYou are not a Member, you cannot use this command."));
+            source.sendError(Text.of("§cYou are not a Member, you cannot use this command."));
             return -1;
         }
 
         if (!SecretSociety.yetToInitiate.contains(player.getUuid())) {
-            source.sendError(new LiteralText("§cYou have already been initiated."));
-            source.sendFeedback(new LiteralText("§7Find the other members with the secret word: §d\""+SecretSociety.secretWord+"\""), false);
+            source.sendError(Text.of("§cYou have already been initiated."));
+            source.sendFeedback(Text.of("§7Find the other members with the secret word: §d\""+SecretSociety.secretWord+"\""), false);
             return -1;
         }
 

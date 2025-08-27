@@ -5,10 +5,10 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.mat0u5.pastlife.Main;
 import net.mat0u5.pastlife.utils.PlayerUtils;
-import net.minecraft.command.arguments.EntityArgumentType;
+import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
@@ -64,13 +64,13 @@ public class LivesCommand {
         ServerPlayerEntity player = source.getPlayer();
 
         int lives = Main.livesManager.getLives(player);
-        source.sendFeedback(new LiteralText("You have " + lives + " " + (lives == 1 ? "life" : "lives") + "."), false);
+        source.sendFeedback(Text.of("You have " + lives + " " + (lives == 1 ? "life" : "lives") + "."), false);
         return 1;
     }
 
     public static int getLives(ServerCommandSource source, ServerPlayerEntity target) {
         int lives = Main.livesManager.getLives(target);
-        source.sendFeedback(new LiteralText(target.getEntityName() + " has " + lives + " " + (lives == 1 ? "life" : "lives") + "."), false);
+        source.sendFeedback(Text.of(target.getEntityName() + " has " + lives + " " + (lives == 1 ? "life" : "lives") + "."), false);
         return 1;
     }
 
@@ -94,6 +94,6 @@ public class LivesCommand {
 
     public static void sendAmountOfLives(ServerCommandSource source, ServerPlayerEntity target) {
         int lives = Main.livesManager.getLives(target);
-        source.sendFeedback(new LiteralText(target.getEntityName() + " now has " + lives + " " + (lives == 1 ? "life" : "lives") + "."), true);
+        source.sendFeedback(Text.of(target.getEntityName() + " now has " + lives + " " + (lives == 1 ? "life" : "lives") + "."), true);
     }
 }
