@@ -3,6 +3,7 @@ package net.mat0u5.pastlife;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.mat0u5.pastlife.boogeyman.BoogeymanCommand;
@@ -12,9 +13,13 @@ import net.mat0u5.pastlife.secretsociety.InitiateCommand;
 import net.mat0u5.pastlife.secretsociety.SecretSocietyCommand;
 import net.mat0u5.pastlife.utils.IClientHelper;
 import net.mat0u5.pastlife.utils.TaskScheduler;
+import net.minecraft.network.packet.s2c.common.ResourcePackSendS2CPacket;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.logging.Logger;
 
@@ -33,6 +38,9 @@ public class Main implements ModInitializer {
 	public void onInitialize() {
 		log("[SERVER] Initializing Past Life!");
 		livesManager = new LivesManager();
+		ServerLifecycleEvents.SERVER_STARTING.register(serverInstance -> server = serverInstance);
+		ServerLifecycleEvents.SERVER_STARTED.register(serverInstance -> server = serverInstance);
+
 		CommandRegistrationCallback.EVENT.register(LivesCommand::register);
 		CommandRegistrationCallback.EVENT.register(BoogeymanCommand::register);
 		CommandRegistrationCallback.EVENT.register(SecretSocietyCommand::register);
@@ -44,9 +52,24 @@ public class Main implements ModInitializer {
 	private static void onPlayerJoin(ServerPlayerEntity player) {
 		MinecraftServer thisServer = player.getServer();
 		if (thisServer == null) return;
-		TaskScheduler.scheduleTask(5, () -> {
+		TaskScheduler.scheduleTask(2, () -> {
+			applySingleResourcepack(player, RESOURCEPACK_URL, RESOURCEPACK_HASH, "Past Life Resourcepack");
+		});
+		TaskScheduler.scheduleTask(100, () -> {
 			thisServer.getCommandManager().executeWithPrefix(thisServer.getCommandSource().withSilent(),"recipe give @a pastlife:tnt_variation");
 		});
+	}
+
+	private static void applySingleResourcepack(ServerPlayerEntity player, String link, String sha1, String message) {
+		UUID id = UUID.nameUUIDFromBytes(link.getBytes(StandardCharsets.UTF_8));
+		ResourcePackSendS2CPacket resourcepackPacket = new ResourcePackSendS2CPacket(
+				id,
+				link,
+				sha1,
+				false,
+				Optional.of(Text.translatable(message))
+		);
+		player.networkHandler.sendPacket(resourcepackPacket);
 	}
 
 
