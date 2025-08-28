@@ -2,9 +2,10 @@ package net.mat0u5.pastlife.secretsociety;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.mat0u5.pastlife.Main;
 import net.mat0u5.pastlife.utils.PlayerUtils;
+import net.minecraft.command.CommandRegistryAccess;
+import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
@@ -13,7 +14,7 @@ import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 
 public class SecretSocietyCommand {
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher, boolean b) {
+    public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess commandRegistryAccess, CommandManager.RegistrationEnvironment registrationEnvironment) {
         dispatcher.register(
             literal("society")
                 .then(literal("begin")
@@ -42,8 +43,10 @@ public class SecretSocietyCommand {
         return 1;
     }
 
-    public static int success(ServerCommandSource source) throws CommandSyntaxException {
+    public static int success(ServerCommandSource source) {
         ServerPlayerEntity player = source.getPlayer();
+        if (player == null) return -1;
+
 
         if (!SecretSociety.members.contains(player.getUuid())) {
             source.sendError(Text.of("§cYou are not a Member, you cannot use this command."));
@@ -60,13 +63,15 @@ public class SecretSocietyCommand {
             return -1;
         }
 
-        Main.log(player.getEntityName()+" ran the '/society success' command");
+        Main.log(player.getNameForScoreboard()+" ran the '/society success' command");
         SecretSociety.end(source.getServer(), true);
         return 1;
     }
 
-    public static int fail(ServerCommandSource source) throws CommandSyntaxException {
+    public static int fail(ServerCommandSource source) {
         ServerPlayerEntity player = source.getPlayer();
+        if (player == null) return -1;
+
 
         if (!SecretSociety.members.contains(player.getUuid())) {
             source.sendError(Text.of("§cYou are not a Member, you cannot use this command."));
@@ -83,7 +88,7 @@ public class SecretSocietyCommand {
             return -1;
         }
 
-        Main.log(player.getEntityName()+" ran the '/society fail' command");
+        Main.log(player.getNameForScoreboard()+" ran the '/society fail' command");
         SecretSociety.end(source.getServer(), false);
         return 1;
     }

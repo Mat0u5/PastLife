@@ -2,14 +2,13 @@
   "required": true,
   "minVersion": "0.8",
   "package": "net.mat0u5.pastlife.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "AbstractPropertiesHandlerMixin",
     "EnchantmentHelperMixin",
     "EnderDragonEntityMixin",
     "ItemStackMixin",
     "MinecraftServerMixin",
-    "RecipeManagerAccessor",
-    "RecipeManagerMixin",
     "ServerPlayerEntityMixin"
   ],
   "client": [

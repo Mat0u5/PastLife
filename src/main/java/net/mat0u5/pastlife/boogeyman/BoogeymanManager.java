@@ -20,19 +20,19 @@ public class BoogeymanManager {
     public static void rollBoogeymen(MinecraftServer server) {
         PlayerUtils.broadcast("§4The Boogeymen are about to be chosen");
         TaskScheduler.scheduleTask(100, () -> {
-            PlayerUtils.playSoundToAllPlayers(SoundEvents.BLOCK_NOTE_BLOCK_DIDGERIDOO, 1, 1);
+            PlayerUtils.playSoundToAllPlayers(SoundEvents.BLOCK_NOTE_BLOCK_DIDGERIDOO.value(), 1, 1);
             PlayerUtils.sendTitleToAllPlayers("§a3", 10, 15, 10);
         });
         TaskScheduler.scheduleTask(130, () -> {
-            PlayerUtils.playSoundToAllPlayers(SoundEvents.BLOCK_NOTE_BLOCK_DIDGERIDOO, 1, 1);
+            PlayerUtils.playSoundToAllPlayers(SoundEvents.BLOCK_NOTE_BLOCK_DIDGERIDOO.value(), 1, 1);
             PlayerUtils.sendTitleToAllPlayers("§e2", 10, 15, 10);
         });
         TaskScheduler.scheduleTask(160, () -> {
-            PlayerUtils.playSoundToAllPlayers(SoundEvents.BLOCK_NOTE_BLOCK_DIDGERIDOO, 1, 1);
+            PlayerUtils.playSoundToAllPlayers(SoundEvents.BLOCK_NOTE_BLOCK_DIDGERIDOO.value(), 1, 1);
             PlayerUtils.sendTitleToAllPlayers("§c1", 10, 15, 10);
         });
         TaskScheduler.scheduleTask(190, () -> {
-            PlayerUtils.playSoundToAllPlayers(new SoundEvent(new Identifier("pastlife_boogeyman_wait")), 1, 1);
+            PlayerUtils.playSoundToAllPlayers(SoundEvent.of(Identifier.of("pastlife_boogeyman_wait")), 1, 1);
             PlayerUtils.sendTitleToAllPlayers("§6You are...", 10, 50, 20);
         });
         TaskScheduler.scheduleTask(280, () -> boogeymenChooseRandom(server));
@@ -58,7 +58,7 @@ public class BoogeymanManager {
             if (chooseBoogeymen > 0 && Main.livesManager.getLives(player) > 1) {
                 boogeymenList.add(player);
                 boogeymen.add(player.getUuid());
-                Main.log(player.getEntityName() + " has been chosen as a Boogeyman!");
+                Main.log(player.getNameForScoreboard() + " has been chosen as a Boogeyman!");
                 chooseBoogeymen--;
             }
             else {
@@ -66,10 +66,10 @@ public class BoogeymanManager {
             }
         }
 
-        PlayerUtils.playSoundToPlayers(normalList, new SoundEvent(new Identifier("pastlife_boogeyman_no")), 1, 1);
+        PlayerUtils.playSoundToPlayers(normalList, SoundEvent.of(Identifier.of("pastlife_boogeyman_no")), 1, 1);
         PlayerUtils.sendTitleToPlayers(normalList, "§aNOT the Boogeyman.", 10, 50, 20);
 
-        PlayerUtils.playSoundToPlayers(boogeymenList, new SoundEvent(new Identifier("pastlife_boogeyman_yes")), 1, 1);
+        PlayerUtils.playSoundToPlayers(boogeymenList, SoundEvent.of(Identifier.of("pastlife_boogeyman_yes")), 1, 1);
         PlayerUtils.sendTitleToPlayers(boogeymenList, "§cThe Boogeyman.", 10, 50, 20);
 
         TaskScheduler.scheduleTask(100, () -> {

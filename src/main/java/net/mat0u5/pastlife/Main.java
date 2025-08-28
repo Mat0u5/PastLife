@@ -2,7 +2,7 @@ package net.mat0u5.pastlife;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.mat0u5.pastlife.boogeyman.BoogeymanCommand;
@@ -45,8 +45,7 @@ public class Main implements ModInitializer {
 		MinecraftServer thisServer = player.getServer();
 		if (thisServer == null) return;
 		TaskScheduler.scheduleTask(5, () -> {
-			thisServer.getCommandManager().execute(thisServer.getCommandSource().withSilent(),"recipe give @a pastlife:tnt_variation");
-
+			thisServer.getCommandManager().executeWithPrefix(thisServer.getCommandSource().withSilent(),"recipe give @a pastlife:tnt_variation");
 		});
 	}
 

@@ -64,7 +64,7 @@ public class SecretSociety {
             if (members.size() < MEMBERS) {
                 memberPlayers.add(player);
                 members.add(player.getUuid());
-                Main.log(player.getEntityName()+" has been chosen as a member of the Secret Society.");
+                Main.log(player.getNameForScoreboard()+" has been chosen as a member of the Secret Society.");
             }
         }
         yetToInitiate = new ArrayList<>(members);
@@ -73,7 +73,7 @@ public class SecretSociety {
 
 
         TaskScheduler.scheduleTask(30, () -> {
-            PlayerUtils.playSoundToAllPlayers(new SoundEvent(new Identifier("pastlife_secretsociety_whisper")), 1, 1);
+            PlayerUtils.playSoundToAllPlayers(SoundEvent.of(Identifier.of("pastlife_secretsociety_whisper")), 1, 1);
             PlayerUtils.sendTitleToPlayers(memberPlayers, "§cThe Society calls", 0, 30, 0);
         });
         TaskScheduler.scheduleTask(45, () -> {
@@ -95,7 +95,7 @@ public class SecretSociety {
         if (!yetToInitiate.contains(player.getUuid())) return;
         yetToInitiate.remove(player.getUuid());
 
-        PlayerUtils.playSoundToPlayer(player, new SoundEvent(new Identifier("pastlife_secretsociety_whisper")), 1, 1);
+        PlayerUtils.playSoundToPlayer(player, SoundEvent.of(Identifier.of("pastlife_secretsociety_whisper")), 1, 1);
 
         int currentTime = 20;
         TaskScheduler.scheduleTask(currentTime, () -> {
@@ -140,7 +140,7 @@ public class SecretSociety {
         active = false;
         ended = true;
         ticks = 0;
-        PlayerUtils.playSoundToAllPlayers(new SoundEvent(new Identifier("pastlife_secretsociety_whisper")), 1, 1);
+        PlayerUtils.playSoundToAllPlayers(SoundEvent.of(Identifier.of("pastlife_secretsociety_whisper")), 1, 1);
 
         List<ServerPlayerEntity> players = PlayerUtils.getAllPlayers();
         List<ServerPlayerEntity> memberPlayers = new ArrayList<>();
@@ -170,7 +170,7 @@ public class SecretSociety {
                     if (member.getHealth() <= 1) {
                         member.setHealth(2);
                     }
-                    member.damage(DamageSource.player(member), 1);
+                    member.damage(member.getWorld(), member.getDamageSources().playerAttack(member), 1);
                     if (Main.livesManager != null) {
                         Main.livesManager.addLives(member, -2);
                     }

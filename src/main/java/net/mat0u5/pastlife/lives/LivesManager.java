@@ -1,7 +1,9 @@
 package net.mat0u5.pastlife.lives;
 
 import net.mat0u5.pastlife.utils.PlayerUtils;
+import net.minecraft.scoreboard.ScoreHolder;
 import net.minecraft.scoreboard.Scoreboard;
+import net.minecraft.scoreboard.ScoreboardObjective;
 import net.minecraft.scoreboard.ServerScoreboard;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -20,12 +22,12 @@ public class LivesManager extends ConfigManager {
     }
 
     private void saveLives(ServerPlayerEntity player, int lives) {
-        setProperty(player.getEntityName(), String.valueOf(lives));
+        setProperty(player.getNameForScoreboard(), String.valueOf(lives));
         livesMap.put(player.getUuid(), lives);
     }
 
     private int loadLives(ServerPlayerEntity player) {
-        int lives = getOrCreateInt(player.getEntityName(), 6);
+        int lives = getOrCreateInt(player.getNameForScoreboard(), 6);
         livesMap.put(player.getUuid(), lives);
         return lives;
     }
@@ -43,7 +45,7 @@ public class LivesManager extends ConfigManager {
         }
         saveLives(player, lives);
         if (lives == 0) {
-            PlayerUtils.broadcast("§8"+player.getEntityName()+"§f ran out of lives.");
+            PlayerUtils.broadcast("§8"+player.getNameForScoreboard()+"§f ran out of lives.");
             player.changeGameMode(GameMode.SPECTATOR);
         }
         scoreboardUpdate(player);
@@ -61,7 +63,7 @@ public class LivesManager extends ConfigManager {
         if (server == null) return;
 
         ServerScoreboard scoreboard = server.getScoreboard();
-        scoreboard.getPlayerScore(player.getEntityName(), scoreboard.getObjective("Lives")).setScore(lives);
+        scoreboard.getOrCreateScore(ScoreHolder.fromName(player.getNameForScoreboard()), scoreboard.getNullableObjective("Lives")).setScore(lives);
 
         if (lives == 0 && !PlayerUtils.isAdmin(player)) {
             player.changeGameMode(GameMode.SPECTATOR);
@@ -76,6 +78,6 @@ public class LivesManager extends ConfigManager {
         if (lives == 2) teamName = "Yellow";
         if (lives == 3) teamName = "Green";
         if (lives >= 4) teamName = "DarkGreen";
-        scoreboard.addPlayerToTeam(player.getEntityName(), scoreboard.getTeam(teamName));
+        scoreboard.addScoreHolderToTeam(player.getNameForScoreboard(), scoreboard.getTeam(teamName));
     }
 }
