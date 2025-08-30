@@ -22,6 +22,7 @@ public class MinecraftServerMixin {
         if (!Main.initializedCommands) {
             Main.initializedCommands = true;
             server.getGameRules().get(GameRules.KEEP_INVENTORY).set(true, server);
+            server.getGameRules().get(GameRules.LOCATOR_BAR).set(false, server);
 
             WorldBorder border = server.getOverworld().getWorldBorder();
             if (border.getSize() > 1_000_000) {

@@ -47,9 +47,9 @@ After updating the skins in the minecraft launcher, it takes a while for the ski
 | Release 1.1    | Finished |                              Tab list shows lives.<br>Ender Dragon drops diamonds.<br>Clamped enchantments to level 1.<br>Colored names in death messages.<br>Added the Secret Society.                              |
 | Release 1.4.7  | Finished |                                                                                                     No Changes.                                                                                                      |
 | Release 1.9.4  | Finished |                                                                                                     No Changes.                                                                                                      |
-| Release 1.14.4 | Finished |                                                                               Switched from Ornithe to Fabric. <br/>Removed built-in zoom.                                                                                |
+| Release 1.14.4 | Finished |                                                                             Switched from Ornithe to Fabric. <br/>Removed built-in zoom.                                                                             |
 | Release 1.18.2 | Finished |                                                                                                     No Changes.                                                                                                      |
-| ???            |          |                                                                                                                                                                                                                      |
+| Release 1.21.8 | Finished |                                                                                                     No Changes.                                                                                                      |
 
 
 ---------
