@@ -15,7 +15,8 @@
     "PlayerEntityRendererMixin",
     "RemotePlayerEntityMixin",
     "TextureManagerMixin",
-    "WorldRendererMixin"
+    "WorldRendererMixin",
+    "TextRendererMixin"
   ],
   "client": [
   ],
